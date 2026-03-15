@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson Player POC</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Progress Header -->
+  <header class="progress-header">
+    <div class="progress-info">
+      <span id="lesson-title" class="lesson-title">Loading Lesson...</span>
+      <span id="step-counter" class="step-counter">Step 0 of 0</span>
+    </div>
+    <div class="progress-bar-container">
+      <div id="progress-bar-fill" class="progress-bar-fill"></div>
+    </div>
+  </header>
+
+  <!-- Main Content Area (Fullscreen Background Media) -->
+  <main class="main-content">
+    
+    <!-- Background Media Layer -->
+    <div id="media-layer" class="media-layer">
+      <!-- Media iframe or placeholder will be injected here -->
+      <div id="media-placeholder" class="media-placeholder">
+        <p>No media for this step</p>
+      </div>
+    </div>
+
+    <!-- Floating Content Overlay Panel (Bottom Right) -->
+    <div id="overlay-panel" class="overlay-panel expanded">
+      
+      <!-- Panel Header with Toggle -->
+      <div class="panel-header">
+        <h2 id="step-title" class="step-title">Step Title</h2>
+        <button id="toggle-panel-btn" class="toggle-btn" aria-label="Toggle Panel">
+           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="minimize-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="expand-icon"><polyline points="18 15 12 9 6 15"></polyline></svg>
+        </button>
+      </div>
+      
+      <!-- Panel Body (Scrollable) -->
+      <div id="panel-body" class="panel-body">
+        
+        <div id="instruction-text" class="instruction-text">
+          Instruction text goes here.
+        </div>
+
+        <div id="response-area" class="response-area hidden">
+            <!-- Dynamic input fields injected here -->
+            <label id="response-label" class="response-label"></label>
+            <div id="input-container"></div>
+        </div>
+
+      </div>
+
+      <!-- Panel Footer (Navigation) -->
+      <div class="panel-footer">
+        <button id="btn-back" class="nav-btn btn-secondary" disabled>Back</button>
+        <button id="btn-next" class="nav-btn btn-primary" disabled>Continue</button>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

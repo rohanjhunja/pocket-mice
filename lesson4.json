@@ -1,0 +1,796 @@
+[
+  {
+    "lesson_id": "lesson_04_rock_pocket_mice_intro",
+    "lesson_title": "Introduction to the Case of Rock Pocket Mice",
+    "lesson_description": "Students are introduced to the anchoring phenomenon of rock pocket mice and explore a computational model to observe how fur color in a population changes over time.",
+    "source_reference": "pdf:Evolutions of Populations | Lesson 4",
+    "estimated_duration_minutes": 45,
+    "difficulty_level": "advanced_high_school_biology",
+    "grade_level": "high_school_ap_biology",
+    "learning_objectives": [
+      "Describe the rock pocket mice phenomenon in the American Southwest",
+      "Observe how environmental change may affect fur color distribution in a population",
+      "Explore a computational model of population change",
+      "Formulate investigable questions using a computational model"
+    ],
+    "total_activity_count": 3,
+    "total_step_count": 10,
+    "activities": [
+      {
+        "activity_id": "lesson_04_activity_01",
+        "activity_title": "The Curious Case of Rock Pocket Mice",
+        "activity_type": "media_observation",
+        "activity_description": "Learners read the context of the phenomenon, watch a video, and respond with observations and questions.",
+        "sequence_order": 1,
+        "estimated_duration_minutes": 15,
+        "teacher_modifiable": true,
+        "steps": [
+          {
+            "step_id": "l04_a01_s01",
+            "step_type": "context",
+            "sequence_order": 1,
+            "title": "Lesson introduction",
+            "instruction_text": "In this lesson, study the phenomenon of rock pocket mice. By the end, explain how fur color changed over time and how that change may have been affected by the environment.",
+            "instruction_format": "text",
+            "completion_condition": {
+              "completion_type": "button_click",
+              "minimum_interaction_time_seconds": 3
+            },
+            "source_reference": "pdf_page_23"
+          },
+          {
+            "step_id": "l04_a01_s02",
+            "step_type": "context",
+            "sequence_order": 2,
+            "title": "Phenomenon background",
+            "instruction_text": "Read about the American Southwest, ancestral light-colored pocket mice, the black lava flows formed by volcanic eruptions, and the present-day distribution of light-colored mice on sandy soil and dark-colored mice on black lava rock.",
+            "instruction_format": "text",
+            "completion_condition": {
+              "completion_type": "button_click",
+              "minimum_interaction_time_seconds": 8
+            },
+            "source_reference": "pdf_page_23"
+          },
+          {
+            "step_id": "l04_a01_s03",
+            "step_type": "media_observation",
+            "sequence_order": 3,
+            "title": "Watch the video",
+            "instruction_text": "Watch the HHMI BioInteractive video about natural selection and the rock pocket mice phenomenon.",
+            "instruction_format": "text",
+            "interactive_or_media": {
+              "media_type": "video",
+              "media_title": "Natural Selection and the Rock Pocket Mouse",
+              "media_url": "https://www.youtube.com/embed/sjeSEngKGrg",
+              "media_source": "youtube",
+              "embed": true,
+              "instructions_for_use": "Watch the video before moving to the next step."
+            },
+            "completion_condition": {
+              "completion_type": "button_click",
+              "minimum_interaction_time_seconds": 10
+            },
+            "source_reference": "pdf_page_23"
+          },
+          {
+            "step_id": "l04_a01_s04",
+            "step_type": "input_response",
+            "sequence_order": 4,
+            "title": "Interesting observations",
+            "instruction_text": "Name at least two things that you found interesting in the video.",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Enter at least two interesting things from the video.",
+              "placeholder": "I found it interesting that...",
+              "max_length": 600
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 5
+            },
+            "source_reference": "pdf_page_23"
+          },
+          {
+            "step_id": "l04_a01_s05",
+            "step_type": "input_response",
+            "sequence_order": 5,
+            "title": "Questions to investigate",
+            "instruction_text": "Write down at least two questions that you would like to investigate about the pocket mice in the desert of New Mexico.",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Write at least two investigable questions.",
+              "placeholder": "1. How does...\n2. Why does...",
+              "max_length": 700
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 5
+            },
+            "source_reference": "pdf_page_23"
+          }
+        ]
+      },
+      {
+        "activity_id": "lesson_04_activity_02",
+        "activity_title": "Introduction to the Computational Model",
+        "activity_type": "simulation",
+        "activity_description": "Learners explore a pocket mouse population model and answer genotype-phenotype questions.",
+        "sequence_order": 2,
+        "estimated_duration_minutes": 15,
+        "teacher_modifiable": true,
+        "steps": [
+          {
+            "step_id": "l04_a02_s01",
+            "step_type": "simulation_task",
+            "sequence_order": 1,
+            "title": "Explore the model",
+            "instruction_text": "Explore the computational model for a few minutes. Each clock tick is a mouse generation. Male and female mice move around randomly, search for partners, and reproduce. Fur coat color is passed from one generation to the next.",
+            "instruction_format": "text",
+            "interactive_or_media": {
+              "media_type": "simulation",
+              "media_title": "Pocket Mouse Natural Selection Model",
+              "media_url": "https://ct-stem.s3.amazonaws.com/uploads/dsugat/2019/05/08/POCKET%20MOUSE-NATURAL%20SELECTION_V2.HTML",
+              "media_source": "external",
+              "embed": true,
+              "instructions_for_use": "Explore the model even if you do not understand every control. Observe fur colors, generations, and inheritance."
+            },
+            "completion_condition": {
+              "completion_type": "simulation_completed",
+              "minimum_interaction_time_seconds": 20
+            },
+            "source_reference": "pdf_page_24"
+          },
+          {
+            "step_id": "l04_a02_s02",
+            "step_type": "input_response",
+            "sequence_order": 2,
+            "title": "Homozygous recessive condition",
+            "instruction_text": "There are two fur coat colors, light and dark. Which of these is a homozygous recessive condition?",
+            "instruction_format": "text",
+            "interactive_or_media": {
+              "media_type": "simulation",
+              "media_title": "Pocket Mouse Natural Selection Model",
+              "media_url": "https://ct-stem.s3.amazonaws.com/uploads/dsugat/2019/05/08/POCKET%20MOUSE-NATURAL%20SELECTION_V2.HTML",
+              "media_source": "external",
+              "instructions_for_use": "Use the model to infer which phenotype is recessive."
+            },
+            "learner_response": {
+              "response_required": true,
+              "response_type": "dropdown",
+              "prompt": "Select the homozygous recessive condition.",
+              "placeholder": "Choose one",
+              "options": [
+                "light-colored fur",
+                "dark-colored fur"
+              ]
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 3
+            },
+            "source_reference": "pdf_page_24"
+          },
+          {
+            "step_id": "l04_a02_s03",
+            "step_type": "input_response",
+            "sequence_order": 3,
+            "title": "Explain your reasoning",
+            "instruction_text": "Explain how you figured out your answer to the previous question.",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Explain your reasoning.",
+              "placeholder": "I inferred this because...",
+              "max_length": 500
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 4
+            },
+            "source_reference": "pdf_page_24"
+          },
+          {
+            "step_id": "l04_a02_s04",
+            "step_type": "input_response",
+            "sequence_order": 4,
+            "title": "Phenotype of Aa",
+            "instruction_text": "There are two alleles, 'A' (dominant) and 'a' (recessive). What would the phenotype be of the genotype 'Aa'?",
+            "instruction_format": "text",
+            "interactive_or_media": {
+              "media_type": "simulation",
+              "media_title": "Pocket Mouse Natural Selection Model",
+              "media_url": "https://ct-stem.s3.amazonaws.com/uploads/dsugat/2019/05/08/POCKET%20MOUSE-NATURAL%20SELECTION_V2.HTML",
+              "media_source": "external",
+              "instructions_for_use": "Use what you observed about dominant and recessive fur colors."
+            },
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_short",
+              "prompt": "Enter the phenotype of genotype Aa.",
+              "placeholder": "Phenotype is...",
+              "max_length": 120
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 3
+            },
+            "source_reference": "pdf_page_24"
+          },
+          {
+            "step_id": "l04_a02_s05",
+            "step_type": "input_response",
+            "sequence_order": 5,
+            "title": "Reasoning for phenotype",
+            "instruction_text": "Explain how you arrived at the answer to the previous question.",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Explain your reasoning.",
+              "placeholder": "Because A is dominant...",
+              "max_length": 500
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 4
+            },
+            "source_reference": "pdf_page_24"
+          }
+        ]
+      },
+      {
+        "activity_id": "lesson_04_activity_03",
+        "activity_title": "Using the Model to Investigate the American Southwest",
+        "activity_type": "reflection",
+        "activity_description": "Learners revise their earlier questions so they can be answered with a computational model and outline how they would investigate them.",
+        "sequence_order": 3,
+        "estimated_duration_minutes": 15,
+        "teacher_modifiable": true,
+        "steps": [
+          {
+            "step_id": "l04_a03_s01",
+            "step_type": "reflection",
+            "sequence_order": 1,
+            "title": "Revise your questions",
+            "instruction_text": "Modify the questions you wrote earlier so they could actually be investigated using the computational model explored in this lesson.",
+            "instruction_format": "text",
+            "interactive_or_media": {
+              "media_type": "simulation",
+              "media_title": "Pocket Mouse Natural Selection Model",
+              "media_url": "https://ct-stem.s3.amazonaws.com/uploads/dsugat/2019/05/08/POCKET%20MOUSE-NATURAL%20SELECTION_V2.HTML",
+              "media_source": "external",
+              "instructions_for_use": "Use the model's available variables and behaviors to refine your questions."
+            },
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Write revised, model-testable questions.",
+              "placeholder": "How does...\nWhat happens when...",
+              "max_length": 700
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 5
+            },
+            "source_reference": "pdf_page_25"
+          },
+          {
+            "step_id": "l04_a03_s02",
+            "step_type": "reflection",
+            "sequence_order": 2,
+            "title": "Design possible experiments",
+            "instruction_text": "Explain how you might design some experiments using the model to answer your research questions.",
+            "instruction_format": "text",
+            "interactive_or_media": {
+              "media_type": "simulation",
+              "media_title": "Pocket Mouse Natural Selection Model",
+              "media_url": "https://ct-stem.s3.amazonaws.com/uploads/dsugat/2019/05/08/POCKET%20MOUSE-NATURAL%20SELECTION_V2.HTML",
+              "media_source": "external",
+              "instructions_for_use": "Refer to model controls, variables, and observable outcomes."
+            },
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Describe your experiment design.",
+              "placeholder": "I would vary..., keep ... constant, and measure...",
+              "max_length": 800
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 6
+            },
+            "source_reference": "pdf_page_25"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lesson_id": "lesson_05_natural_selection_part_1",
+    "lesson_title": "Natural Selection: Part 1",
+    "lesson_description": "Students investigate inheritance in the pocket mouse model and explore how predation and background affect population change.",
+    "source_reference": "pdf:Evolutions of Populations | Lesson 5",
+    "estimated_duration_minutes": 45,
+    "difficulty_level": "advanced_high_school_biology",
+    "grade_level": "high_school_ap_biology",
+    "learning_objectives": [
+      "Investigate inheritance of fur color across generations",
+      "Use initial settings in the model to create different populations",
+      "Observe how predation affects population size",
+      "Relate environmental background to observed changes in phenotype frequency"
+    ],
+    "total_activity_count": 2,
+    "total_step_count": 9,
+    "activities": [
+      {
+        "activity_id": "lesson_05_activity_01",
+        "activity_title": "Understanding the Mechanism of Inheritance",
+        "activity_type": "simulation",
+        "activity_description": "Learners use the model to investigate how genotype and phenotype relate across generations.",
+        "sequence_order": 1,
+        "estimated_duration_minutes": 22,
+        "teacher_modifiable": true,
+        "steps": [
+          {
+            "step_id": "l05_a01_s01",
+            "step_type": "context",
+            "sequence_order": 1,
+            "title": "Lesson setup",
+            "instruction_text": "Continue exploring the pocket mouse model. Today you will investigate inheritance of a trait across generations and how it affects population evolution. While answering the following questions, make sure the 'PREDATION?' box is unchecked.",
+            "instruction_format": "text",
+            "interactive_or_media": {
+              "media_type": "simulation",
+              "media_title": "Pocket Mouse Natural Selection Model",
+              "media_url": "https://ct-stem.s3.amazonaws.com/uploads/dsugat/2019/05/08/POCKET%20MOUSE-NATURAL%20SELECTION_V2.HTML",
+              "media_source": "external",
+              "embed": true,
+              "instructions_for_use": "Open the model and ensure the PREDATION? box is unchecked."
+            },
+            "completion_condition": {
+              "completion_type": "button_click",
+              "minimum_interaction_time_seconds": 5
+            },
+            "source_reference": "pdf_page_27"
+          },
+          {
+            "step_id": "l05_a01_s02",
+            "step_type": "interactive_observation",
+            "sequence_order": 2,
+            "title": "Create all light-colored mice",
+            "instruction_text": "Change the sliders under 'Initial Settings'. Each time you change sliders, press SETUP. Try to set the model so all mice have light-colored fur, then describe the initial settings you used.",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Describe the initial settings you used.",
+              "placeholder": "I set...",
+              "max_length": 600
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 8
+            },
+            "source_reference": "pdf_page_27"
+          },
+          {
+            "step_id": "l05_a01_s03",
+            "step_type": "question",
+            "sequence_order": 3,
+            "title": "Predict light population outcome",
+            "instruction_text": "What will happen after lots of generations if the initial population of mice all have light-colored fur?",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "State your prediction.",
+              "placeholder": "After many generations...",
+              "max_length": 500
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 4
+            },
+            "source_reference": "pdf_page_27"
+          },
+          {
+            "step_id": "l05_a01_s04",
+            "step_type": "interactive_observation",
+            "sequence_order": 4,
+            "title": "Test your prediction",
+            "instruction_text": "Run an experiment to prove or disprove your answer to the previous question and explain your observations.",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Explain your observations and whether they support your prediction.",
+              "placeholder": "I observed that...",
+              "max_length": 700
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 8
+            },
+            "source_reference": "pdf_page_28"
+          },
+          {
+            "step_id": "l05_a01_s05",
+            "step_type": "question",
+            "sequence_order": 5,
+            "title": "Predict dark population outcome",
+            "instruction_text": "What will happen after lots of generations if the initial population of mice all have dark-colored fur?",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "State your prediction.",
+              "placeholder": "After many generations...",
+              "max_length": 500
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 4
+            },
+            "source_reference": "pdf_page_28"
+          },
+          {
+            "step_id": "l05_a01_s06",
+            "step_type": "interactive_observation",
+            "sequence_order": 6,
+            "title": "Test dark population prediction",
+            "instruction_text": "Run an experiment to prove or disprove your answer to the previous question and explain your observations.",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Explain your observations and whether they support your prediction.",
+              "placeholder": "I observed that...",
+              "max_length": 700
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 8
+            },
+            "source_reference": "pdf_page_28"
+          },
+          {
+            "step_id": "l05_a01_s07",
+            "step_type": "input_response",
+            "sequence_order": 7,
+            "title": "Map genotype to phenotype",
+            "instruction_text": "In this model, 'AA', 'Aa', and 'aa' are genotypes. Based on your investigations so far, say which of the three genotypes applies to each of the two fur colors.",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Map the fur colors to genotype(s).",
+              "placeholder": "Light fur: ...\nDark fur: ...",
+              "max_length": 400
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 4
+            },
+            "source_reference": "pdf_page_28"
+          }
+        ]
+      },
+      {
+        "activity_id": "lesson_05_activity_02",
+        "activity_title": "Exploring the Model",
+        "activity_type": "simulation",
+        "activity_description": "Learners investigate the chance-of-predation slider and the effect of changing background after many generations.",
+        "sequence_order": 2,
+        "estimated_duration_minutes": 23,
+        "teacher_modifiable": true,
+        "steps": [
+          {
+            "step_id": "l05_a02_s01",
+            "step_type": "interactive_observation",
+            "sequence_order": 1,
+            "title": "Effect of chance-of-predation",
+            "instruction_text": "Try at least five different values for the 'chance-of-predation' slider and observe how it affects population size. Then explain the effects.",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Explain how chance-of-predation affects population size.",
+              "placeholder": "When I increased chance-of-predation...",
+              "max_length": 800
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 8
+            },
+            "source_reference": "pdf_page_29"
+          },
+          {
+            "step_id": "l05_a02_s02",
+            "step_type": "interactive_observation",
+            "sequence_order": 2,
+            "title": "Mixed population and changing background",
+            "instruction_text": "Start a new experiment with a mixed population of dark-furred and light-furred mice. Run the model for at least 100 generations. Then change the background and run it for 100 generations again. Repeat with different backgrounds and record what you observe.",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Describe what you observed.",
+              "placeholder": "I noticed that when the background changed...",
+              "max_length": 900
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 10
+            },
+            "source_reference": "pdf_page_29"
+          },
+          {
+            "step_id": "l05_a02_s03",
+            "step_type": "reflection",
+            "sequence_order": 3,
+            "title": "Explain the observations",
+            "instruction_text": "What might explain the observations that you wrote down in the previous question?",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Explain what might account for your observations.",
+              "placeholder": "These observations may be explained by...",
+              "max_length": 700
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 5
+            },
+            "source_reference": "pdf_page_29"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "lesson_id": "lesson_06_natural_selection_part_2",
+    "lesson_title": "Natural Selection: Part 2",
+    "lesson_description": "Students design and perform an experiment using the pocket mouse model to test a hypothesis about natural selection.",
+    "source_reference": "pdf:Evolutions of Populations | Lesson 6",
+    "estimated_duration_minutes": 45,
+    "difficulty_level": "advanced_high_school_biology",
+    "grade_level": "high_school_ap_biology",
+    "learning_objectives": [
+      "Formulate a research question about natural selection using the model",
+      "State a testable hypothesis",
+      "Design and perform an investigation",
+      "Analyze results and state a conclusion",
+      "Identify a big idea learned from the lesson"
+    ],
+    "total_activity_count": 3,
+    "total_step_count": 8,
+    "activities": [
+      {
+        "activity_id": "lesson_06_activity_01",
+        "activity_title": "Designing an Experiment Using the Model",
+        "activity_type": "experiment_design",
+        "activity_description": "Learners frame a model-testable question, propose a hypothesis, and design an experiment.",
+        "sequence_order": 1,
+        "estimated_duration_minutes": 18,
+        "teacher_modifiable": true,
+        "steps": [
+          {
+            "step_id": "l06_a01_s01",
+            "step_type": "context",
+            "sequence_order": 1,
+            "title": "Natural selection setup",
+            "instruction_text": "Investigate how natural selection affects a population of mice over time. In this model, mice with certain phenotypes may have an advantage in different environments. Traits that give an advantage get passed to the next generation, causing populations to change over time.",
+            "instruction_format": "text",
+            "completion_condition": {
+              "completion_type": "button_click",
+              "minimum_interaction_time_seconds": 5
+            },
+            "source_reference": "pdf_page_31"
+          },
+          {
+            "step_id": "l06_a01_s02",
+            "step_type": "input_response",
+            "sequence_order": 2,
+            "title": "Research question",
+            "instruction_text": "Come up with a question about natural selection in the case of the pocket mice that can be answered using this model.",
+            "instruction_format": "text",
+            "interactive_or_media": {
+              "media_type": "simulation",
+              "media_title": "Pocket Mouse Natural Selection Model",
+              "media_url": "https://ct-stem.s3.amazonaws.com/uploads/dsugat/2019/05/08/POCKET%20MOUSE-NATURAL%20SELECTION_V2.HTML",
+              "media_source": "external",
+              "instructions_for_use": "Base your question on variables the model can manipulate or display."
+            },
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Write a model-testable research question.",
+              "placeholder": "If..., then how will...",
+              "max_length": 500
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 5
+            },
+            "source_reference": "pdf_page_31"
+          },
+          {
+            "step_id": "l06_a01_s03",
+            "step_type": "input_response",
+            "sequence_order": 3,
+            "title": "Hypothesis",
+            "instruction_text": "Based on your earlier exploration of the model, guess the answer to your question and state it in the form of a testable statement (hypothesis).",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Write your hypothesis.",
+              "placeholder": "If..., then...",
+              "max_length": 500
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 5
+            },
+            "source_reference": "pdf_page_31"
+          },
+          {
+            "step_id": "l06_a01_s04",
+            "step_type": "reflection",
+            "sequence_order": 4,
+            "title": "Experiment design",
+            "instruction_text": "Design an experiment to test your hypothesis. Explain your design.",
+            "instruction_format": "text",
+            "interactive_or_media": {
+              "media_type": "simulation",
+              "media_title": "Pocket Mouse Natural Selection Model",
+              "media_url": "https://ct-stem.s3.amazonaws.com/uploads/dsugat/2019/05/08/POCKET%20MOUSE-NATURAL%20SELECTION_V2.HTML",
+              "media_source": "external",
+              "instructions_for_use": "Describe what you will change, what you will keep constant, and what you will observe or measure."
+            },
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Explain your experiment design.",
+              "placeholder": "I will vary..., keep ... constant, and measure...",
+              "max_length": 900
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 8
+            },
+            "source_reference": "pdf_page_32"
+          }
+        ]
+      },
+      {
+        "activity_id": "lesson_06_activity_02",
+        "activity_title": "Performing an Investigation",
+        "activity_type": "experiment",
+        "activity_description": "Learners run their experiment, record data, upload a supporting file if needed, and state a conclusion.",
+        "sequence_order": 2,
+        "estimated_duration_minutes": 20,
+        "teacher_modifiable": true,
+        "steps": [
+          {
+            "step_id": "l06_a02_s01",
+            "step_type": "interactive_observation",
+            "sequence_order": 1,
+            "title": "Run experiment and record observations",
+            "instruction_text": "Collect data from the experiment in an Excel or Word file. Describe your observations and explain whether those support your hypothesis or not.",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Describe your observations and whether they support your hypothesis.",
+              "placeholder": "My observations were...\nThese do/do not support my hypothesis because...",
+              "max_length": 1000
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 12
+            },
+            "source_reference": "pdf_page_32"
+          },
+          {
+            "step_id": "l06_a02_s02",
+            "step_type": "input_response",
+            "sequence_order": 2,
+            "title": "Upload supporting file",
+            "instruction_text": "Upload a Word, Excel, screenshot, or another file if you used it to record and analyze data. If using Google Docs or Sheets, export them before upload.",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": false,
+              "response_type": "file_upload",
+              "prompt": "Upload your file if you created one."
+            },
+            "completion_condition": {
+              "completion_type": "button_click",
+              "minimum_interaction_time_seconds": 2
+            },
+            "source_reference": "pdf_page_32"
+          },
+          {
+            "step_id": "l06_a02_s03",
+            "step_type": "reflection",
+            "sequence_order": 3,
+            "title": "Conclusion",
+            "instruction_text": "Explain the conclusion of your experiment.",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "State the conclusion of your experiment.",
+              "placeholder": "The experiment showed that...",
+              "max_length": 700
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 5
+            },
+            "source_reference": "pdf_page_32"
+          }
+        ]
+      },
+      {
+        "activity_id": "lesson_06_activity_03",
+        "activity_title": "A Big Idea",
+        "activity_type": "reflection",
+        "activity_description": "Learners articulate the major takeaway from the lesson.",
+        "sequence_order": 3,
+        "estimated_duration_minutes": 7,
+        "teacher_modifiable": true,
+        "steps": [
+          {
+            "step_id": "l06_a03_s01",
+            "step_type": "completion",
+            "sequence_order": 1,
+            "title": "Big idea",
+            "instruction_text": "Mention and describe a big idea that you learned in this lesson.",
+            "instruction_format": "text",
+            "learner_response": {
+              "response_required": true,
+              "response_type": "text_long",
+              "prompt": "Write the big idea you learned.",
+              "placeholder": "One big idea I learned is...",
+              "max_length": 500
+            },
+            "completion_condition": {
+              "completion_type": "response_submitted",
+              "required_response": true,
+              "minimum_interaction_time_seconds": 4
+            },
+            "source_reference": "pdf_page_33"
+          }
+        ]
+      }
+    ]
+  }
+]
