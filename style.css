@@ -11,7 +11,7 @@
   --success-color: #10b981;
   --disabled-bg: #cbd5e1;
   --disabled-text: #94a3b8;
-  --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --shadow: 0 0 40px rgba(0, 0, 0, 0.15);
 }
 
 * {
@@ -28,6 +28,11 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+body.video-theme {
+  background-color: #000;
 }
 
 /* Progress Header */
@@ -86,10 +91,15 @@ body {
   width: 100%;
   height: 100%;
   z-index: 1;
-  background-color: #e2e8f0; /* Default empty background */
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: height 0.3s ease, background-color 0.3s ease;
+}
+
+body.video-theme .media-layer {
+  background-color: #000;
 }
 
 .media-placeholder {
@@ -218,16 +228,10 @@ img.media-image {
 /* Input / Response Area */
 .response-area {
   margin-top: 16px;
-  border-top: 1px solid var(--border-color);
-  padding-top: 16px;
 }
 
 .response-label {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 8px;
-  font-size: 0.875rem;
-  color: #334155;
+  display: none; /* User requested removing the prompt */
 }
 
 input[type="text"],
@@ -309,13 +313,89 @@ textarea {
 }
 
 /* Responsive constraints */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  /* On mobile, limit media height so it mostly stays above the overlay */
+  .media-layer {
+    height: 50vh; /* Approximate 16:9 on portrait devices or top half */
+    align-items: flex-start; /* Push media to top */
+  }
+
+  .media-layer.is-interactive {
+    height: 100%; /* Interactives use full available space */
+  }
+
   .overlay-panel {
     width: 100%;
     bottom: 0;
     right: 0;
     border-radius: 16px 16px 0 0;
     border-bottom: none;
-    max-height: 80vh;
+    height: auto;
+    max-height: 70vh; /* Up to 70% of screen height */
   }
+
+  /* Centered State (No Media) on Mobile - let it take full screen */
+  .overlay-panel.centered {
+    right: 0;
+    transform: none;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    height: calc(100vh - 60px); /* Forcing full height */
+    max-height: none;
+    border-radius: 16px 16px 0 0;
+  }
+
+  /* Add padding above instruction title and hide collapse function when no media is present on mobile */
+  .overlay-panel.centered .panel-header {
+    padding-top: 40px;
+  }
+
+  .overlay-panel.centered .toggle-btn {
+    display: none;
+  }
+}
+
+/* Completion Layer Details */
+.completion-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50; /* Above media and overlay */
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.completion-card {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  max-width: 400px;
+  width: 90%;
+  animation: slideUpFade 0.5s ease-out;
+}
+
+.completion-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--success-color);
+  margin-bottom: 16px;
+}
+
+.completion-message {
+  color: var(--text-dark);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }

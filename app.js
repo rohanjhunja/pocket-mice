@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
       responseLabel: document.getElementById('response-label'),
       inputContainer: document.getElementById('input-container'),
       btnBack: document.getElementById('btn-back'),
-      btnNext: document.getElementById('btn-next')
+      btnNext: document.getElementById('btn-next'),
+      completionLayer: document.getElementById('completion-layer')
     };
   
     // --- State ---
@@ -72,12 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
   
       // Navigation
       elements.btnNext.addEventListener('click', () => {
+          saveResponse();
           if (currentStepIndex < allSteps.length - 1) {
-              saveResponse();
               currentStepIndex++;
               renderStep(currentStepIndex);
           } else {
-              alert("Lesson Completed! (POC end)");
+              showCompletionCard();
           }
       });
   
@@ -101,6 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
   
+    function showCompletionCard() {
+        elements.completionLayer.classList.remove('hidden');
+    }
+
     function renderStep(index) {
       if (!allSteps || allSteps.length === 0) return;
   
@@ -134,6 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
   
     function renderMedia(step) {
       elements.mediaLayer.innerHTML = ''; // Clear current media
+      elements.mediaLayer.classList.remove('is-interactive');
+      document.body.classList.remove('video-theme');
   
       if (step.interactive_or_media) {
         elements.panel.classList.remove('centered');
@@ -149,6 +156,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (media.media_type === 'video' || media.media_type === 'simulation') {
            if (media.media_type === 'video' && url.includes('youtube.com')) {
                url += (url.includes('?') ? '&' : '?') + 'autoplay=1';
+               document.body.classList.add('video-theme');
+           } else if (media.media_type === 'simulation') {
+               elements.mediaLayer.classList.add('is-interactive');
            }
 
            const iframe = document.createElement('iframe');
