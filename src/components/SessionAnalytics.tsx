@@ -129,10 +129,13 @@ export function SessionAnalytics({ selectedStepsJson, students, responses, event
 
     return allSteps.map((step, idx) => {
       const stepResponses = responses.filter(r => r.step_id === step.step_id)
-      // Unique students who answered this step
-      const uniqueStudentIds = new Set(stepResponses.map(r => r.student_id))
       const stepEvents = events.filter(e => e.step_id === step.step_id)
-      const mediaClicks = stepEvents.filter(e => e.event_type.includes('media') || e.event_type.includes('click'))
+      // Count completion from step_completed events OR responses (whichever captures more students)
+      const completedFromEvents = new Set(stepEvents.filter(e => e.event_type === 'step_completed').map(e => e.student_id))
+      const completedFromResponses = new Set(stepResponses.map(r => r.student_id))
+      const allCompleted = new Set([...completedFromEvents, ...completedFromResponses])
+      // Only count media interaction clicks (not step lifecycle events)
+      const mediaClicks = stepEvents.filter(e => e.event_type.startsWith('media_'))
 
       const times: number[] = []
       Object.entries(studentResponses).forEach(([studentId, sResponses]) => {
@@ -159,9 +162,9 @@ export function SessionAnalytics({ selectedStepsJson, students, responses, event
       return {
         step,
         index: idx,
-        uniqueCompleted: uniqueStudentIds.size,
+        uniqueCompleted: allCompleted.size,
         avgTimeMs,
-        avgMediaClicks: uniqueStudentIds.size > 0 ? Math.round((mediaClicks.length / uniqueStudentIds.size) * 10) / 10 : 0,
+        avgMediaClicks: allCompleted.size > 0 ? Math.round((mediaClicks.length / allCompleted.size) * 10) / 10 : 0,
         hasResponses: step.learner_response?.response_required,
         responsesByStudent: byStudent,
         totalResponses: stepResponses.length,
@@ -187,11 +190,13 @@ export function SessionAnalytics({ selectedStepsJson, students, responses, event
           .filter(r => r.step_id === step.step_id)
           .sort((a, b) => new Date(b.submitted_at).getTime() - new Date(a.submitted_at).getTime())
         const latestResponse = allStepResponses[0] || null
-        const stepMediaEvents = sEvents.filter(e => e.step_id === step.step_id && (e.event_type.includes('media') || e.event_type.includes('click')))
+        // Check step_completed events for non-response steps
+        const hasCompletedEvent = sEvents.some(e => e.step_id === step.step_id && e.event_type === 'step_completed')
+        // Only count media interaction clicks (not step lifecycle events)
+        const stepMediaEvents = sEvents.filter(e => e.step_id === step.step_id && e.event_type.startsWith('media_'))
         
         let timeMs = 0
         if (latestResponse) {
-          // Use first response for time calculation (original attempt)
           const firstResponse = allStepResponses[allStepResponses.length - 1]
           const endTime = new Date(firstResponse.submitted_at).getTime()
           const firstResponseIdx = sResponses.indexOf(firstResponse)
@@ -199,11 +204,18 @@ export function SessionAnalytics({ selectedStepsJson, students, responses, event
             ? new Date(sResponses[firstResponseIdx - 1].submitted_at).getTime()
             : (studentJoinMap[student.id] || endTime)
           timeMs = endTime - startTime
+        } else if (hasCompletedEvent) {
+          // For non-response steps, estimate time from step_viewed to step_completed
+          const viewedEvent = sEvents.find(e => e.step_id === step.step_id && e.event_type === 'step_viewed')
+          const completedEvent = sEvents.find(e => e.step_id === step.step_id && e.event_type === 'step_completed')
+          if (viewedEvent && completedEvent) {
+            timeMs = new Date(completedEvent.created_at).getTime() - new Date(viewedEvent.created_at).getTime()
+          }
         }
 
         return {
           step,
-          completed: !!latestResponse,
+          completed: !!latestResponse || hasCompletedEvent,
           responseValue: latestResponse?.response_value || null,
           allResponses: allStepResponses,
           versionCount: allStepResponses.length,

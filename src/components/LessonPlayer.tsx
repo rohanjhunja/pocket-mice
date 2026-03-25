@@ -25,6 +25,7 @@ export default function LessonPlayer({ session, student, initialResponses, resum
   const [currentInputValue, setCurrentInputValue] = useState("");
   const [isVideoTheme, setIsVideoTheme] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [failedEmbedUrl, setFailedEmbedUrl] = useState<string | null>(null);
 
   useEffect(() => {
     // Flatten selected steps from session configuration
@@ -46,6 +47,9 @@ export default function LessonPlayer({ session, student, initialResponses, resum
       const step = allSteps[currentStepIndex];
       setCurrentInputValue(learnerResponses[step.step_id] || "");
       setIsMinimized(false);
+      setFailedEmbedUrl(null);
+      // Track step viewed for ALL step types
+      trackEvent(student.id, session.id, step.step_id, 'step_viewed');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentStepIndex, allSteps.length]);
@@ -73,6 +77,8 @@ export default function LessonPlayer({ session, student, initialResponses, resum
   };
 
   const handleNext = async () => {
+    // Track step completion for ALL steps (not just response ones)
+    trackEvent(student.id, session.id, step.step_id, 'step_completed');
     await handleSaveResponse();
     if (currentStepIndex < allSteps.length - 1) {
       setCurrentStepIndex(currentStepIndex + 1);
@@ -83,6 +89,8 @@ export default function LessonPlayer({ session, student, initialResponses, resum
 
   const handleBack = async () => {
     if (currentStepIndex > 0) {
+      // Track step completion for current step before going back
+      trackEvent(student.id, session.id, step.step_id, 'step_completed');
       await handleSaveResponse();
       setCurrentStepIndex(currentStepIndex - 1);
     }
@@ -98,17 +106,20 @@ export default function LessonPlayer({ session, student, initialResponses, resum
       
       <main className="flex-1 relative overflow-hidden">
         <MediaBackground 
-          media={step.interactive_or_media} 
+          media={step.interactive_or_media}
+          stepId={step.step_id}
           onThemeChange={setIsVideoTheme}
           onMediaInteraction={(eventType) => {
             trackEvent(student.id, session.id, step.step_id, eventType);
           }}
+          onEmbedError={(url) => setFailedEmbedUrl(url)}
         />
         
         <InstructionOverlay 
           step={step} 
           isMinimized={isMinimized} 
           onToggleMinimize={() => setIsMinimized(!isMinimized)}
+          fallbackUrl={failedEmbedUrl}
         >
           <ResponseForm 
             responseReq={step.learner_response}

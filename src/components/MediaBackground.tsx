@@ -1,13 +1,82 @@
-import { useEffect, useRef, useCallback } from 'react';
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import { ExternalLink } from 'lucide-react';
 
 interface MediaBackgroundProps {
   media: any;
+  stepId: string;
   onThemeChange: (isVideo: boolean) => void;
   onMediaInteraction?: (eventType: string) => void;
+  onEmbedError?: (url: string) => void;
 }
 
-export function MediaBackground({ media, onThemeChange, onMediaInteraction }: MediaBackgroundProps) {
+type EmbedState = 'checking' | 'embeddable' | 'not-embeddable';
+
+export function MediaBackground({ media, stepId, onThemeChange, onMediaInteraction, onEmbedError }: MediaBackgroundProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [embedState, setEmbedState] = useState<EmbedState>('checking');
+  const [resolvedUrl, setResolvedUrl] = useState<string>('');
+
+  // Resolve the display URL
+  const getUrl = () => {
+    if (!media?.media_url) return '';
+    let url = media.media_url;
+    if (url.startsWith('http://')) url = url.replace('http://', 'https://');
+    if (url.toUpperCase().includes('POCKET%20MOUSE-NATURAL%20SELECTION_V2.HTML')) {
+      url = '/Pocket Mouse-Natural Selection_v2.html';
+    }
+    return url;
+  };
+
+  // Check embeddability server-side whenever step/media changes
+  useEffect(() => {
+    setEmbedState('checking');
+
+    const url = getUrl();
+    setResolvedUrl(url);
+
+    if (!media || !url) return;
+
+    // Only check iframe-based media types
+    if (media.media_type !== 'video' && media.media_type !== 'simulation' && media.media_type !== 'content') {
+      setEmbedState('embeddable'); // images etc don't need iframe check
+      return;
+    }
+
+    // For YouTube: only /embed/ paths are embeddable
+    if (url.includes('youtube.com') && !url.includes('/embed/')) {
+      // Channel pages, user pages, watch pages without embed — not embeddable
+      if (url.includes('/channel/') || url.includes('/user/') || url.includes('/@') || url.includes('/watch')) {
+        setEmbedState('not-embeddable');
+        if (onEmbedError) onEmbedError(url);
+        return;
+      }
+    }
+
+    // Local URLs don't need a server check
+    if (url.startsWith('/')) {
+      setEmbedState('embeddable');
+      return;
+    }
+
+    // Server-side embed check
+    fetch(`/api/check-embed?url=${encodeURIComponent(url)}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.embeddable) {
+          setEmbedState('embeddable');
+        } else {
+          setEmbedState('not-embeddable');
+          if (onEmbedError) onEmbedError(data.finalUrl || url);
+        }
+      })
+      .catch(() => {
+        // If the check itself fails, try embedding anyway
+        setEmbedState('embeddable');
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stepId, media?.media_url]);
 
   useEffect(() => {
     if (media?.media_type === 'video' && media.media_url?.includes('youtube.com')) {
@@ -18,50 +87,59 @@ export function MediaBackground({ media, onThemeChange, onMediaInteraction }: Me
   }, [media, onThemeChange]);
 
   // Track iframe clicks via window blur detection
-  // When a user clicks into an iframe, the parent window loses focus
   useEffect(() => {
     if (!onMediaInteraction || !media) return;
     if (media.media_type !== 'video' && media.media_type !== 'simulation' && media.media_type !== 'content') return;
+    if (embedState !== 'embeddable') return;
 
     const eventType = media.media_type === 'video' ? 'media_video_click' : 'media_simulation_click';
 
     const handleBlur = () => {
-      // Only fire if focus moved to our iframe (not to another tab)
       if (document.activeElement === iframeRef.current) {
         onMediaInteraction(eventType);
-        // Re-focus the parent so we can detect the next click
-        setTimeout(() => {
-          window.focus();
-        }, 100);
+        setTimeout(() => { window.focus(); }, 100);
       }
     };
 
     window.addEventListener('blur', handleBlur);
     return () => window.removeEventListener('blur', handleBlur);
-  }, [media, onMediaInteraction]);
+  }, [media, onMediaInteraction, embedState]);
 
-  if (!media) {
+  if (!media) return null;
+
+  const url = resolvedUrl;
+
+  // ===== NOT EMBEDDABLE — return nothing, InstructionOverlay handles the link =====
+  if (embedState === 'not-embeddable') {
     return null;
   }
 
-  let url = media.media_url;
-  // POC local intercept logic
-  if (url && url.toUpperCase().includes('POCKET%20MOUSE-NATURAL%20SELECTION_V2.HTML')) {
-    url = '/Pocket Mouse-Natural Selection_v2.html';
+  // ===== CHECKING — show loading spinner =====
+  if (embedState === 'checking') {
+    return (
+      <div className="absolute top-0 left-0 w-full h-full z-0 flex items-center justify-center bg-white">
+        <div className="flex flex-col items-center gap-2">
+          <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+          <span className="text-xs text-slate-400">Checking resource…</span>
+        </div>
+      </div>
+    );
   }
 
+  // ===== EMBEDDABLE — render iframe =====
   if (media.media_type === 'video' || media.media_type === 'simulation' || media.media_type === 'content') {
-    if (media.media_type === 'video' && url.includes('youtube.com')) {
-      url += (url.includes('?') ? '&' : '?') + 'autoplay=1';
+    let iframeSrc = url;
+    if (media.media_type === 'video' && iframeSrc.includes('youtube.com')) {
+      iframeSrc += (iframeSrc.includes('?') ? '&' : '?') + 'autoplay=1';
     }
 
     const isInteractive = media.media_type === 'simulation' || media.media_type === 'content';
-    
+
     return (
       <div className={`absolute top-0 left-0 w-full z-0 flex items-center justify-center transition-colors duration-300 md:h-full flex-start md:items-center ${isInteractive ? 'h-full bg-white' : 'h-[50vh] bg-black'} md:bg-transparent`}>
         <iframe
           ref={iframeRef}
-          src={url}
+          src={iframeSrc}
           className="w-full h-full border-none"
           allow="autoplay; fullscreen"
           allowFullScreen

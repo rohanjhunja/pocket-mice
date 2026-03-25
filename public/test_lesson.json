@@ -2,7 +2,7 @@
   {
     "lesson_id": "lesson_link_test",
     "lesson_title": "Link test",
-    "lesson_description": "A lightweight POC lesson to test distinct link rendering patterns across embedded interactives, media, documents, articles, and external resources.",
+    "lesson_description": "A lightweight POC lesson to test distinct link rendering patterns across embedded simulations, videos, images, content pages, and external resources.",
     "source_reference": "poc:link_test",
     "estimated_duration_minutes": 20,
     "difficulty_level": "poc",
@@ -46,7 +46,7 @@
             "instruction_text": "Test a root landing page for CODAP.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "link",
+              "media_type": "content",
               "media_title": "CODAP root",
               "media_url": "https://codap.concord.org/",
               "media_source": "external",
@@ -67,7 +67,7 @@
             "instruction_text": "Test a non-embedded reference landing page.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "link",
+              "media_type": "content",
               "media_title": "HHMI BioInteractive root",
               "media_url": "http://www.hhmi.org/biointeractive",
               "media_source": "external",
@@ -99,7 +99,7 @@
             "instruction_text": "Test a CODAP document loaded through a hash parameter using a shared id.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "interactive",
+              "media_type": "simulation",
               "media_title": "CODAP shared id",
               "media_url": "https://codap.concord.org/releases/latest/static/dg/en/cert/index.html#shared=61343",
               "media_source": "external",
@@ -120,7 +120,7 @@
             "instruction_text": "Test a CODAP document loaded through a hash parameter containing an encoded shared file URL.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "interactive",
+              "media_type": "simulation",
               "media_title": "CODAP shared encoded URL",
               "media_url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FJNFuCVGlihmi9b7aknfC%2Ffile.json",
               "media_source": "external",
@@ -183,7 +183,7 @@
             "instruction_text": "Test a NetTango interactive page intended for embedded or in-browser use.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "interactive",
+              "media_type": "simulation",
               "media_title": "NetTango screen",
               "media_url": "https://ntango.sesp.northwestern.edu/NetTango/example/screen1.html",
               "media_source": "external",
@@ -204,7 +204,7 @@
             "instruction_text": "Test an HTML interactive served from GitHub Pages.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "interactive",
+              "media_type": "simulation",
               "media_title": "GitHub Pages HTML interactive",
               "media_url": "https://bainco.github.io/assets/temp/example/screen2.html",
               "media_source": "external",
@@ -225,7 +225,7 @@
             "instruction_text": "Test an embeddable Concord Lab interactive loaded through a hash-based path.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "interactive",
+              "media_type": "simulation",
               "media_title": "Concord Lab embeddable",
               "media_url": "https://lab.concord.org/embeddable.html#interactives/sam/DNA-to-proteins/1-dna-to-protein.json",
               "media_source": "external",
@@ -246,7 +246,7 @@
             "instruction_text": "Test a Scratch project using the dedicated embed URL.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "interactive",
+              "media_type": "simulation",
               "media_title": "Scratch embed",
               "media_url": "https://scratch.mit.edu/projects/100898229/embed",
               "media_source": "external",
@@ -267,7 +267,7 @@
             "instruction_text": "Test the Scratch editor URL as a non-embed interactive/editor page.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "link",
+              "media_type": "content",
               "media_title": "Scratch editor",
               "media_url": "https://scratch.mit.edu/projects/100898229/editor/",
               "media_source": "external",
@@ -341,7 +341,7 @@
             "instruction_text": "Test a YouTube channel URL as a regular external page.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "link",
+              "media_type": "content",
               "media_title": "YouTube channel",
               "media_url": "https://www.youtube.com/channel/UCBkuiMC1rlybuTcyMK-jWKw",
               "media_source": "external",
@@ -394,7 +394,7 @@
             "instruction_text": "Test a published Google Slides presentation with autoplay-related query parameters.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "document",
+              "media_type": "content",
               "media_title": "Google Slides published presentation",
               "media_url": "https://docs.google.com/presentation/d/e/2PACX-1vQGMCRzJ3-uWDLxOAUNzgvSgb1FBE03dpozjc43d3l_NZmwK1T0A5fPRuGK2EfU6TAJIS6OwW1048UC/pub?start=false&loop=false&delayms=3000",
               "media_source": "external",
@@ -415,7 +415,7 @@
             "instruction_text": "Test a published Google Doc page.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "document",
+              "media_type": "content",
               "media_title": "Google Docs published document",
               "media_url": "https://docs.google.com/document/d/e/2PACX-1vTWzKSZhN-I4AduAwoBqhz_NOqC8ybl-dZrCFUXevvX0HOSf6yvdahuxBjlf-LTyP_p8dGgn-_VRis7/pub",
               "media_source": "external",
@@ -447,7 +447,7 @@
             "instruction_text": "Test a Wikipedia article page.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "link",
+              "media_type": "content",
               "media_title": "Wikipedia article",
               "media_url": "https://en.wikipedia.org/wiki/Loop_of_Henle",
               "media_source": "external",
@@ -468,7 +468,7 @@
             "instruction_text": "Test an OpenBook URL that depends on query parameters for record id and page number.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "link",
+              "media_type": "content",
               "media_title": "NAP OpenBook page",
               "media_url": "http://www.nap.edu/openbook.php?record_id=13165&page=143",
               "media_source": "external",
@@ -489,7 +489,7 @@
             "instruction_text": "Test a paper page with a long slug and paper id in the path.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "link",
+              "media_type": "content",
               "media_title": "Semantic Scholar paper",
               "media_url": "https://www.semanticscholar.org/paper/Diversity-of-human-hair-pigmentation-as-studied-by-Ito-Wakamatsu/097cf32ac411a0c98fa88a20b90f51e904967e1e",
               "media_source": "external",
@@ -510,7 +510,7 @@
             "instruction_text": "Test a gene-information page from the NLM/GHR site.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "link",
+              "media_type": "content",
               "media_title": "NLM gene page",
               "media_url": "https://ghr.nlm.nih.gov/gene/MC1R",
               "media_source": "external",
@@ -531,7 +531,7 @@
             "instruction_text": "Test a condition page that includes a fragment anchor.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "link",
+              "media_type": "content",
               "media_title": "NLM condition page",
               "media_url": "https://ghr.nlm.nih.gov/condition/sickle-cell-disease#genes",
               "media_source": "external",
@@ -552,7 +552,7 @@
             "instruction_text": "Test a structured educational content page from Learn Genetics.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "link",
+              "media_type": "content",
               "media_title": "Learn Genetics page",
               "media_url": "https://learn.genetics.utah.edu/content/basics/ptc/",
               "media_source": "external",
@@ -573,7 +573,7 @@
             "instruction_text": "Test a standard external article page.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "link",
+              "media_type": "content",
               "media_title": "General article",
               "media_url": "https://www.audubon.org/news/what-makes-bird-feathers-so-colorfully-fabulous",
               "media_source": "external",
@@ -594,7 +594,7 @@
             "instruction_text": "Test a Khan Academy article/review page.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "link",
+              "media_type": "content",
               "media_title": "Khan Academy article",
               "media_url": "https://www.khanacademy.org/science/high-school-biology/hs-molecular-genetics/hs-rna-and-protein-synthesis/a/hs-rna-and-protein-synthesis-review",
               "media_source": "external",
@@ -626,7 +626,7 @@
             "instruction_text": "Test a curriculum print page with numeric path segments.",
             "instruction_format": "text",
             "interactive_or_media": {
-              "media_type": "link",
+              "media_type": "content",
               "media_title": "CT-STEM curriculum print page",
               "media_url": "https://ct-stem.northwestern.edu/curriculum/print/1014/1",
               "media_source": "external",
