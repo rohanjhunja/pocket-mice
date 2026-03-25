@@ -21,7 +21,7 @@ export function MediaBackground({ media, onThemeChange, onMediaInteraction }: Me
   // When a user clicks into an iframe, the parent window loses focus
   useEffect(() => {
     if (!onMediaInteraction || !media) return;
-    if (media.media_type !== 'video' && media.media_type !== 'simulation') return;
+    if (media.media_type !== 'video' && media.media_type !== 'simulation' && media.media_type !== 'content') return;
 
     const eventType = media.media_type === 'video' ? 'media_video_click' : 'media_simulation_click';
 
@@ -50,12 +50,12 @@ export function MediaBackground({ media, onThemeChange, onMediaInteraction }: Me
     url = '/Pocket Mouse-Natural Selection_v2.html';
   }
 
-  if (media.media_type === 'video' || media.media_type === 'simulation') {
+  if (media.media_type === 'video' || media.media_type === 'simulation' || media.media_type === 'content') {
     if (media.media_type === 'video' && url.includes('youtube.com')) {
       url += (url.includes('?') ? '&' : '?') + 'autoplay=1';
     }
 
-    const isInteractive = media.media_type === 'simulation';
+    const isInteractive = media.media_type === 'simulation' || media.media_type === 'content';
     
     return (
       <div className={`absolute top-0 left-0 w-full z-0 flex items-center justify-center transition-colors duration-300 md:h-full flex-start md:items-center ${isInteractive ? 'h-full bg-white' : 'h-[50vh] bg-black'} md:bg-transparent`}>
