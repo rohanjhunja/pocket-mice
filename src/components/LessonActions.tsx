@@ -2,9 +2,10 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Bookmark, Share, Play, Check } from 'lucide-react'
+import { Bookmark, Share, Play, Check, Pencil } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
+import { LessonEditor } from '@/components/LessonEditor'
 import {
   Dialog,
   DialogContent,
@@ -28,6 +29,7 @@ export function LessonActions({ lessonId, jsonContent, initialIsBookmarked }: Le
   const [isBookmarked, setIsBookmarked] = useState(initialIsBookmarked)
   const [isBookmarkLoading, setIsBookmarkLoading] = useState(false)
   const [isLaunchLoading, setIsLaunchLoading] = useState(false)
+  const [isEditorOpen, setIsEditorOpen] = useState(false)
 
   // Initialize selected steps state with all steps checked by default
   const initialCheckedState: Record<string, boolean> = {}
@@ -99,6 +101,7 @@ export function LessonActions({ lessonId, jsonContent, initialIsBookmarked }: Le
   }
 
   return (
+    <>
     <div className="flex gap-3 w-full md:w-auto mt-4 md:mt-0">
       <Button variant="outline" className="flex-1 md:flex-none" onClick={handleShare}>
         <Share className="w-4 h-4 mr-2" /> Share
@@ -112,6 +115,14 @@ export function LessonActions({ lessonId, jsonContent, initialIsBookmarked }: Le
       >
         <Bookmark className={`w-4 h-4 mr-2 ${isBookmarked ? 'fill-current' : ''}`} /> 
         {isBookmarked ? 'Bookmarked' : 'Bookmark'}
+      </Button>
+
+      <Button 
+        variant="outline" 
+        className="flex-1 md:flex-none" 
+        onClick={() => setIsEditorOpen(true)}
+      >
+        <Pencil className="w-4 h-4 mr-2" /> Edit
       </Button>
 
       <Dialog>
@@ -170,5 +181,14 @@ export function LessonActions({ lessonId, jsonContent, initialIsBookmarked }: Le
         </DialogContent>
       </Dialog>
     </div>
+
+    {isEditorOpen && (
+      <LessonEditor
+        lessonId={lessonId}
+        jsonContent={jsonContent}
+        onClose={() => setIsEditorOpen(false)}
+      />
+    )}
+    </>
   )
 }

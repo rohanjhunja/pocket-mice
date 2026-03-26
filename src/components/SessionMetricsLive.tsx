@@ -50,7 +50,6 @@ export function SessionMetricsLive({
         (payload) => {
           setStudents((prev) => {
             const newCount = prev + 1
-            // Recalculate completion rate with new student count
             setCompletionRate(
               newCount > 0 && expectedSteps > 0
                 ? Math.round((responses / (newCount * expectedSteps)) * 100)
@@ -58,12 +57,13 @@ export function SessionMetricsLive({
             )
             return newCount
           })
+          const p = payload.new as any
           setActivityFeed((prev) => [
             {
-              id: payload.new.id,
+              id: p?.id || crypto.randomUUID(),
               type: 'student_joined' as const,
-              label: `${payload.new.name} joined the session`,
-              timestamp: payload.new.joined_at || new Date().toISOString(),
+              label: `${p?.name || 'A student'} joined the session`,
+              timestamp: p?.joined_at || new Date().toISOString(),
             },
             ...prev,
           ].slice(0, 50))
@@ -80,7 +80,6 @@ export function SessionMetricsLive({
         (payload) => {
           setResponses((prev) => {
             const newCount = prev + 1
-            // Recalculate using current student count
             setCompletionRate(
               students > 0 && expectedSteps > 0
                 ? Math.round((newCount / (students * expectedSteps)) * 100)
@@ -88,12 +87,13 @@ export function SessionMetricsLive({
             )
             return newCount
           })
+          const p = payload.new as any
           setActivityFeed((prev) => [
             {
-              id: payload.new.id,
+              id: p?.id || crypto.randomUUID(),
               type: 'response_submitted' as const,
-              label: `Response submitted for step "${payload.new.step_id}"`,
-              timestamp: payload.new.submitted_at || new Date().toISOString(),
+              label: `Response submitted for step "${p?.step_id || 'unknown'}"`,
+              timestamp: p?.submitted_at || new Date().toISOString(),
             },
             ...prev,
           ].slice(0, 50))

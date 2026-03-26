@@ -58,3 +58,74 @@ export async function createSession(lessonId: string, selectedSteps: any) {
 
   return data[0].id
 }
+
+export async function updateLesson(lessonId: string, updatedJsonContent: any) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) throw new Error('Not authenticated')
+
+  // Recompute totals
+  let totalSteps = 0
+  updatedJsonContent.activities?.forEach((a: any) => { totalSteps += a.steps?.length || 0 })
+  updatedJsonContent.total_activity_count = updatedJsonContent.activities?.length || 0
+  updatedJsonContent.total_step_count = totalSteps
+
+  // Recompute sequence_order and apply safe defaults
+  updatedJsonContent.activities?.forEach((a: any, ai: number) => {
+    a.sequence_order = ai + 1
+    if (!a.activity_id) a.activity_id = `act_${ai + 1}`
+    if (!a.activity_type) a.activity_type = 'exploration'
+    a.steps?.forEach((s: any, si: number) => {
+      s.sequence_order = si + 1
+      if (!s.step_id) s.step_id = `step_${ai + 1}_${si + 1}`
+      if (!s.instruction_format) s.instruction_format = 'text'
+      if (!s.completion_condition) {
+        s.completion_condition = s.learner_response ? 'response_submitted' : 'next_button'
+      }
+      // Ensure response has valid type
+      if (s.learner_response) {
+        if (!s.learner_response.response_type) s.learner_response.response_type = 'text_short'
+      }
+    })
+  })
+
+  const { error } = await supabase
+    .from('lessons')
+    .update({
+      title: updatedJsonContent.lesson_title || 'Untitled',
+      description: updatedJsonContent.lesson_description || '',
+      json_content: updatedJsonContent,
+    })
+    .eq('id', lessonId)
+    .eq('teacher_id', user.id)
+
+  if (error) throw new Error(error.message)
+
+  revalidatePath(`/dashboard/lesson/${lessonId}`)
+  revalidatePath('/dashboard')
+}
+
+export async function duplicateLesson(lessonId: string, jsonContent: any) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) throw new Error('Not authenticated')
+
+  const newTitle = (jsonContent.lesson_title || 'Untitled') + ' (Copy)'
+  const duplicatedJson = { ...jsonContent, lesson_title: newTitle }
+
+  const { data, error } = await supabase
+    .from('lessons')
+    .insert({
+      teacher_id: user.id,
+      title: newTitle,
+      description: jsonContent.lesson_description || '',
+      tags: [],
+      json_content: duplicatedJson,
+    })
+    .select()
+
+  if (error) throw new Error(error.message)
+
+  revalidatePath('/dashboard')
+  return data[0].id
+}
