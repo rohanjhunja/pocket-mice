@@ -1,0 +1,144 @@
+CONSERVATION OF MECHANICAL ENERGY DURING FREE FALL
+Author(s): Shirish Sant, Neha Deshpande, Sugat Dabholkar
+Subject: Physics, Self-directed
+Time: 4 class periods (30 min each)
+Level: High School / Freshmen Physics
+Version: v2
+OVERVIEW
+This lesson is about the conservation of mechanical energy during the free fall of an object. Students will
+explore a computational model of free fall of a ball and make observations regarding changes in its motion and
+energy. 
+ 
+STANDARDS
+NEXT GENERATION SCIENCE STANDARDS
+Physical Science[HS-PS2] Motion and Stability: Forces and Interactions[HS-PS2-1] Analyze data to support the claim that Newton’s second law of motion describes themathematical relationship among the net force on a macroscopic object, its mass, and itsacceleration.[HS-PS3-2] Develop and use models to illustrate that energy at the macroscopic scale can beaccounted for as a combination of energy associated with the motions of particles (objects) andenergy associated with the relative positions of particles (objects)
+COMPUTATIONAL THINKING IN STEM
+Modeling and Simulation PracticesDesigning Computational ModelsUsing Computational Models to Find and Test SolutionsUsing Computational Models to Understand a ConceptConstructing Computational ModelsAssessing Computational ModelsComputational Problem Solving PracticesComputer ProgrammingTroubleshooting and DebuggingData Practices
+2/26/26, 4:15 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1011/ 1/8
+Collecting Data
+CREDITS
+Lesson development - Shirish Sant, Neha Deshpande and Sugat Dabholkar
+ 
+Topic idea - Shirish 
+Illustration - Neha
+Model coding - Sugat
+ACTIVITIES
+1. Introduction to Computational Thinking2. Exploring the model3. Observations regarding motion of the ball4. Changes in mechanical energy of the ball5. Evaluating the model6. Constructing the model
+2/26/26, 4:15 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1011/ 2/8
+STUDENT DIRECTIONS AND RESOURCES
+In this lesson, you will learn about -
+1. Changes in distance, velocity, and acceleration of an object under free fall
+2. Conservation of mechanical energy during the free fall of an object 
+3. Effect of mass on mechanical energy of an object
+4. Free fall of an object is independent of its mass
+5. How to use a computational model to investigate an object under free fall
+6. How to evaluate and extend computational models
+7. How to construct a computational model of an object under free fall using block-based coding 
+1. INTRODUCTION TO COMPUTATIONAL THINKING
+Computational Thinking inComputational Thinking in……
+The embedded resource from above can be accessed via this link
+(https://www.youtube.com/embed/2ACjQLXrdug)
+In this video, researchers at the Indian Institute of Science Education and Research (IISER) Pune talk about how
+they use computational tools and methods in their work.
+Contemporary scientists and mathematicians use such computational tools and methods to understand natural
+phenomena, solve problems and design solutions. The thinking required for this is called Computational
+Thinking.
+In this lesson using a computational model, we will learn about computational thinking, and motion and
+conservation of mechanical energy of an object during free fall.
+QUESTION 1.1
+Based on what you saw in the video, explain why science students need to develop computational thinking. 
+2. EXPLORING THE MODEL
+Explore the model before you answer the questions below.
+2/26/26, 4:15 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1011/ 3/8
+ powered by NetLogo
+Mode: Interactive Commands and
+setup proceed for one second
+The embedded resource from above can be accessed via this link
+(https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML)
+QUESTION 2.1
+What happens to the ball when you press 'proceed for one second' in the model? 
+QUESTION 2.2
+Write three observations about the motion of the ball.
+QUESTION 2.3
+Write three observations about the energy of the ball.
+3. OBSERVATIONS REGARDING MOTION OF THE BALL
+ powered by NetLogo
+Mode: Interactive Commands and
+setup proceed for one second
+The embedded resource from above can be accessed via this link
+(https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML)
+QUESTION 3.1
+What changes do you observe in distance as time progresses?
+2/26/26, 4:15 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1011/ 4/8
+QUESTION 3.2
+What changes do you observe in velocity as time progresses?
+QUESTION 3.3
+What changes do you observe in acceleration as time progresses?
+4. CHANGES IN MECHANICAL ENERGY OF THE BALL
+ powered by NetLogo
+Mode: Interactive Commands and
+setup proceed for one second
+The embedded resource from above can be accessed via this link
+(https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML)
+QUESTION 4.1
+Observe what happens to kinetic energy (KE), potential energy (PE) and total energy (KE+PE) of the ball after
+each second it drops.   
+Write your observations below.
+QUESTION 4.2
+Observe what happens when the mass of the ball is changed. Write your observations below. Mention which
+aspects regarding the motion and energy of the ball change and which remain unchanged.
+5. EVALUATING THE MODEL
+2/26/26, 4:15 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1011/ 5/8
+ powered by NetLogo
+Mode: Interactive Commands and
+setup proceed for one second
+The embedded resource from above can be accessed via this link
+(https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML)
+QUESTION 5.1
+Do you think you learned anything new with this model? If yes, elaborate.
+QUESTION 5.2
+What do you think such models can be useful for?
+QUESTION 5.3
+What are some limitations of this model?
+QUESTION 5.4
+In order to improve this model, what changes will you make?
+6. CONSTRUCTING THE MODEL
+On this page, you will use coding blocks to construct a model of an object under free fall.
+2/26/26, 4:15 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1011/ 6/8
+ powered by
+setup
+proceed for on
+dit dThe embedded resource from above can be accessed via this link
+(https://ct-
+stem.s3.amazonaws.com/uploads/sugat_teacher_account/2019/12/15/NETTANGO_FREE%20FALL_SCREENSHOT.HTML)
+QUESTION 6.1
+How will you know if your model is accurate?
+QUESTION 6.2
+Take screenshots of the coding blocks (setup and 'proceed for one second') in your final model and upload
+those here.
+Upload files to the space allocated by your teacher.
+QUESTION 6.3
+What did you learn additionally about the motion of an object under free fall after constructing the model?
+QUESTION 6.4
+What is the biggest takeaway for you from this lesson?
+2/26/26, 4:15 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1011/ 7/8
+This material was developed by the
+CT-STEM Project
+at Northwestern University. To inquire about using our material in your school or as part of research, please
+contact
+ctstem@northwestern.edu
+.
+This work was made possible through generous support from the National Science Foundation (grants CNS-
+1138461, CNS-1441041, DRL-1020101, DRL-1640201 and DRL-1842374) and the Spencer Foundation (Award
+#201600069). Any opinions, findings, or recommendations expressed in this material are those of the author(s)
+and do not necessarily reflect the views of the funding organizations.
+© 2026 CT-STEM Project. Some rights reserved.
+2/26/26, 4:15 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1011/ 8/8

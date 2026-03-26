@@ -1,0 +1,313 @@
+{
+  "lesson_title": "SIMPLE HARMONIC MOTION - SIMPLE PENDULUM",
+  "lesson_description": "This lesson is about understanding and investigating simple harmonic motion (SHM) of a simple pendulum. Students use a computational model of a simple pendulum to learn about its position, velocity and acceleration. Students can also observe changes in the mechanical energy (kinetic energy and potential energy) of the pendulum.",
+  "activities": [
+    {
+      "activity_title": "1. INTRODUCTION TO COMPUTATIONAL THINKING",
+      "steps": [
+        {
+          "title": "Watch the video",
+          "instruction_text": "In this video, researchers at the Indian Institute of Science Education and Research (IISER) Pune talk about how they use computational tools and methods in their work. Scientists and Mathematicians are increasingly using computational tools and methods to understand natural phenomena and solve problems. The thinking required to do so is called computational thinking.",
+          "interactive_or_media": {
+            "media_type": "video",
+            "media_url": "https://www.youtube.com/embed/2ACjQLXrdug"
+          }
+        },
+        {
+          "title": "QUESTION 1.1",
+          "instruction_text": "Based on what you saw in the video, explain why science students need to develop computational thinking.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "video",
+            "media_url": "https://www.youtube.com/embed/2ACjQLXrdug"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "2. EXPLORING A MODEL OF SIMPLE PENDULUM",
+      "steps": [
+        {
+          "title": "Explore the model",
+          "instruction_text": "Explore the model first for at least 100 ticks. Then answer the questions below.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%201_2021-02-10-19-57-22-835037.html"
+          }
+        },
+        {
+          "title": "QUESTION 2.1",
+          "instruction_text": "Write at least two observation/s that you find interesting in the model above.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%201_2021-02-10-19-57-22-835037.html"
+          }
+        },
+        {
+          "title": "QUESTION 2.2",
+          "instruction_text": "What parameters can you vary in the model?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%201_2021-02-10-19-57-22-835037.html"
+          }
+        },
+        {
+          "title": "QUESTION 2.3",
+          "instruction_text": "Describe your observations regarding how the motion of pendulum changes as you vary the parameters.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%201_2021-02-10-19-57-22-835037.html"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "3. INVESTIGATING MOTION OF A PENDULUM",
+      "steps": [
+        {
+          "title": "Investigate Motion",
+          "instruction_text": "Investigate the motion of the pendulum in the model below.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%202_2021-02-10-20-00-07-289962.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.1",
+          "instruction_text": "Describe your observations about how the displacement from the mean position of the pendulum changes as time progresses.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%202_2021-02-10-20-00-07-289962.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.2",
+          "instruction_text": "Describe your observations about how the velocity of the pendulum changes as time progresses.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%202_2021-02-10-20-00-07-289962.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.3",
+          "instruction_text": "Describe your observations about how the acceleration of the pendulum changes as time progresses.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%202_2021-02-10-20-00-07-289962.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.4",
+          "instruction_text": "Which parameter represents time in this model?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%202_2021-02-10-20-00-07-289962.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.5",
+          "instruction_text": "Find the time period of the pendulum.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%202_2021-02-10-20-00-07-289962.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.6",
+          "instruction_text": "How can you establish the relationship between ticks and one second? (Hint: You will have to use the data you collected when you performed an experiment with a real pendulum. Skip this question if you have not performed the physical experiment.)",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%202_2021-02-10-20-00-07-289962.html"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "4. DESIGNING AN EXPERIMENT TO FIND 'G'",
+      "steps": [
+        {
+          "title": "Experiment Setup",
+          "instruction_text": "Use the model below to conduct experiments to find 'g'.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%202_2021-02-10-20-01-46-410289.html"
+          }
+        },
+        {
+          "title": "QUESTION 4.1",
+          "instruction_text": "How could you conduct a computational experiment with this model to find out 'g'? (You will need to use information from the physical experiment you already performed with a real pendulum. If you have not done the physical experiment, use your imagination to design a computational experiment that can be also performed in real life.)",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%202_2021-02-10-20-01-46-410289.html"
+          }
+        },
+        {
+          "title": "QUESTION 4.2",
+          "instruction_text": "Conduct the experiment and find the value of 'g'. (Use the correct unit of time. You will need to convert 'ticks' to seconds.)",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%202_2021-02-10-20-01-46-410289.html"
+          }
+        },
+        {
+          "title": "QUESTION 4.3",
+          "instruction_text": "Design another computational experiment to verify that the period of the pendulum does not change if you change the release angle. Describe your experimental design.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%202_2021-02-10-20-01-46-410289.html"
+          }
+        },
+        {
+          "title": "QUESTION 4.4",
+          "instruction_text": "Perform the experiment and write your observations.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%202_2021-02-10-20-01-46-410289.html"
+          }
+        },
+        {
+          "title": "QUESTION 4.5",
+          "instruction_text": "Write the conclusion of your experiment.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%202_2021-02-10-20-01-46-410289.html"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "5. UNDERSTANDING KE AND PE OF A PENDULUM",
+      "steps": [
+        {
+          "title": "Energy Model",
+          "instruction_text": "Explore the simulation and energy graph.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%203_2021-02-10-20-02-49-654923.html"
+          }
+        },
+        {
+          "title": "QUESTION 5.1",
+          "instruction_text": "Explore the energy (KE and PE) graph and note down your observations.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%203_2021-02-10-20-02-49-654923.html"
+          }
+        },
+        {
+          "title": "QUESTION 5.2",
+          "instruction_text": "In the energy (KE and PE) graph, which colour represents KE and which colour represents PE?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%203_2021-02-10-20-02-49-654923.html"
+          }
+        },
+        {
+          "title": "QUESTION 5.3",
+          "instruction_text": "Find the relationship between the position of the bob and its kinetic and potential energy.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%203_2021-02-10-20-02-49-654923.html"
+          }
+        },
+        {
+          "title": "QUESTION 5.4",
+          "instruction_text": "Note down the position/s of the bob where its KE and PE are maximum and minimum.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%203_2021-02-10-20-02-49-654923.html"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "6. EVALUATING AND EXTENDING THE MODEL",
+      "steps": [
+        {
+          "title": "QUESTION 6.1",
+          "instruction_text": "What are the advantages of using computational models for research?",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        },
+        {
+          "title": "QUESTION 6.2",
+          "instruction_text": "List some limitations of the last model you used in this lesson.",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        },
+        {
+          "title": "QUESTION 6.3",
+          "instruction_text": "To overcome one of those limitations, how will you modify the model?",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        },
+        {
+          "title": "QUESTION 6.4",
+          "instruction_text": "What is your biggest takeaway from this lesson?",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -14,9 +14,10 @@ interface LessonPlayerProps {
   student: any;
   initialResponses: Record<string, string>;
   resumeStepIndex?: number;
+  isPreview?: boolean;
 }
 
-export default function LessonPlayer({ session, student, initialResponses, resumeStepIndex = 0 }: LessonPlayerProps) {
+export default function LessonPlayer({ session, student, initialResponses, resumeStepIndex = 0, isPreview = false }: LessonPlayerProps) {
   const [allSteps, setAllSteps] = useState<any[]>([]);
   const [currentStepIndex, setCurrentStepIndex] = useState(resumeStepIndex);
   const [learnerResponses, setLearnerResponses] = useState<Record<string, string>>(initialResponses);
@@ -48,8 +49,10 @@ export default function LessonPlayer({ session, student, initialResponses, resum
       setCurrentInputValue(learnerResponses[step.step_id] || "");
       setIsMinimized(false);
       setFailedEmbedUrl(null);
-      // Track step viewed for ALL step types
-      trackEvent(student.id, session.id, step.step_id, 'step_viewed');
+      // Track step viewed for ALL step types, unless previewing
+      if (!isPreview) {
+        trackEvent(student.id, session.id, step.step_id, 'step_viewed');
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentStepIndex, allSteps.length]);
@@ -67,7 +70,9 @@ export default function LessonPlayer({ session, student, initialResponses, resum
       
       try {
         setIsSubmitting(true);
-        await submitResponse(student.id, session.id, step.step_id, val);
+        if (!isPreview) {
+          await submitResponse(student.id, session.id, step.step_id, val);
+        }
       } catch (e) {
         toast.error("Failed to save response. Please check connection.");
       } finally {
@@ -77,8 +82,10 @@ export default function LessonPlayer({ session, student, initialResponses, resum
   };
 
   const handleNext = async () => {
-    // Track step completion for ALL steps (not just response ones)
-    trackEvent(student.id, session.id, step.step_id, 'step_completed');
+    // Track step completion for ALL steps (not just response ones), unless previewing
+    if (!isPreview) {
+      trackEvent(student.id, session.id, step.step_id, 'step_completed');
+    }
     await handleSaveResponse();
     if (currentStepIndex < allSteps.length - 1) {
       setCurrentStepIndex(currentStepIndex + 1);
@@ -89,8 +96,10 @@ export default function LessonPlayer({ session, student, initialResponses, resum
 
   const handleBack = async () => {
     if (currentStepIndex > 0) {
-      // Track step completion for current step before going back
-      trackEvent(student.id, session.id, step.step_id, 'step_completed');
+      // Track step completion for current step before going back, unless previewing
+      if (!isPreview) {
+        trackEvent(student.id, session.id, step.step_id, 'step_completed');
+      }
       await handleSaveResponse();
       setCurrentStepIndex(currentStepIndex - 1);
     }
@@ -102,6 +111,8 @@ export default function LessonPlayer({ session, student, initialResponses, resum
         title={session.lessons?.title || "Live Lesson"} 
         currentStep={currentStepIndex} 
         totalSteps={allSteps.length} 
+        isPreview={isPreview}
+        lessonId={session.lessons?.id}
       />
       
       <main className="flex-1 relative overflow-hidden">
@@ -110,7 +121,7 @@ export default function LessonPlayer({ session, student, initialResponses, resum
           stepId={step.step_id}
           onThemeChange={setIsVideoTheme}
           onMediaInteraction={(eventType) => {
-            trackEvent(student.id, session.id, step.step_id, eventType);
+            if (!isPreview) trackEvent(student.id, session.id, step.step_id, eventType);
           }}
           onEmbedError={(url) => setFailedEmbedUrl(url)}
         />
@@ -133,7 +144,7 @@ export default function LessonPlayer({ session, student, initialResponses, resum
           />
         </InstructionOverlay>
 
-        {showCompletion && <CompletionCard />}
+        {showCompletion && <CompletionCard isPreview={isPreview} lessonId={session.lessons?.id} />}
       </main>
     </div>
   );

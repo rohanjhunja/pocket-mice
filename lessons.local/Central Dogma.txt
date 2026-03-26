@@ -1,0 +1,1667 @@
+2022 CENTRAL DOGMA
+Author(s): Karen Johnson, Sugat Dabholkar, Mandy Peel
+Subject: Biology
+Time: 11 classes, 42 minutes each
+Level: Introductory High School Biology
+Version: v2
+UNIT OVERVIEW
+The purpose of this unit is to teach students about the central dogma of biology; that the flow of information is
+from DNA (information storage) to RNA (information transfer) to protein (functional product).
+DNA structure and replication (might be able to modify/use some of the “Exploring DNA replication”) activitiesTranscriptionTranslationImpact on traits
+ 
+ 
+HS-LS1.1 Construct an explanation based on evidence for how the structure of DNA determines the structure of proteins, which carry out the 
+essential functions of life through systems of specialized cells.
+HS-LS3.1 Ask questions to clarify relationships about the role of DNA and chromosomes in coding the instructions for characteristic traits 
+passed from parents to offspring.
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 1/86
+SCIENCE AND ENGINEERING PRACTICES
+CONSTRUCTING EXPLANATIONS AND DESIGNING 
+SOLUTIONS
+(HTTP://WWW.NAP.EDU/OPENBOOK.PHP?RECORD_ID=13165&PAGE=67)
+Constructing explanations and designing solutions in 9–12 
+builds on K–8 experiences and progresses to explanations 
+and designs that are supported by multiple and 
+independent student-generated sources of evidence 
+consistent with scientific ideas, principles, and theories.
+(http://www.nap.edu/openbook.php?record_id=13165&page=67)
+Construct an explanation based on valid and 
+reliable evidence obtained from a variety of 
+sources (including students’ own investigations, 
+models, theories, simulations, peer review) and the 
+assumption that theories and laws that describe 
+the natural world operate today as they did in the 
+past and will continue to do so in the future.
+(http://www.nap.edu/openbook.php?record_id=13165&page=67)
+ 
+ASKING QUESTIONS AND DEFINING PROBLEMS
+(HTTP://WWW.NAP.EDU/OPENBOOK.PHP?RECORD_ID=13165&PAGE=54)
+Asking questions and defining problems in 9-12 builds on 
+K-8 experiences and progresses to formulating, refining, 
+and evaluating empirically testable questions and design 
+problems using models and simulations.
+(http://www.nap.edu/openbook.php?record_id=13165&page=54)
+Ask questions that arise from examining models or 
+a theory to clarify relationships.
+(http://www.nap.edu/openbook.php?record_id=13165&page=54)
+DISCIPLINARY CORE IDEAS
+LS1.A: STRUCTURE AND FUNCTION
+(HTTP://WWW.NAP.EDU/OPENBOOK.PHP?RECORD_ID=13165&PAGE=143)
+Systems of specialized cells within organisms help 
+them perform the essential functions of life.
+(http://www.nap.edu/openbook.php?record_id=13165&page=143)
+All cells contain genetic information in the form of 
+DNA molecules. Genes are regions in the DNA that 
+contain the instructions that code for the formation 
+of proteins, which carry out most of the work of 
+cells. (Note: This Disciplinary Core Idea is also 
+addressed by HS-LS3-1.)
+(http://www.nap.edu/openbook.php?record_id=13165&page=143)
+LS3.A: INHERITANCE OF TRAITS
+(HTTP://WWW.NAP.EDU/OPENBOOK.PHP?RECORD_ID=13165&PAGE=158)
+Each chromosome consists of a single very long 
+DNA molecule, and each gene on the chromosome 
+is a particular segment of that DNA. The 
+instructions for forming species’ characteristics are 
+carried in DNA. All cells in an organism have the 
+same genetic content, but the genes used 
+(expressed) by the cell may be regulated in 
+different ways. Not all DNA codes for a protein; 
+some segments of DNA are involved in regulatory 
+or structural functions, and some have no as-yet 
+known function.
+(http://www.nap.edu/openbook.php?record_id=13165&page=158)
+CROSSCUTTING CONCEPTS
+STRUCTURE AND FUNCTION
+(HTTP://WWW.NAP.EDU/OPENBOOK.PHP?RECORD_ID=13165&PAGE=96)
+Investigating or designing new systems or 
+structures requires a detailed examination of the 
+properties of different materials, the structures of 
+different components, and connections of 
+components to reveal its function and/or solve a 
+problem.
+(http://www.nap.edu/openbook.php?record_id=13165&page=96)
+ 
+CAUSE AND EFFECT
+(HTTP://WWW.NAP.EDU/OPENBOOK.PHP?RECORD_ID=13165&PAGE=87)
+Empirical evidence is required to differentiate 
+between cause and correlation and make claims 
+about specific causes and effects.
+(http://www.nap.edu/openbook.php?record_id=13165&page=87)
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 2/86
+CT-STEM STANDARDS
+Computational modeling and simulation practices
+Dynamic model/simulation
+Algorithm practices
+Using (and modifying? assessing?) algorithms to understand phenomena 
+Programming practices
+Modifying code
+Computational visualization practices
+Dynamic models
+Computational problem solving practices
+STANDARDS
+NEXT GENERATION SCIENCE STANDARDS
+Life Science[HS-LS1-1] Construct an explanation based on evidence for how the structure of DNA determines thestructure of proteins which carry out the essential functions of life through systems of specialized cells.[HS-LS3-1] Ask questions to clarify relationships about the role of DNA and chromosomes in coding theinstructions for characteristic traits passed from parents to offspring.
+CREDITS
+Questions: Karen Johnson, Sugat Dabholkar
+Computational Tools: Karen Johnson, Sugat Dabholkar, Jordan Brick, Amanda Peel, Leif Rasmussen
+Lesson Development Discussions: Sugat Dabholkar, Sue Juhl, Jordan Brick, Karen Johnson 
+ACKNOWLEDGEMENT
+https://www.semanticscholar.org/paper/Diversity-of-human-hair-pigmentation-as-studied-by-Ito-
+Wakamatsu/097cf32ac411a0c98fa88a20b90f51e904967e1e (https://www.semanticscholar.org/paper/Diversity-of-human-hair-
+pigmentation-as-studied-by-Ito-Wakamatsu/097cf32ac411a0c98fa88a20b90f51e904967e1e)
+Concord Consortium
+Inside Edition
+Khan Academy
+RCSBProteinDataBank (https://www.youtube.com/channel/UCBkuiMC1rIybuTcyMK-jWKw)
+Sarah Carter, Michael Novak
+UNDERLYING LESSONS
+Lesson 1. What Makes Us Look Different?Lesson 2. What is Hair?Lesson 3. What gives hair its color?Lesson 4. What do proteins do?Lesson 5. How do the instructions to make proteins work?Lesson 6. How do our cells know how to make proteins (like in hair)?Lesson 7. How do the instructions end up all over our body?Lesson 8. Celebrating differencesLesson 9. Big pictureLesson 10. Copy of How do our cells know how to make proteins (like in hair)?
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 3/86
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 4/86
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 5/86
+LESSON 1. WHAT MAKES US LOOK DIFFERENT?
+Author(s): Karen Johnson, Sugat Dabholkar, Mandy Peel
+Subject: Biology
+Time: 30 minutes
+Level: Introductory High School Biology
+Version: v2
+LESSON 1 OVERVIEW
+This lesson includes the anchoring phenomenon (and an embedded pre-assessment) to get students to begin to explore physical traits and the 
+ways in which they manifest.
+ 
+ 
+CREDITS
+Questions: Karen Johnson
+Lesson Development Discussions: Sugat Dabholkar, Sue Juhl, Jordan Brick, Karen Johnson, Mandy Peel 
+ACKNOWLEDGEMENT
+Inside Edition
+LESSON 1 ACTIVITIES
+1.1. Central Dogma Inquiry Opener1.2. Twins!1.3. How Are the Differences Caused?1.4. How are we going to figure this out?
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 6/86
+1.0. STUDENT DIRECTIONS AND RESOURCES
+Students will be able to discuss some of the things that make people different from each other and will begin to predict/speculate what it is that 
+makes us all different.
+1.1. CENTRAL DOGMA INQUIRY OPENER
+QUESTION 1.1.1
+Write down everything you know about what makes people different from each other in the space below (3 things minimum):
+1.2. TWINS!
+Twin Teens: One Black, OnTwin Teens: One Black, On……
+The embedded resource from above can be accessed via this link
+(https://www.youtube.com/embed/JIUK2KSbvvI)
+QUESTION 1.2.1
+Watch the video and write down everything you notice about the twins in the space below.
+QUESTION 1.2.2
+Write 2-3 questions you have or things you wonder about after having seen the video.
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 7/86
+QUESTION 1.2.3
+Discuss the video and the answers to the last 2 questions with the class.  Use the space below to write down any notes you want to keep track 
+of.  If you do not have any notes, write “no notes.”
+1.3. HOW ARE THE DIFFERENCES CAUSED?
+QUESTION 1.3.1
+How do you think the genetic information in the twins' genes causes their different physical characteristics? (What do you think causes the 
+differences in the physical characteristics of the twins?)
+QUESTION 1.3.2
+What questions will we need to answer to be able to confidently explain how these physical characteristics arise and what causes them to be 
+different (minimum of 2)?
+QUESTION 1.3.3
+Select one of your questions from Q 3.2 and share it with your class.  What question(s) from a classmate do you think is the most important to 
+answer?
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 8/86
+1.4. HOW ARE WE GOING TO FIGURE THIS OUT?
+We are going to use a combination of resources to figure this out: computational models, experimental analysis,
+and scientific literature will all play an important role.
+CT-STEM Scientists
+
+
+The embedded resource from above can be accessed via this link
+(https://northwestern.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=3e25cc92-36e6-48be-bff9-
+51b897189215&v=1)
+QUESTION 1.4.1
+Watch the video above.  Write down 3 trends you see with the scientists who are featured.
+QUESTION 1.4.2
+Optional: Summarize how computational tools are used by scientists as shown in this video.
+QUESTION 1.4.3
+A lot of the molecules we're going to look at are really tiny.  For example, DNA molecules are only 1 nanometer
+wide! If you take a millimeter, which is already pretty tiny, divide it by 1000, and divide it by 1000 again, that's a
+nanometer.  Using this information, why might computational models help?
+QUESTION 1.4.4
+What are some other reasons we might want to use computational modeling to figure out how the twins look
+different?
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 9/86
+LESSON 2. WHAT IS HAIR?
+Author(s): Karen Johnson, Sugat Dabholkar, Mandy Peel
+Subject: Biology
+Time: 42 min (1 class period)
+Level: Introductory High School Biology
+Version: v2
+LESSON 2 OVERVIEW
+In this lesson, students will do hands-on activities to analyze the chemical contents and structure of hair
+ 
+Teacher attachments include pictures for students to use in place of in-person chemical tests or microscope
+analysis of their hair.
+CREDITS
+Questions: Karen Johnson
+Lesson Development Discussions: Sugat Dabholkar, Sue Juhl, Jordan Brick, Karen Johnson 
+LESSON 2 ACTIVITIES
+2.1. Microscope Data analysis2.2. What Do You Think Hair is Made of?2.3. Hair Data Analysis
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 10/86
+2.0. STUDENT DIRECTIONS AND RESOURCES
+Students will analyze the chemical and structural nature of hair. 
+2.1. MICROSCOPE DATA ANALYSIS
+Look at your own hair and that of 2 other people or use the "Hair Microscope Pictures" file from page 0 of
+this lesson for the following questions
+QUESTION 2.1.1
+Draw what you see under the microscope for at least 3 different hair colors/textures at 100x magnification. Focus on highlighting the contrasts 
+in your drawings rather than getting the perfect colors (optional: If you'd rather draw on paper, draw a squiggle here and ask for a paper copy of 
+this)
+Note: Draw your sketch in the sketchpad below
+QUESTION 2.1.2
+Colors that are available for these drawings are somewhat limiting!  Help me out by explaining why you drew them
+the way you did. (if you did the paper version, hand it in, and in this space, write why you chose to do it on paper)
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 11/86
+QUESTION 2.1.3
+What did you notice about the structure of your own hair or the hair that most closely resembles yours from the "Hair Microscope Pictures(https://docs.google.com/presentation/d/e/2PACX-1vQGMCRzJ3-uWDLxOAUNzgvSgb1FBE03dpozjc43d3l_NZmwK1T0A5fPRuGK2EfU6TAjIS6OwW1048UC/pub?start=false&loop=false&delayms=3000)" file (point out at least 2 characteristics)?
+QUESTION 2.1.4
+Compare and contrast the structures you saw in your own hair to that of the other 2 hair colors you looked at under the microscope.
+QUESTION 2.1.5
+What do you think causes these structures and differences (speculate about at least 2 things and explain your reasoning)?
+QUESTION 2.1.6
+Based on this analysis, what question(s) will we need to answer before we can explain how our hair is different (minimum 1)?
+QUESTION 2.1.7
+Optional: What do you think happens as some people get older and their hair starts to go grey/white?  Think about the structure of hair as you 
+saw it under the microscope
+2.2. WHAT DO YOU THINK HAIR IS MADE OF?
+In this lesson, students will do hands-on activities to analyze the chemical contents and structure of hair.
+ 
+QUESTION 2.2.1
+Predict what types of molecules are in hair.
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 12/86
+Lipid/fat Glucose Starch Protein
+Is this in hair (yes/no)?
+QUESTION 2.2.2
+What reasoning did you use to answer the previous question?
+QUESTION 2.2.3
+After you have made your predictions and provided reasons for them, test your hair (and positive controls) for
+each of the macromolecules using these instructions (https://docs.google.com/document/d/e/2PACX-
+1vTWzKSZhN-I4AduAwoBqhz_NOqC8ybl-dZrCFUXevvX0HOSf6yvdahuxBjIf-LTyP_p8dGgn-_V Ris7/pub).
+ 
+Why is it important to include controls for your tests?
+2.3. HAIR DATA ANALYSIS
+Do tests for glucose, starch, lipids, and protein on human hair as instructed by your teacher or use the
+"Hair Macromolecule Tests" file on page 0 of this lesson to answer the following questions.
+                
+                       
+Pictures (if necessary) (https://docs.google.com/presentation/d/e/2PACX-
+1vRBnJwZj_hKlE2hpqSMOpp8oPCxmP8EWRe_jwCpQ-xiyEi0r96aEPYI8KEbozswDMoW70j4UmxX7gjc/pub?
+start=false&loop=false&delayms=60000)
+QUESTION 2.3.1
+What is hair made of?  How do you know (use evidence from your tests or the pictures)?
+QUESTION 2.3.2
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 13/86
+Did your findings agree with your predictions?  Explain.
+QUESTION 2.3.3
+How does the information about what hair is made of and how it looks under a microscope fit into the idea(s) you have about what makes 
+Maria's (right) and Lucy's (left) hair color different?
+QUESTION 2.3.4
+What questions would we need to be able to answer to figure out how these sisters (and other people) get their
+hair or different hair colors (minimum of 2)?   Share at least one question with the whole class.
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 14/86
+LESSON 3. WHAT GIVES HAIR ITS COLOR?
+Author(s): Karen Johnson, Sugat Dabholkar, Mandy Peel
+Subject: Biology
+Time: 75 min
+Level: Introductory High School Biology
+Version: v2
+LESSON 3 OVERVIEW
+This lesson deepens the exploration of the anchoring phenomenon by asking students to investigate the role of melanin, a protein product, in 
+determining human hair color hair color.
+ 
+ACKNOWLEDGEMENT
+Questions: Karen Johnson
+Computational Tools: Karen Johnson, Sugat Dabholkar, Jordan Brick
+Lesson Development Discussions: Sugat Dabholkar, Sue Juhl, Jordan Brick, Karen Johnson 
+LESSON 3 ACTIVITIES
+3.1. What do we already know?3.2. Melanin Model Exploration3.3. Melanin model questions3.4. Scaling up!3.5. Looking into the code3.6. Optional: Melanin in other animals3.7. Mid-unit reflection
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 15/86
+3.0. STUDENT DIRECTIONS AND RESOURCES
+Students will use a computational model to explore the impact of melanin, a protein product, on human hair.
+ 
+3.1. WHAT DO WE ALREADY KNOW?
+Students will review what they learned through microscope analysis of human hair and interrogate their prior understanding of melanin.
+QUESTION 3.1.1
+Think back to the structure of different hair colors as you saw them under the microscope (see picture, too).  What do you notice about the 
+coloration?
+ 
+QUESTION 3.1.2
+Part of the color of hair is something called melanin.  What do you already know about melanin?
+ 
+QUESTION 3.1.3
+Discuss the last 2 questions as a class and write down some answers from your classmates that are different from
+your own in the space below.
+3.2. MELANIN MODEL EXPLORATION
+Melanin has a lot of similarities with proteins, and, while not technically a protein itself, it is made by proteins.  Different versions of the proteins 
+that make melanin can make different forms of the pigment.  Natural human hair is colored by 2 forms of melanin: pheomelanin and eumelanin.  
+Use the model to see which types of melanin are in which hair colors (and how much of each is there).  
+ 
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 16/86
+ 
+ powered by NetLogo
+Mode: Interactive Commands and
+hair-color
+black
+The embedded resource from above can be accessed via this link
+(https://ct-stem.s3.amazonaws.com/uploads/sugat_teacher_account/2020/07/27/melanin%20levels_2020-07-27-
+13-31-04-517472.html)
+QUESTION 3.2.1
+What is something you found interesting by playing around with this model? You might be asked to demonstrate for the class.
+(If you're having trouble getting it going, here are some hints) (https://docs.google.com/presentation/d/e/2PACX-
+1vS_w-yFAcuylWjKgg5qbW0L4s6bCHKprbgcIrCKMMc7R-AkoxUxj_uUnO3BNF1Kv3XxAIYV j90WHlQw/pub?
+start=false&loop=false&delayms=3000)
+ 
+3.3. MELANIN MODEL QUESTIONS
+Melanin has a lot of similarities with proteins, and, while not technically a protein, itself, it is made by proteins.  Different versions of the proteins 
+that make melanin can make different forms of the pigment.  Natural human hair is colored by 2 forms of melanin: pheomelanin and eumelanin.  
+Use the model to see which types of melanin are in which hair colors (and how much of each is there).  
+ 
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 17/86
+NewOpen...CloseImport...Revert...
+Save...Create a copyShare
+ ables
+Graph
+Map
+ lider
+Undo
+RedoData Set
+Measurements (0 )
+The embedded resource from above can be accessed via this link 
+ (https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-
+shared.concord.org%2FJNFuCVGIihmi9b7aknfC%2Ffile.json)
+To check the melanin levels in each hair color, choose a hair color, click “Setup” then “check-protein-quantities” and record the data.
+ 
+QUESTION 3.3.1
+Record the levels of eumelanin and pheomelanin in the table for at least 2 individuals of each hair color in the table.  Take a screenshot of your 
+table and upload it here.
+(If you're having trouble getting it going, here are some hints) (https://docs.google.com/presentation/d/e/2PACX-1vS_w-yFAcuylWjKgg5qbW0L4s6bCHKprbgcIrCKMMc7R-AkoxUxj_uUnO3BNF1Kv3XxAIYV j90WHlQw/pub?start=false&loop=false&delayms=3000)
+ 
+Note: Once you upload the file, scroll down and click "save" before you do the rest of the questions on this page. 
+That will help the page save so you don't lose your answers!
+Upload files to the space allocated by your teacher.
+QUESTION 3.3.2
+What do each of the dots in the graph represent?
+QUESTION 3.3.3
+Based on your data, what is the trend of eumelanin levels with respect to hair color?
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 18/86
+QUESTION 3.3.4
+You can check the pheomelanin levels on the graph by selecting the word “pheomelanin” from the table and
+dragging it to the y-axis of the graph.  Based on your data, what is the trend of pheomelanin levels with regards to hair color?
+QUESTION 3.3.5
+What evidence did you use to answer the last 2 questions?
+QUESTION 3.3.6
+What melanin do you think Lucy (left in the picture above) has more of (eumelanin or pheomelanin)?  Maria (right)?  What evidence did you use 
+to answer this question?
+Lucy Maria
+Eumelanin or Pheomelanin?
+Explanation
+3.4. SCALING UP!
+NewOpen...CloseImport...Revert...
+Save...Create a copyShare
+ ables
+Graph
+Map
+ lider
+Undo
+RedoData Set
+Measurements (0 )
+The embedded resource from above can be accessed via this link
+(https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-
+shared.concord.org%2FJNFuCV GIihmi9b7aknfC%2Ffile.json)
+QUESTION 3.4.1
+This computational model allows us to collect data about a lot of people's hair very quickly. Why is it beneficial to
+collect a lot of data quickly?
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 19/86
+QUESTION 3.4.2
+Generate data for a lot of people with random hair colors by opening the command center and typing in “collect-data number” (where "number" 
+indicates the number of people you want to collect for), then enter.  Check out the graph that is made of your new data.  In detail, using 
+qualitative and quantitative data from the graph, describe the relationship between eumelanin levels and hair color.
+QUESTION 3.4.3
+You can check the pheomelanin levels on the graph by selecting the word “pheomelanin” from the table and dragging it to the y-axis of the 
+graph.  In detail, using qualitative and quantitative detail from the graph, describe the relationship between pheomelanin levels and hair color.
+QUESTION 3.4.4
+Why are the measurements of each type of melanin not the same for each person with the same hair color (ie. why is the eumelanin level for all 
+people with black hair not exactly the same-speculate if you're not sure!)?
+QUESTION 3.4.5
+How do you think the body knows which melanin to make and how much? If you don't know, speculate! (and let me know you're speculating). 
+Then, share your answers with the rest of the class.
+QUESTION 3.4.6
+Optional: In 2-3 sentences, reflect on what you and your classmates said in response to the last question.  What
+do you think might be involved and how do you think it works?
+3.5. LOOKING INTO THE CODE
+It’s time to check out the code used to make this model!  This way, we can find out how the program “knows” what melanin levels each hair color has.
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 20/86
+ powered by NetLogo
+Mode: Interactive Commands and
+hair-color
+black
+The embedded resource from above can be accessed via this link
+(https://ct-stem.s3.amazonaws.com/uploads/sugat_teacher_account/2020/07/27/melanin%20levels_2020-07-27-
+13-31-04-517472.html)
+QUESTION 3.5.1
+Click on the netlogo code model and scroll through.  Find where the instructions are for the human to be made.  Copy and paste the code for 
+making a human here.
+QUESTION 3.5.2
+Change something about the human (or their hair) in the code (you will need to recompile the code and hit setup again to see any changes).  
+What did you change (copy and paste the new code here)? 
+Describe the effect. (Make sure you recompile the code before you test the effect of your changes)
+QUESTION 3.5.3
+Take a screenshot of the person in the model after you made your changes and upload it here
+Upload files to the space allocated by your teacher.
+QUESTION 3.5.4
+Optional: Can you find where we told the computer how to figure out the melanin levels that should go with each hair color?  Copy that code 
+and paste it here.
+QUESTION 3.5.5
+Optional: Every time you check protein quantities for any given hair color, they are slightly different. What part(s) of
+the code do you think cause this variation? Why do you think the model creators made the model this way?
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 21/86
+3.6. OPTIONAL: MELANIN IN OTHER ANIMALS
+Melanin is a pigment in a lot of animals, not just people!  It is one of the pigments in dogs
+(http://www.doggenetics.co.uk/pigment.html), birds (https://www.audubon.org/news/what-makes-bird-feathers-so-
+colorfully-fabulous), and even birds' relatives, dinosaurs (https://www.smithsonianmag.com/science-nature/colors-
+dinosaurs-open-new-window-study-past-180972070/)!
+   
+QUESTION 3.6.1
+Optional: Choose one of the articles above and read it.  Which one did you read?
+QUESTION 3.6.2
+Optional: What is one thing you learned from reading that article?
+QUESTION 3.6.3
+Optional: Would you recommend the article to a friend?  Why or why not?
+3.7. MID-UNIT REFLECTION
+QUESTION 3.7.1
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 22/86
+Write at least one big idea that you learned about how our hair color is made so far
+QUESTION 3.7.2
+Pick any computational tool/activity that you have used in this lesson. Briefly describe the tool and explain how
+you used it to learn. 
+QUESTION 3.7.3
+Indicate how much you agree or disagree with the following statement:
+I enjoyed learning with the computational tools/activities in this unit so far.
+   Strongly disagree   Disagree   In the middle / I don't know   Agree   Strongly agree
+QUESTION 3.7.4
+Indicate how much you agree or disagree with the following statement:
+I feel that I successfully learned the content of this unit so far.
+   Strongly disagree   Disagree   In the middle / I don't know   Agree   Strongly agree
+QUESTION 3.7.5
+Indicate how much you agree or disagree with the following statement:
+Compared to lessons without computational tools/activities, I found this unit more engaging so far
+   Strongly disagree   Disagree   In the middle / I don't know   Agree   Strongly agree
+QUESTION 3.7.6
+Indicate how much you agree or disagree with the following statement:
+Compared to lessons without computational tools/activities, I found this unit more challenging so far.
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 23/86
+   Strongly disagree   Disagree   In the middle / I don't know   Agree   Strongly agree
+QUESTION 3.7.7
+Indicate how much you agree or disagree with the following statement:
+I felt stressed by the computational tools/activities we have done so far.
+   Strongly disagree   Disagree   In the middle / I don't know   Agree   Strongly agree
+QUESTION 3.7.8
+Is anything that you learned in this unit so far relevant to your personal aspirations? If yes, please explain.
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 24/86
+LESSON 4. WHAT DO PROTEINS DO?
+Author(s): Karen Johnson, Sugat Dabholkar, Mandy Peel
+Subject: Biology
+Time: 42 min (1 class period)
+Level: Introductory High School Biology
+Version: v2
+LESSON 4 OVERVIEW
+In this lesson, students will get an overview of what proteins are made of, what they do, and how structure impacts function.
+ 
+CREDITS
+Questions: Karen Johnson
+Lesson Development Discussions: Sugat Dabholkar, Sue Juhl, Jordan Brick, Karen Johnson 
+ACKNOWLEDGEMENT
+Khan Academy, RCSBProteinDataBank
+LESSON 4 ACTIVITIES
+4.1. What do we already know?4.2. Protein overview4.3. Structure/Function Introduction4.4. Protein Structure and Function4.5. Hair structure and function
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 25/86
+4.0. STUDENT DIRECTIONS AND RESOURCES
+Students will get an overview of what proteins are made of, what they do, and how structure impacts function.
+ 
+4.1. WHAT DO WE ALREADY KNOW?
+Let's think about what we already know about proteins.
+QUESTION 4.1.1
+What are the first 3 words or phrases that come to mind when you hear the word “protein?”
+QUESTION 4.1.2
+What do you know/remember about amino acids?
+4.2. PROTEIN OVERVIEW
+This video will give you an overview of proteins: what they’re made of and what they do.  Watch the whole thing (take notes in the notes section 
+below if you would like) and then answer the following questions.
+Introduction to proteins anIntroduction to proteins an……
+The embedded resource from above can be accessed via this link
+(https://www.youtube.com/embed/78QUeXV KiJ4)
+QUESTION 4.2.1
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 26/86
+What information seemed the most important in this video?
+QUESTION 4.2.2
+What information in the video surprised you or confirmed something you thought you already knew?
+QUESTION 4.2.3
+Talk to a neighbor or the whole class about your answers to the previous questions.  Write down observations from them that are different from 
+your own observations in the space below.
+4.3. STRUCTURE/FUNCTION INTRODUCTION
+In this lesson, students will examine the relationship between structure and function of some of the parts of their
+bodies.
+QUESTION 4.3.1
+Look at your hands.  What is their function (what can they do-write down at least 3 specific things. Bullet points are ok)?
+QUESTION 4.3.2
+Write down 4 things you notice about the structure of a hand (what it is made of and how it is all put together. Bullet points are ok).
+ 
+QUESTION 4.3.3
+Choose at least 2 of your structure observations and describe how the structure helps your hands do at least 2 of the functions of your hands.
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 27/86
+QUESTION 4.3.4
+Optional: Now, think about your feet.  What are their functions?  What structures help your feet fulfill their functions? 
+QUESTION 4.3.5
+Optional: Compare and contrast the functions of your hands and feet.
+QUESTION 4.3.6
+How do the different structures of your hands and feet help with their different functions?
+4.4. PROTEIN STRUCTURE AND FUNCTION
+Proteins have similar relationships between their structures and function to the structures and functions of our body parts.  
+QUESTION 4.4.1
+Match the following proteins, non-protein analogs, and functions (all 3 columns should be connected).
+Note: Draw your sketch in the sketchpad below
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 28/86
+QUESTION 4.4.2
+Watch the video below from 1:16-3:21. 
+The embedded resource from above can be accessed via this link
+(https://www.youtube.com/embed/wvTv8TqWC48)
+How can you remember the hierarchy of protein structure? (remember, the primary structure is just the sequence of amino acids…)
+QUESTION 4.4.3
+Amino acids can act differently from each other (they can be different sizes like the beads in the necklace have different hydrophobic and 
+hydrophilic properties like phospholipids, oils, water, etc.). Based on this information, how do you think the primary structure could affect the 
+other structures (secondary, tertiary, quaternary)?
+ 
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 29/86
+QUESTION 4.4.4
+Melanin is made by a protein that is 216 amino acids long. Eumelanin and pheomelanin (the pigments that make Maria and Lucy's hair dark 
+brown and red, respectively) are made by slightly different versions of the same protein: they have a few amino acids that are different between 
+them.  Thinking back over the previous questions, why do you think slightly different versions of the same thing might do things differently?
+4.5. HAIR STRUCTURE AND FUNCTION
+QUESTION 4.5.1
+Below is a picture of the structure of hair.  What do you notice (focus on the hair, mostly)?
+ 
+Hair has many purposes for people: warmth, fashion and sexual attraction, protection from ultraviolet light, etc.
+How does the structure of hair help it do its function(s)? Link at least one structure and function.
+QUESTION 4.5.2
+Optional: Is there anything about the structure of hair that surprises you? If so, what?
+QUESTION 4.5.3
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 30/86
+Optional: The blog post linked here (https://www.thetech.org/ask-a-geneticist/hair-texture-can-change) includes
+some information about what makes hair straight, curly, or wavy.  Read the post and discuss how the primary
+structure of proteins, the amino acid sequence of the protein(s) in hair, can influence if, and how, curly hair will get
+in the space below.
+ 
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 31/86
+LESSON 5. HOW DO THE INSTRUCTIONS TO MAKE PROTEINS WORK?
+Author(s): Karen Johnson, Sugat Dabholkar, Mandy Peel
+Subject: Biology
+Time: 60 min
+Level: Introductory High School Biology
+Version: v2
+LESSON 5 OVERVIEW
+In this lesson, we will take a step back to find out about where the instructions for making proteins are kept and how proteins get made.
+ 
+CREDITS
+Questions: Karen Johnson
+Computational Tools: Sugat Dabhoklar
+Lesson Development Discussions: Sugat Dabholkar, Sue Juhl, Jordan Brick, Karen Johnson 
+LESSON 5 ACTIVITIES
+5.1. What do we already know?5.2. Introduction to DNA and RNA5.3. How are DNA and RNA made? Introduction to the Model System5.4. A closer look at DNA synthesis - 15.5. A closer look at DNA synthesis - 25.6. A Closer Look at RNA Synthesis
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 32/86
+5.0. STUDENT DIRECTIONS AND RESOURCES
+In this lesson, students will compare and contrast the structures and functions of DNA and RNA and get an overview of how they are made.
+ 
+5.1. WHAT DO WE ALREADY KNOW?
+QUESTION 5.1.1
+Brainstorm all you know about DNA in the space below.
+QUESTION 5.1.2
+Based on previous knowledge, what are genes and what do they do?
+5.2. INTRODUCTION TO DNA AND RNA
+The information below will be used to answer the following questions
+ 
+ 
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 33/86
+ 
+ 
+ 
+QUESTION 5.2.1
+Look at the pictures above to fill in this Venn Diagram (note: there isn't really a "sketch." Use the text boxes, but note that moving 
+text boxes is a challenge!)
+Note: Draw your sketch in the sketchpad below
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 34/86
+QUESTION 5.2.2
+Fill out the table below using information from the pictures and table above:
+RNA (ribonucleicacid) DNA (deoxyribonucleicacid)
+Where in a cell is it found?
+What is it’s helix “backbone” made of?
+How many “strands” (helix backbones) are there in eachmolecule?
+What is the primary function of the molecule?
+QUESTION 5.2.3
+DNA can’t leave the nucleus and protein is made in the cytoplasm of cells at ribosomes (protein synthesis factories). How do the 
+instructions from the DNA get to the ribosomes?
+QUESTION 5.2.4
+Fill in the following table about 3 types of RNA involved in protein synthesis. (open this link
+(https://www.khanacademy.org/science/high-school-biology/hs-molecular-genetics/hs-rna-and-protein-synthesis/a/hs-rna-and-protein-
+synthesis-review) in a new tab, right click or 2-finger click, and look up the full names of these RNAs and their functions (what they 
+do).
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 35/86
+mRNA tRNA rRNA
+Full name
+Function
+5.3. HOW ARE DNA AND RNA MADE? INTRODUCTION TO THE MODEL SYSTEM
+Here is a test tube model of how DNA and RNA get made within a cell.
+ powered by NetLogo
+Mode: Interactive Commands and
+add-a-template-DNA-strand
+The embedded resource from above can be accessed via this link
+(https://ct-
+stem.s3.amazonaws.com/uploads/jordanbrickteacher/2020/07/28/replication%20and%20transcription%20%281%29_2020-
+07-28-14-22-49-447356.html)
+QUESTION 5.3.1
+Play around with the model above. What is one thing you found interesting?
+5.4. A CLOSER LOOK AT DNA SYNTHESIS - 1
+Let’s use that test tube model to see how DNA gets made.
+ 
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 36/86
+ powered by NetLogo
+Mode: Interactive Commands and
+add-a-template-DNA-strand
+The embedded resource from above can be accessed via this link
+(https://ct-
+stem.s3.amazonaws.com/uploads/jordanbrickteacher/2020/07/28/replication%20and%20transcription%20%281%29_2020-
+07-28-14-23-48-382092.html)
+QUESTION 5.4.1
+Click “add-a-template-DNA strand” again, then “add-deoxyribonucleotides,” and then “go.”  Describe what happens. Be specific.
+QUESTION 5.4.2
+Click “add-DNAP,” which adds the enzyme DNA polymerase.  What happens now? Be specific 
+QUESTION 5.4.3
+Based on your answer the last question, what is the role of DNA polymerase?
+QUESTION 5.4.4
+If you add more deoxyribonucleotides, what happens to the rate of DNA being built (the process is called replication)?  
+5.5. A CLOSER LOOK AT DNA SYNTHESIS - 2
+Let’s use that test tube model to see how DNA gets made.
+ 
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 37/86
+ powered by NetLogo
+Mode: Interactive Commands and
+add-a-template-DNA-strand
+The embedded resource from above can be accessed via this link
+(https://ct-
+stem.s3.amazonaws.com/uploads/jordanbrickteacher/2020/07/28/replication%20and%20transcription%20%281%29_2020-
+07-28-14-24-17-357838.html)
+QUESTION 5.5.1
+What patterns do you see after DNA is replicated?
+QUESTION 5.5.2
+Record the percentages of each nucleotide (A, T, G, C) in the table below once the new strand of DNA has been fully synthesized (move the 
+“ticks” slider to the right to speed it up and adjust the deoxyribonucleotide number, if necessary).  Carry out this process 2 times to fill out the 
+table. 
+(Note: "Old" and "Template" are the same thing in this case)
+%A %T %C %G
+template
+new
+template
+new
+QUESTION 5.5.3
+What do you notice about the percentages in each trial? (look across more than just one letter in each trial)
+QUESTION 5.5.4
+This relationship is called “Chargaff’s rule” after the scientist who discovered it in the late 1940s. It helped other scientists figure out the 
+structure of DNA and how DNA can contain the information necessary to make copies of itself.  Use the information from the last few questions 
+and the model to write an algorithm for DNA polymerase to function (the steps DNA polymerase needs to follow to replicate DNA).
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 38/86
+5.6. A CLOSER LOOK AT RNA SYNTHESIS
+Let’s use the test tube model to make some RNA!  This process is called transcription. The RNA is transcribed (or put together) based on the 
+sequence in the DNA (the DNA template).
+ powered by NetLogo
+Mode: Interactive Commands and
+add-a-template-DNA-strand
+The embedded resource from above can be accessed via this link
+(https://ct-
+stem.s3.amazonaws.com/uploads/jordanbrickteacher/2020/07/28/replication%20and%20transcription%20%281%29_2020-
+07-28-14-24-17-357838.html)
+QUESTION 5.6.1
+Your challenge for this page is to make RNA based on a DNA template.  What buttons did you need to press to make it happen?  What does 
+that mean about what is necessary to make RNA?
+QUESTION 5.6.2
+There’s a bug somewhere in the program or monitor (the model/buttons you see on top)!  Check out all the readouts after your RNA is made 
+and write what needs to change in the space below. (Here's a hint if you need one (https://docs.google.com/presentation/d/e/2PACX-
+1vS_mg3CSMPsw8QpUj1MccZuIv0m4BLpvcgnYH3-udA2kOLU9PFp2UEtOUpVxYzpIuKgmO3mT8JYA-1O/pub?
+start=false&loop=false&delayms=3000))
+QUESTION 5.6.3
+Let’s fix the bug!  If you want to change something in the code, open the NetLogo code bar.  If you want to change something in the readouts, 
+click on the lock icon on the top left to change the mode to “authoring” (you’ll need to change it back before you’re done).  What did you do to fix 
+the bug?  Did it work?
+Try it first on your own. If you can't get it, talk to a neighbor, then check out the hints below:
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 39/86
+Hint 1 (https://docs.google.com/presentation/d/e/2PACX-1vQoqqp-
+E22xFcLYzR1bZxxz4id2PiwzWN0vw5oXNJw5ASHM73K0s4tYwRNwGf9h2GqUNjYV hozD_GDX/pub?
+start=false&loop=false&delayms=3000) 
+Hint 2 (https://docs.google.com/presentation/d/e/2PACX-
+1vQDiK7nw8npG8xaw9ghZdgDE99_yBatYDk2pkOqN0JSMlkPHMuOtBbjO3WvRAEgrSH2cZOr9mRc-f8-/pub?
+start=false&loop=false&delayms=3000)
+QUESTION 5.6.4
+Compare and contrast the process of making RNA (transcription) to the replication of DNA. Write down at least one similarity and one 
+difference. 
+QUESTION 5.6.5
+Why is the process of transcription important for making proteins?
+If you need them, there are a few hints below:
+hint 1 (https://docs.google.com/presentation/d/e/2PACX-
+1vRKFKIX3NChBnICSGYn5LTdzqHaxQv0ncU5oYuKI407JjbrZmJPyIWol6JKOZ7ymeav_H-Xk8Afb3j8/pub?
+start=false&loop=false&delayms=3000)
+hint 2 (https://docs.google.com/presentation/d/e/2PACX-1vRGS-
+zcssupEheUR5hIprZzlK2yK2DrvdGGWiCnfKxV 7SBnENltNnzU38yRm1_ZkqB3Y32HoYpqri03/pub?
+start=false&loop=false&delayms=3000)
+QUESTION 5.6.6
+Think back to our original question about the twins (Lucy and Maria) and how their hair got to be the different colors/textures it is. What else do 
+we need to find out to be able to answer the question?
+QUESTION 5.6.7
+Discuss the last 2 questions with your classmates and write down any observations or insights (different from your
+own) that they have below.
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 40/86
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 41/86
+LESSON 6. HOW DO OUR CELLS KNOW HOW TO MAKE PROTEINS (LIKE IN HAIR)?
+Author(s): Karen Johnson, Sugat Dabholkar, Mandy Peel
+Subject: Biology
+Time: 42 min (1 class period)
+Level: Introductory High School Biology
+Version: v2
+LESSON 6 OVERVIEW
+Students will be able to describe how instructions from DNA can be used to make specific proteins.
+CREDITS
+Questions: Karen Johnson
+Computational Tools: Concord Consortium, Amanda Peel, Karen Johnson, Leif Rasmussen
+Lesson Development Discussions: Sugat Dabholkar, Sue Juhl, Jordan Brick, Karen Johnson 
+ACKNOWLEDGEMENT
+Concord Consortium
+LESSON 6 ACTIVITIES
+6.1. What do we already know?6.2. Algorithmic Explanation of Protein Synthesis6.3. How is Protein Actually Made?6.4. Making our own!6.5. Body Modeling Translation6.6. Writing Algorithmic Explanations of Translation6.7. Model comparisons6.8. Reflection on Learning
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 42/86
+6.0. STUDENT DIRECTIONS AND RESOURCES
+In this lesson, we’re going to find out how the instructions from DNA and RNA are used to make proteins (like the ones that make hair).
+6.1. WHAT DO WE ALREADY KNOW?
+ 
+QUESTION 6.1.1
+Think back to a couple lessons ago: What did you learn about the functions of proteins?
+QUESTION 6.1.2
+What do you remember about how the specific structure of something can affect its function?
+QUESTION 6.1.3
+There is a process that must be done in order for the instructions to make proteins to be brought from the DNA in
+the nucleus of cells into the cytoplasm, where the proteins are made. What is the name of that process (this
+process is the first step of the central dogma  of molecular biology, the process through which DNA instructions
+are decoded into a fully functional product)?
+ 
+Note: Transcription is RNA made using a DNA template.  Dr. J can't edit the choice options, unfortunately.   You can
+consider this a hint, though!
+   Replication (DNA is made using a DNA template)   Transcription (RNA is made using an RNA template)   Translation (protein is made using an RNA template)
+QUESTION 6.1.4
+In 1-2 sentences, describe how you think proteins might get made or ask 1-2 questions that would help you be able to describe how proteins 
+are made (those proteins are the endpoint of the the central dogma of molecular biology: again, the process through which
+DNA instructions are decoded into a fully functional product).
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 43/86
+6.2. ALGORITHMIC EXPLANATION OF PROTEIN SYNTHESIS
+Write an algorithm (step by step procedure) for protein synthesis.  It is ok if you don't know all of the steps. Do
+your best to write the steps that explain what you think happens. Try to include algorithm concepts in your steps
+(branching, iteration, methods, variables).
+Algorithm:
+Definition: A sequence of steps to solve a problemGame example: Every level had you build an algorithm to light the colored squares.Real life example: Directions to your house
+Method/Procedure:
+Definition: A set of steps that are used in many processes; encapsulated sequence of stepsGame example: The procedures were methods. They were separate steps in the main programReal life example: Tying your shoe.  The steps are a complete method because they complete a task. You callthis method in multiple circumstances.
+Iteration:
+Definition: Repeating a sequence of steps until a condition is met Game example: The loops in the games were examples of iteration.  They repeated the sequence until all thesquares were lit. Real life example: Each day is an iteration, each week, each month, each year
+Branching:
+Definition: Choosing a path, if/then/else statements Real life example: Choosing what to wear each day: if it is cold outside, then wear a sweater, else don’t weara sweater 
+Variable:
+Definition: A value that can change; used in programming to make programs universal Real life example: 
+Set variable1 = 5
+Set variable2 = 6
+variable1 + variable2 = 11 
+Weather example: Choosing what to wear each day: if it is cold outside, then wear a sweater, else don’t wear a
+sweater. Weather is a variable with a value that is set each day. Weather = cold, weather = warm, weather = hot,
+etc.
+QUESTION 6.2.1
+Write an algorithm (step by step procedure) for protein synthesis.  It is ok if you don't know all of the steps. Do
+your best to write the steps that explain what you think happens. Try to include algorithm concepts in your steps
+(branching, iteration, methods, variables).
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 44/86
+*If you would rather write/draw your algorithm on a piece of paper, do so and turn it in to your teacher. Then
+write "turned in to teacher" in the box below.
+6.3. HOW IS PROTEIN ACTUALLY MADE?
+AboutShare
+Click TranscribeTranscribe to see full mRNA strand created or TranscribeTranscribe
+Click TranslateTranslate to generate full protein from mRNA or TranslaTransla
+Start/continue modelStart/continue model StopStop ResetReset Edit DNAEdit DNA
+The embedded resource from above can be accessed via this link
+(https://lab.concord.org/embeddable.html#interactives/sam/DNA-to-proteins/1-dna-to-protein.json)
+QUESTION 6.3.1
+Click the "transcribe" button in the model to start the process of transcription (also starting the process of decoding the DNA into that final 
+functional product, following the steps of the central dogma of molecular biology). 
+Describe the process below using the following terms: 
+                
+ 
+QUESTION 6.3.2
+How many ribonucleotides (RNA) match with each deoxyribonucleotide (DNA)?  Do the same nucleotides and
+ribonucleotides always go together? If so, specify which ones go together.
+QUESTION 6.3.3
+Once the mRNA is done being made, click “translate.”  Translation is the process of building a protein using the instructions provided through 
+mRNA.  The enzyme that carries out this process is called a ribosome and it is made of protein and RNA. This process is making proteins, 
+those final functional products of the process outlined by the central dogma of molecular biology 
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 45/86
+ 
+Write down 3 things you notice during the translation animation
+ 
+QUESTION 6.3.4
+How many ribonucleotides (RNA) match with each amino acid?  Can you tell if the same ribonucleotides and
+amino acids always go together? Explain your answer
+6.4. MAKING OUR OWN!
+QUESTION 6.4.1
+Groups of 3 nucleotides can be called a “codon.” Using information from the model on the last page, why do you think it’s helpful to have a 
+term for a group of 3 nucleotides?
+QUESTION 6.4.2
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 46/86
+ 
+Most scientists who work with DNA, RNA, and protein 
+use a key to translate from the language of nucleotides to 
+the language of proteins. This key is called a codon table 
+and there are 2 versions above-both have the same 
+information presented in slightly different ways.  Use one 
+of the codon tables to translate the following mRNA 
+sequence into amino acids:
+aug-acc-ggg-cga-agg-uag
+ 
+For help with either or both, check out these resources:
+Codon wheel interpretation
+(https://docs.google.com/presentation/d/e/2PACX-1vQ9bNSnSdHsV 0UQ-oFIFcZal8X9yPrXmPw6crqNog0V bWQMdKCQmkv7iusIrZJerp0_6w0fwoZBm8ur/pub?start=false&loop=false&delayms=3000)
+Codon table interpretation (https://docs.google.com/presentation/d/e/2PACX-1vR-Hz5i1C_OxZxlL1acxkbMsv2Cvly4MwGDIMNrMSzflM0atcpniEieQnbJB9mIB7kJTaJ-X_aym11C/pub?start=false&loop=false&delayms=3000)
+ 
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 47/86
+QUESTION 6.4.3
+What do you notice about the 4th and 5th amino acids and 4th and 5th codons in the sequence you translated? 
+How can you explain what you saw (hint: look back at the codon tables)?
+QUESTION 6.4.4
+Use the model below to check your answers.  Enter each codon (trio of mRNA letters, not amino acid letters) from the previous question into 
+the model and press enter after each to watch the amino acid sequence grow. Screenshot the polypeptide (protein) sequence (“PolyPSeq”) and 
+upload it here.
+The embedded resource from above can be accessed via this link
+(https://scratch.mit.edu/projects/100898229/embed)
+Upload files to the space allocated by your teacher.
+QUESTION 6.4.5
+Try your own mRNA sequence: write the mRNA sequence from above but make a couple of changes.  What is the effect on the amino
+acids?
+New mRNA sequence Amino acid sequence
+QUESTION 6.4.6
+Using the information from this page and the last one, write out the algorithm (the instructions) that you, acting as
+the ribosome  followed to put together the amino acids in the correct order to make a protein based on the mRNA
+sequence.  Be specific!
+QUESTION 6.4.7
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 48/86
+Optional: check out the code used by the program (https://scratch.mit.edu/projects/100898229/editor/
+(https://scratch.mit.edu/projects/100898229/editor/)).  What do you notice?
+QUESTION 6.4.8
+Optional: In the behind-the-scenes look at the scratch modeling, can you write, in words, what one of the groups
+of blocks means (pictured is an example of a group of blocks)?
+6.5. BODY MODELING TRANSLATION
+Body modeling protein synthesis activity
+Ten students wear signs that have triplet mRNA codons on them and line up to form an mRNA strand (make sure START is first and STOP is last).  
+Three chairs are set up as the ribosome and are labeled A, P, and E for the three ribosome sites. 
+A bag with chain blocks that are labeled as the 20 amino acids is placed on the A site chair. 
+The first person sits in the A site and reads the table for his/her codon and finds the corresponding amino acid chain block in the bag.  
+The mRNA strand shifts, and now person 1 is in the P site with their amino acid, and person 2 is in the A site. 
+Person 2 reads the table for his/her codon and finds the corresponding amino acid chain block in the bag and the chain shifts again.  
+Person 1 is in the E site and hands their amino acid to person 2, who is in the P site.  
+Person 2 connects his/her amino acid chain block to person 1’s, thus beginning the polypeptide chain. 
+Person 3 continues the process. 
+These steps are repeated until the STOP codon is reached and the mRNA disassembles from the ribosome. 
+During this process, 10 students are acting out the sequence and the rest of the class is helping them figure out the process and make meaning around what is happening. The 
+teacher should facilitate and lead discussion of the steps and overall sense-making around the process.
+ 
+QUESTION 6.5.1
+In your own words, how did the "ribosome" know which amino acid to add?
+QUESTION 6.5.2
+How does this activity demonstrate part of the Central Dogma of molecular biology (pictured below)?
+What is the &#39;Central Dogma&#39;? | Facts | yourgenome.org
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 49/86
+6.6. WRITING ALGORITHMIC EXPLANATIONS OF TRANSLATION
+Here are resources to help with writing your algorithm: 
+Algorithm:
+Definition: A sequence of steps to solve a problemGame example: Every level had you build an algorithm to light the colored squares.Real life example: Directions to your house
+Method/Procedure:
+Definition: A set of steps that are used in many processes; encapsulated sequence of stepsGame example: The procedures were methods. They were separate steps in the main programReal life example: Tying your shoe.  The steps are a complete method because they complete a task. You callthis method in multiple circumstances.
+Iteration:
+Definition: Repeating a sequence of steps until a condition is met Game example: The loops in the games were examples of iteration.  They repeated the sequence until all thesquares were lit. Real life example: Each day is an iteration, each week, each month, each year
+Branching:
+Definition: Choosing a path, if/then/else statements Real life example: Choosing what to wear each day: if it is cold outside, then wear a sweater, else don’t weara sweater 
+Variable:
+Definition: A value that can change; used in programming to make programs universal Real life example: 
+Set variable1 = 5
+Set variable2 = 6
+variable1 + variable2 = 11 
+Weather example: Choosing what to wear each day: if it is cold outside, then wear a sweater, else don’t wear a
+sweater. Weather is a variable with a value that is set each day. Weather = cold, weather = warm, weather = hot,
+etc.
+ 
+QUESTION 6.6.1
+Write an algorithm (step by step procedure) for protein synthesis.  Include precise steps for the ribosome, mRNA,
+tRNAs, and amino acids.  How do the amino acids "know" what order to go in?
+Try to include algorithm concepts in your steps (branching, iteration, methods, variables).
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 50/86
+*If you would rather write/draw your algorithm on a piece of paper, do so and turn it in to your teacher. Then
+write "turned in to teacher" in the box below.
+6.7. MODEL COMPARISONS
+So far in the lessons, we've used 3 different model systems: NetLogo, the one from Concord Consortium, and
+Scratch (pictured in the order mentioned below).
+ 
+    
+    
+QUESTION 6.7.1
+Think about each of the three models (NetLogo, Concord, Scratch). What is good about each (minimum 1 about each)? 
+Netlogo Concord Scratch
+QUESTION 6.7.2
+What could be improved about each modeling system (minimum 1 improvement each)?
+Netlogo Concord Scratch
+QUESTION 6.7.3
+Which type of model did you find most useful and why?
+QUESTION 6.7.4
+Talk about the models with your classmates: what is the general consensus about the most useful modeling
+system we could use?  What is the biggest improvement that could be made (to any)?
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 51/86
+6.8. REFLECTION ON LEARNING
+Please honestly answer the following questions to help us understand how this lesson helped you learn.
+QUESTION 6.8.1
+What did you learn from this lesson?
+QUESTION 6.8.2
+What part of the lesson helped you learn the most and why/how did it help you?
+QUESTION 6.8.3
+How did the translation body modeling activity help you understand translation?
+QUESTION 6.8.4
+How did writing and modifying algorithms of translation help you learn about translation?
+QUESTION 6.8.5
+Compared to your first algorithm at the beginning of this lesson, how did your second algorithm change?
+QUESTION 6.8.6
+Do you have any other comments or feedback you would like to share about this lesson?
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 52/86
+LESSON 7. HOW DO THE INSTRUCTIONS END UP ALL OVER OUR BODY?
+Author(s): Karen Johnson, Sugat Dabholkar, Mandy Peel
+Subject: Biology
+Time: 45 minutes
+Level: Introductory High School Biology
+Version: v4
+LESSON 7 OVERVIEW
+The DNA Replication Fork model helps students to simulate the process of DNA replication that occurs in every
+living thing as part of mitosis and meiosis. Students manipulate the simulation to see how different proteins work
+together to copy DNA. Students also learn how DNA relies upon patterns to replicate itself correctly and how
+mistakes in replication can sometimes occur.
+CREDITS
+Questions: Sugat Dabholkar, Karen Johnson
+Computational Tools: Sugat Dabholkar
+Lesson Development Discussions: Sugat Dabholkar, Sue Juhl, Jordan Brick, Karen Johnson 
+ 
+LESSON 7 ACTIVITIES
+7.1. What Enzymes are Needed?7.2. Completely Replicate DNA7.3. Breaking the Rules7.4. What does this have to do with getting instructions to new places?
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 53/86
+7.0. STUDENT DIRECTIONS AND RESOURCES
+Students will explore DNA replication and the enzymes that help carry it out through a computational model.
+7.1. WHAT ENZYMES ARE NEEDED?
+EXPLORE THE BIOLOGY:
+DNA (DeoxyriboNucleic Acid) is made of two strands which wind around each other in a double helix.  When DNA
+is replicated, the DNA strands are separated and each serves as a template (i.e. the basis for a pattern) for a new
+double helix.
+ 
+DNA is a polymer.  Polymers (poly = many) are large molecules made of smaller, linked units called monomers
+(mono = one). 
+DNA is made up of many, individual nucleotides (monomers) that are connected to each other to form both single
+strands and helical, double strands (polymers).  Nucleotides are attached to a growing strand by an enzyme.    
+ 
+Please read the instructions below, before you use the model.
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 54/86
+ powered by NetLogo
+Mode: Interactive Commands and
+setup go/stop substitutions
+The embedded resource from above can be accessed via this link
+(https://ct-stem.s3.amazonaws.com/uploads/johnsonk/2022/04/29/dna%20replication%20forknosub_2022-04-29-
+15-10-09-946716.html)
+Start by specifying the following settings in the simulator:
+DNA-strand-length:  30                             Speed:  Normal
+Enzyme labels: checked                           Substitutions:  unchecked
+Nucleo labels: unchecked                         Free-nucleosides:  50                   Time-limit:  None
+ 
+When you have chosen the correct settings, press SETUP.
+The simulation setup shows the tools you will need to replicate DNA.  You have a strand of Condensed DNA, Free
+Nucleotides and Replication Enzymes:
+ 
+EXPLORE THE BIOLOGY:
+Enzymes are proteins that perform chemical reactions in cells.  This simulation shows you four different enzymes
+that are integral to DNA replication. 
+Press GO/STOP to start the simulation! 
+You can drag and drop molecules inside the cell using your mouse cursor.
+QUESTION 7.1.1
+Enzymes are proteins that carry out useful chemical reactions in biological systems.  These are some of those
+functional products made at the end of the central dogma of molecular biology from the instructions encoded in
+the DNA
+Which enzyme unwinds condensed DNA?  
+Hint: Try moving the different enzymes to the condensed DNA. 
+[Note: you may have to “let an enzyme go” with your mouse in order to see the enzyme work.]
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 55/86
+QUESTION 7.1.2
+Which enzyme unzips the double stranded DNA? (Use the model to answer.)
+QUESTION 7.1.3
+What enzyme will attach nucleotides to form double stranded DNA?
+Hint:  You will need to move an enzyme and nucleotides into one place together to form new DNA.
+7.2. COMPLETELY REPLICATE DNA
+ powered by NetLogo
+Mode: Interactive Commands and
+setup go/stop substitutions
+The embedded resource from above can be accessed via this link
+(https://ct-stem.s3.amazonaws.com/uploads/johnsonk/2022/04/29/dna%20replication%20forknosub_2022-04-29-
+15-10-09-946716.html)
+EXPLORE THE BIOLOGY:
+DNA (DeoxyriboNucleic Acid) is made of two strands which wind around each other in a double helix.  When DNA
+is replicated, the DNA strands are separated and each serves as a template (i.e. the basis for a pattern) for a new
+double helix.
+DNA-strand-length:  30                            Speed:  Normal
+Enzyme labels: checked                           Substitutions:  unchecked
+Nucleo labels: unchecked                         Free-nucleosides:  50                   Time-limit:  None
+ 
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 56/86
+NOTE: Even though you are moving the proteins in this simulated cell by hand, in a real cell the proteins move
+randomly. This model allows the movement of molecules using the mouse to observe the effects faster. You
+would see the same behavior in the model but at a very slow pace if you do not move the molecules by hand.
+QUESTION 7.2.1
+Can DNA polymerase attach any nucleotide, anywhere on a DNA strand?
+(Hint:  Try out different bases at different locations; write what works and what doesn’t.)
+QUESTION 7.2.2
+Which nucleotides (colors, labels) will pair together?  (Turn NUCLEO-LABELS on)
+A C T G
+What nucleotide goes with thisone?
+QUESTION 7.2.3
+Why do you think only certain nucleotides will pair up, but others won’t? 
+QUESTION 7.2.4
+As mentioned above, in this model you are dragging the enzymes to the place they're needed and you can drag
+the nucleotides to where they need to go.  In an actual cell, there is not someone dragging things where they
+need to be.  Think back to the original replication/transcription model you worked with (pictured below) and how
+the nucleotides got to the right place.  Which model do you think is more accurate?  Why?
+ 
+7.3. BREAKING THE RULES
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 57/86
+ powered by NetLogo
+Mode: Interactive Commands and
+setup go/stop substitutions
+The embedded resource from above can be accessed via this link
+(https://ct-stem.s3.amazonaws.com/uploads/johnsonk/2022/04/29/dna%20replication%20forknosub_2022-04-29-
+15-10-09-946716.html)
+Return the free nucleotides to approximately 50 and make sure SUBSTITUTIONS is UNCHECKED. SETUP the
+simulation, press GO/STOP.
+2. Unwind the DNA, separate the stands, attach the polymerase to the TOP strand ONLY. Observe the top strand
+of DNA, now.
+~
+3. After the top strand is finished, turn SUBSTITUTIONS to ON and attach polymerase to the bottom
+strand. Observe replication of the bottom DNA strand.
+4. Press GO/STOP to end the simulation.
+5. Check the readout boxes for your top and bottom DNA strands (as in the picture below) by going to the
+Command center and typing in "calculate-mutations" then pressing enter
+. 
+ 
+QUESTION 7.3.1
+Compare your top and bottom strands; what changed when you turned SUBSTITUTIONS on?  What do you
+think SUBSTITUTIONS means?
+Hint:  You might want to compare this challenge to your results from Part 1 – Challenge 4.
+Hint:  In order to see your DNA more clearly, press GO/STOP, change FREE-NUCLEOTIDES to zero, and move the
+enzymes out of the way, then press GO/STOP again!
+QUESTION 7.3.2
+What nucleotide pairings do you observe in the bottom strand but not in the top strand?
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 58/86
+QUESTION 7.3.3
+The changes you observed in the sequence of nucleotides in your DNA strand are called mutations.  There are
+several different types of mutations.  You simulated substitution mutations, meaning that some nucleotides were
+paired incorrectly during replication, for example a Thymine might be substituted where a Cytosine should be, or a
+Guanine substituted for an Adenine.  As a result, the two, new DNA strands that you made had different (mutated)
+sequences. 
+What other kinds of mutations do you think might happen to change the sequence of nucleotides in DNA?
+QUESTION 7.3.4
+Some mutations make huge changes in the proteins they code for, leading to huge changes in their functions. 
+Other mutations in the DNA sequence do not cause actual changes in the function.  Part of this is because some
+amino acids are really similar to each other.  Part of it is the redundancy built into the genetic code. 
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 59/86
+Use the codon wheel or table above and find a change in a nucleotide of a codon that would not lead to a change
+in the protein.  Describe it below.
+QUESTION 7.3.5
+The eumelanin and pheomelanin that give Lucy and Maria their hair colors are made by slightly different versions
+of the same protein.  Using information from this page and previous lessons, explain how these different proteins
+could come about.
+7.4. WHAT DOES THIS HAVE TO DO WITH GETTING INSTRUCTIONS TO NEWPLACES?
+You've replicated DNA!  What happens next is cell division, which we've already seen:
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 60/86
+QUESTION 7.4.1
+Why do you think it is important for DNA to replicate before a cell divides?
+QUESTION 7.4.2
+If DNA mutates, what happens to the protein that gets made?  What do you think that will do to the characteristic
+the protein helps create in the full organism?
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 61/86
+LESSON 8. CELEBRATING DIFFERENCES
+Author(s): Karen Johnson, Sugat Dabholkar, Mandy Peel
+Subject: Biology
+Time: 42 min (1 class period)
+Level: Introductory High School Biology
+Version: v2
+LESSON 8 OVERVIEW
+CREDITS
+Questions: Sugat Dabholkar, Karen Johnson
+Computational Tools: Karen Johnson, Sugat Dabholkar
+Lesson Development Discussions: Sugat Dabholkar, Sue Juhl, Jordan Brick, Karen Johnson 
+LESSON 8 ACTIVITIES
+8.1. Exploring the model-18.2. Exploring the model-28.3. Designing experiments8.4. Reflection8.5. At the end of the unit
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 62/86
+8.0. STUDENT DIRECTIONS AND RESOURCES
+You know by now that DNA has a genetic code to make specific proteins.  
+Different versions of the MC1R gene (https://ghr.nlm.nih.gov/gene/MC1R) determine what type of melanin gets
+made.  The most common MC1R version codes for eumelanin (brown hair), but there are specific regions in the
+DNA sequence that are changed to make pheomelanin (red hair) or a non-functional protein.
+8.1. EXPLORING THE MODEL-1
+ powered by NetLogo re
+Mode: Interactive Commands and
+setup
+The embedded resource from above can be accessed via this link
+(https://ct-stem.s3.amazonaws.com/uploads/johnsonk/2020/07/29/replication%20of%20mc1r%20gene_2020-07-
+29-15-58-20-441398.html)
+QUESTION 8.1.1
+What are at least two interesting things that you notice in the model?
+(It might help to check out the "DNA-template-sequence" box near the bottom of the model)
+8.2. EXPLORING THE MODEL-2
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 63/86
+ powered by NetLogo re
+Mode: Interactive Commands and
+setup
+The embedded resource from above can be accessed via this link
+(https://ct-stem.s3.amazonaws.com/uploads/johnsonk/2020/07/29/replication%20of%20mc1r%20gene_2020-07-
+29-15-58-20-441398.html)
+QUESTION 8.2.1
+What is the "error-rate" slider in the model? What affect does it seem to have on the the nucleotides matching
+together properly?
+ 
+(note: you have power over the DNA!!!!  Remember, what letters are part of DNA)
+QUESTION 8.2.2
+Explain how you figured out an answer to the previous question. Save the evidence that you used to infer your
+answer as a screenshot.
+Your answer to the previous question is your 'claim'. Write you answer in the claim-evidence-reason format.
+QUESTION 8.2.3
+What is the effect of that error rate slider on protein production?
+QUESTION 8.2.4
+Upload a screenshot of your evidence here.
+Upload files to the space allocated by your teacher.
+8.3. DESIGNING EXPERIMENTS
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 64/86
+A Gene is a unit of heredity made up of a segment of DNA.  Different versions of the MC1R gene
+(https://ghr.nlm.nih.gov/gene/MC1R) determine what type of melanin gets made.  The most common MC1R version
+codes for eumelanin (brown hair), but there are specific regions in the DNA sequence that are changed to make
+pheomelanin (red hair) or a non-functional protein.  One of those regions contains this sequence of DNA: 
+CACAGCCATCCCCCAGCTGGGGCTGGCTGCCAACCAGACA
+ 
+Remember the CENTRAL DOGMA of molecular biology:
+ 
+ powered by NetLogo re
+Mode: Interactive Commands and
+setup
+The embedded resource from above can be accessed via this link
+(https://ct-stem.s3.amazonaws.com/uploads/johnsonk/2020/07/29/replication%20of%20mc1r%20gene_2020-07-
+29-15-58-20-441398.html)
+QUESTION 8.3.1
+Design an experiment that uses this model to investigate how a replication error in MC1R could affect hair color.
+Write your experimental design here (what precise steps will you follow?) 
+Here is the sequence of mc1r we're using, just as a reminder: 
+CACAGCCATCCCCCAGCTGGGGCTGGCTGCCAACCAGACA
+(be careful copying and pasting.  Spaces or empty lines confuse the program)
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 65/86
+Check with your teacher before you move on
+QUESTION 8.3.2
+Write a hypothesis for your experiment. What do you think will happen when there's a replication error, and why?
+(use the "if...then...because..." format if that helps)
+QUESTION 8.3.3
+Perform your experiment, making sure you start with the eumelanin sequence of
+mc1r: CACAGCCATCCCCCAGCTGGGGCTGGCTGCCAACCAGACA
+Collect evidence using a google doc (make sure you have all of the relevant information!) and save it as a pdf file
+on your computer (see picture below for help). Upload your evidence file here.
+Upload files to the space allocated by your teacher.
+QUESTION 8.3.4
+Write the conclusion of your experiment.  What did you find out? Was your hypothesis supported or should we
+reject it?  
+QUESTION 8.3.5
+Explain how replication error in the MC1R gene could change the hair color of a person using specific evidence
+from your experiment.
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 66/86
+QUESTION 8.3.6
+Based on the information from this model and information about the MC1R gene
+(https://ghr.nlm.nih.gov/gene/MC1R), in your own words, what is a gene?
+QUESTION 8.3.7
+Optional: Human DNA polymerase is very good at copying DNA.  It usually only makes a mistake in 1 out of every
+100,000 nucleotides (an error rate of 0.001%!  For context, though, there are about 3 billion basepairs of DNA in
+each of your cells) AND there are other enzymes in the cell that look for mistakes and fix them.  This means that
+it's very unlikely that every person with red hair has had a mutation that changes their hair from brown to red.  If
+that's true, how are there people with red hair?
+8.4. REFLECTION
+QUESTION 8.4.1
+What is one big idea about genes and hair that you learned in this lesson?
+QUESTION 8.4.2
+What are advantages of using computational models to study natural phenomena?
+QUESTION 8.4.3
+What are some limitations of using computational models to study natural phenomena?
+QUESTION 8.4.4
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 67/86
+Class discussion: Share your answer (with specifics) to one of the above questions (4.2 and 4.3) with your
+classmates.  In the space below, write whichever answers of your classmates most resonate with you (minimum
+one).
+QUESTION 8.4.5
+Optional: Did you know that there are computational tools that scientists use to investigate DNA sequences in
+humans? Read about one of those on the internet. Explain how it works.
+8.5. AT THE END OF THE UNIT
+QUESTION 8.5.1
+Write at least one big idea that you learned about the Central Dogma (DNA->RNA->protein) in this unit
+QUESTION 8.5.2
+Pick any computational tool/activity that you have used in this unit. Briefly describe the tool and explain how you
+used it to learn
+QUESTION 8.5.3
+Indicate how much you agree or disagree with the following statements:
+I enjoyed learning with computational tools/activities in this unit.
+   Strongly disagree   Disagree   In the middle/ I don't know   Agree   Strongly agree
+QUESTION 8.5.4
+Indicate how much you agree or disagree with the following statement:
+I feel that I successfully learned the content of this lesson.
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 68/86
+   Strongly disagree   Disagree   In the middle / I don't know   Agree   Strongly agree
+QUESTION 8.5.5
+Compared to lessons without computational tools/activities, I found this unit more engaging.
+   Strongly disagree   Disagree   In the middle/ I don't know   Agree   Strongly agree
+QUESTION 8.5.6
+Compared to lessons without computational tools/activities, I found this unit more challenging.
+   Strongly disagree   Disagree   In the middle/ I don't know   Agree   Strongly agree
+QUESTION 8.5.7
+I felt stressed by the computational tools/activities we have done in this unit.
+   Strongly disagree   Disagree   In the middle/ I don't know   Agree   Strongly agree
+QUESTION 8.5.8
+Is anything that you learned in this unit relevant to your personal aspirations? If yes, please explain.
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 69/86
+LESSON 9. BIG PICTURE
+Author(s): Karen Johnson, Sugat Dabholkar, Mandy Peel
+Subject: Biology
+Time: 42 min (1 class period)
+Level: Introductory High School Biology
+Version: v2
+LESSON 9 OVERVIEW
+This lesson is the summative assessment for the unit.  It is a project that can be adapted for multiple formats.
+CREDITS
+Questions: Karen Johnson
+LESSON 9 ACTIVITIES
+9.1. Your project
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 70/86
+9.0. STUDENT DIRECTIONS AND RESOURCES
+To show what you have learned in this unit, you will model the science behind the central dogma as it pertains to the effects of changes in a 
+single gene on the characteristics of a person.  
+Here's a link to the guidelines and rubric (https://docs.google.com/document/d/e/2PACX-1vQY4OrV V Gpne8Q_u2jrI29LPstP6eiyJB4OuuyiM9RZisNwGMzQ4gLpgyp9zpNobLp8pCKEZYmzZIGr/pub)
+9.1. YOUR PROJECT
+To show what you have learned in this unit, you will model the science behind the central dogma as it pertains to the effects of changes in a 
+single gene on the characteristics of a person.  You can choose a format to present this project from the ones below, it just needs to fully 
+address everything in the rubric.  You can also use any of the genes/conditions listed.  Don't forget to look at the attachment on page 0 for 
+further instructions and the rubric!!
+Formats:
+A brochure 
+A story or essay
+A comic strip
+A song or rap
+A poster
+A video
+A computational model
+Your choice!  (Must be teacher approved)
+Gene/condition:
+PTC tasting (https://learn.genetics.utah.edu/content/basics/ptc/) 
+Sickle Cell Disease (https://ghr.nlm.nih.gov/condition/sickle-cell-disease#genes)
+BRCA1 breast cancer (https://ghr.nlm.nih.gov/gene/BRCA1#location)
+Cystic Fibrosis (https://ghr.nlm.nih.gov/condition/cystic-fibrosis)
+Maple Syrup Urine Disease (https://ghr.nlm.nih.gov/condition/maple-syrup-urine-disease)
+Your choice! (Must be teacher approved. Make sure it’s a single gene condition-a lot of characteristics are polygenic, meaning that they 
+are caused by multiple genes)
+Another useful source (https://learn.genetics.utah.edu/content/disorders/singlegeneeg/)
+QUESTION 9.1.1
+Upload your project here.
+Upload files to the space allocated by your teacher.
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 71/86
+LESSON 10. COPY OF HOW DO OUR CELLS KNOW HOW TO MAKE PROTEINS (LIKEIN HAIR)?
+Author(s): Karen Johnson, Sugat Dabholkar, Mandy Peel
+Subject: Biology
+Time: 42 min (1 class period)
+Level: Introductory High School Biology
+Version: v3
+LESSON 10 OVERVIEW
+Students will be able to describe how instructions from DNA can be used to make specific proteins.
+CREDITS
+Questions: Karen Johnson
+Computational Tools: Concord Consortium, Amanda Peel, Karen Johnson, Leif Rasmussen
+Lesson Development Discussions: Sugat Dabholkar, Sue Juhl, Jordan Brick, Karen Johnson 
+ACKNOWLEDGEMENT
+Concord Consortium
+LESSON 10 ACTIVITIES
+10.1. What do we already know?10.2. Algorithmic Explanation of Protein Synthesis10.3. How is Protein Actually Made?10.4. Making our own!10.5. Body Modeling Translation10.6. Writing Algorithmic Explanations of Translation10.7. Model comparisons10.8. Reflection on Learning10.9. Optional: How Do Proteins Get Their Structures?10.10. Optional: Body Modeling Protein Folding10.11. Optional: Writing Algorithmic Explanations of Protein Folding10.12. Optional: Modeling Protein Folding
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 72/86
+10.0. STUDENT DIRECTIONS AND RESOURCES
+In this lesson, we’re going to find out how the instructions from DNA and RNA are used to make proteins (like the ones that make hair).
+10.1. WHAT DO WE ALREADY KNOW?
+ 
+QUESTION 10.1.1
+Think back to a couple lessons ago: What did you learn about the functions of proteins?
+QUESTION 10.1.2
+What do you remember about how the specific structure of something can affect its function?
+QUESTION 10.1.3
+There is a process that must be done in order for the instructions to make proteins to be brought from the DNA in
+the nucleus of cells into the cytoplasm, where the proteins are made. What is the name of that process (this
+process is the first step of the central dogma  of molecular biology, the process through which DNA instructions
+are decoded into a fully functional product)?
+   Replication (DNA is made using a DNA template)   Transcription (RNA is made using an RNA template)   Translation (protein is made using an RNA template)
+QUESTION 10.1.4
+In 1-2 sentences, describe how you think proteins might get made or ask 1-2 questions that would help you be able to describe how proteins 
+are made (those proteins are the endpoint of the the central dogma of molecular biology: again, the process through which
+DNA instructions are decoded into a fully functional product).
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 73/86
+10.2. ALGORITHMIC EXPLANATION OF PROTEIN SYNTHESIS
+Write an algorithm (step by step procedure) for protein synthesis.  It is ok if you don't know all of the steps. Do
+your best to write the steps that explain what you think happens. Try to include algorithm concepts in your steps
+(branching, iteration, methods, variables).
+Algorithm:
+Definition: A sequence of steps to solve a problemGame example: Every level had you build an algorithm to light the colored squares.Real life example: Directions to your house
+Method/Procedure:
+Definition: A set of steps that are used in many processes; encapsulated sequence of stepsGame example: The procedures were methods. They were separate steps in the main programReal life example: Tying your shoe.  The steps are a complete method because they complete a task. You callthis method in multiple circumstances.
+Iteration:
+Definition: Repeating a sequence of steps until a condition is met Game example: The loops in the games were examples of iteration.  They repeated the sequence until all thesquares were lit. Real life example: Each day is an iteration, each week, each month, each year
+Branching:
+Definition: Choosing a path, if/then/else statements Real life example: Choosing what to wear each day: if it is cold outside, then wear a sweater, else don’t weara sweater 
+Variable:
+Definition: A value that can change; used in programming to make programs universal Real life example: 
+Set variable1 = 5
+Set variable2 = 6
+variable1 + variable2 = 11 
+Weather example: Choosing what to wear each day: if it is cold outside, then wear a sweater, else don’t wear a
+sweater. Weather is a variable with a value that is set each day. Weather = cold, weather = warm, weather = hot,
+etc.
+QUESTION 10.2.1
+Write an algorithm (step by step procedure) for protein synthesis.  It is ok if you don't know all of the steps. Do
+your best to write the steps that explain what you think happens. Try to include algorithm concepts in your steps
+(branching, iteration, methods, variables).
+*If you would rather write/draw your algorithm on a piece of paper, do so and turn it in to your teacher. Then
+write "turned in to teacher" in the box below.
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 74/86
+10.3. HOW IS PROTEIN ACTUALLY MADE?
+AboutShare
+Click TranscribeTranscribe to see full mRNA strand created or TranscribeTranscribe
+Click TranslateTranslate to generate full protein from mRNA or TranslaTransla
+Start/continue modelStart/continue model StopStop ResetReset Edit DNAEdit DNA
+The embedded resource from above can be accessed via this link
+(https://lab.concord.org/embeddable.html#interactives/sam/DNA-to-proteins/1-dna-to-protein.json)
+QUESTION 10.3.1
+Click the "transcribe" button in the model to start the process of transcription (also starting the process of decoding the DNA into that final 
+functional product, following the steps of the central dogma of molecular biology). 
+Describe the process below using the following terms: 
+                
+ 
+QUESTION 10.3.2
+How many ribonucleotides (RNA) match with each deoxyribonucleotide (DNA)?  Do the same nucleotides and
+ribonucleotides always go together? If so, specify which ones go together.
+QUESTION 10.3.3
+Once the mRNA is done being made, click “translate.”  Translation is the process of building a protein using the instructions provided through 
+mRNA.  The enzyme that carries out this process is called a ribosome and it is made of protein and RNA. This process is making proteins, 
+those final functional products of the process outlined by the central dogma of molecular biology 
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 75/86
+ 
+Write down 3 things you notice during the translation animation
+ 
+QUESTION 10.3.4
+How many ribonucleotides (RNA) match with each amino acid?  Can you tell if the same ribonucleotides and
+amino acids always go together? Explain your answer
+10.4. MAKING OUR OWN!
+QUESTION 10.4.1
+Groups of 3 nucleotides can be called a “codon.” Using information from the model on the last page, why do you think it’s helpful to have a 
+term for a group of 3 nucleotides?
+QUESTION 10.4.2
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 76/86
+ 
+Most scientists who work with DNA, RNA, and protein 
+use a key to translate from the language of nucleotides to 
+the language of proteins. This key is called a codon table 
+and there are 2 versions above-both have the same 
+information presented in slightly different ways.  Use one 
+of the codon tables to translate the following mRNA 
+sequence into amino acids:
+aug-acc-ggg-cga-agg-uag
+ 
+For help with either or both, check out these resources:
+Codon wheel interpretation
+(https://docs.google.com/presentation/d/e/2PACX-1vQ9bNSnSdHsV 0UQ-oFIFcZal8X9yPrXmPw6crqNog0V bWQMdKCQmkv7iusIrZJerp0_6w0fwoZBm8ur/pub?start=false&loop=false&delayms=3000)
+Codon table interpretation (https://docs.google.com/presentation/d/e/2PACX-1vR-Hz5i1C_OxZxlL1acxkbMsv2Cvly4MwGDIMNrMSzflM0atcpniEieQnbJB9mIB7kJTaJ-X_aym11C/pub?start=false&loop=false&delayms=3000)
+ 
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 77/86
+QUESTION 10.4.3
+What do you notice about the 4th and 5th amino acids and 4th and 5th codons in the sequence you translated? 
+How can you explain what you saw (hint: look back at the codon tables)?
+QUESTION 10.4.4
+Use the model below to check your answers.  Enter each codon (trio of mRNA letters, not amino acid letters) from the previous question into 
+the model and press enter after each to watch the amino acid sequence grow. Screenshot the polypeptide (protein) sequence (“PolyPSeq”) and 
+upload it here.
+The embedded resource from above can be accessed via this link
+(https://scratch.mit.edu/projects/100898229/embed)
+Upload files to the space allocated by your teacher.
+QUESTION 10.4.5
+Try your own mRNA sequence: write the mRNA sequence from above but make a couple of changes.  What is the effect on the amino
+acids?
+New mRNA sequence Amino acid sequence
+QUESTION 10.4.6
+Using the information from this page and the last one, write out the algorithm (the instructions) that you, acting as
+the ribosome  followed to put together the amino acids in the correct order to make a protein based on the mRNA
+sequence.  Be specific!
+QUESTION 10.4.7
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 78/86
+Optional: check out the code used by the program (https://scratch.mit.edu/projects/100898229/editor/
+(https://scratch.mit.edu/projects/100898229/editor/)).  What do you notice?
+QUESTION 10.4.8
+Optional: In the behind-the-scenes look at the scratch modeling, can you write, in words, what one of the groups
+of blocks means (pictured is an example of a group of blocks)?
+10.5. BODY MODELING TRANSLATION
+Body modeling protein synthesis activity
+Ten students wear signs that have triplet mRNA codons on them and line up to form an mRNA strand (make sure START is first and STOP is last).  
+Three chairs are set up as the ribosome and are labeled A, P, and E for the three ribosome sites. 
+A bag with chain blocks that are labeled as the 20 amino acids is placed on the A site chair. 
+The first person sits in the A site and reads the table for his/her codon and finds the corresponding amino acid chain block in the bag.  
+The mRNA strand shifts, and now person 1 is in the P site with their amino acid, and person 2 is in the A site. 
+Person 2 reads the table for his/her codon and finds the corresponding amino acid chain block in the bag and the chain shifts again.  
+Person 1 is in the E site and hands their amino acid to person 2, who is in the P site.  
+Person 2 connects his/her amino acid chain block to person 1’s, thus beginning the polypeptide chain. 
+Person 3 continues the process. 
+These steps are repeated until the STOP codon is reached and the mRNA disassembles from the ribosome. 
+During this process, 10 students are acting out the sequence and the rest of the class is helping them figure out the process and make meaning around what is happening. The 
+teacher should facilitate and lead discussion of the steps and overall sense-making around the process.
+ 
+QUESTION 10.5.1
+In your own words, how did the "ribosome" know which amino acid to add?
+QUESTION 10.5.2
+How does this activity demonstrate part of the Central Dogma of molecular biology (pictured below)?
+What is the &#39;Central Dogma&#39;? | Facts | yourgenome.org
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 79/86
+10.6. WRITING ALGORITHMIC EXPLANATIONS OF TRANSLATION
+Here are resources to help with writing your algorithm: 
+Algorithm:
+Definition: A sequence of steps to solve a problemGame example: Every level had you build an algorithm to light the colored squares.Real life example: Directions to your house
+Method/Procedure:
+Definition: A set of steps that are used in many processes; encapsulated sequence of stepsGame example: The procedures were methods. They were separate steps in the main programReal life example: Tying your shoe.  The steps are a complete method because they complete a task. You callthis method in multiple circumstances.
+Iteration:
+Definition: Repeating a sequence of steps until a condition is met Game example: The loops in the games were examples of iteration.  They repeated the sequence until all thesquares were lit. Real life example: Each day is an iteration, each week, each month, each year
+Branching:
+Definition: Choosing a path, if/then/else statements Real life example: Choosing what to wear each day: if it is cold outside, then wear a sweater, else don’t weara sweater 
+Variable:
+Definition: A value that can change; used in programming to make programs universal Real life example: 
+Set variable1 = 5
+Set variable2 = 6
+variable1 + variable2 = 11 
+Weather example: Choosing what to wear each day: if it is cold outside, then wear a sweater, else don’t wear a
+sweater. Weather is a variable with a value that is set each day. Weather = cold, weather = warm, weather = hot,
+etc.
+ 
+QUESTION 10.6.1
+Write an algorithm (step by step procedure) for protein synthesis.  Include precise steps for the ribosome, mRNA,
+tRNAs, and amino acids.  How do the amino acids "know" what order to go in?
+Try to include algorithm concepts in your steps (branching, iteration, methods, variables).
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 80/86
+*If you would rather write/draw your algorithm on a piece of paper, do so and turn it in to your teacher. Then
+write "turned in to teacher" in the box below.
+10.7. MODEL COMPARISONS
+So far in the lessons, we've used 3 different model systems: NetLogo, the one from Concord Consortium, and
+Scratch (pictured in the order mentioned below).
+ 
+    
+    
+QUESTION 10.7.1
+Think about each of the three models (NetLogo, Concord, Scratch). What is good about each (minimum 1 about each)? 
+Netlogo Concord Scratch
+QUESTION 10.7.2
+What could be improved about each modeling system (minimum 1 improvement each)?
+Netlogo Concord Scratch
+QUESTION 10.7.3
+Which type of model did you find most useful and why?
+QUESTION 10.7.4
+Talk about the models with your classmates: what is the general consensus about the most useful modeling
+system we could use?  What is the biggest improvement that could be made (to any)?
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 81/86
+10.8. REFLECTION ON LEARNING
+Please honestly answer the following questions to help us understand how this lesson helped you learn.
+QUESTION 10.8.1
+What did you learn from this lesson?
+QUESTION 10.8.2
+What part of the lesson helped you learn the most and why/how did it help you?
+QUESTION 10.8.3
+How did the translation body modeling activity help you understand translation?
+QUESTION 10.8.4
+How did writing and modifying algorithms of translation help you learn about translation?
+QUESTION 10.8.5
+Compared to your first algorithm at the beginning of this lesson, how did your second algorithm change?
+QUESTION 10.8.6
+Do you have any other comments or feedback you would like to share about this lesson?
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 82/86
+10.9. OPTIONAL: HOW DO PROTEINS GET THEIR STRUCTURES?
+Some proteins can fold into their 3D structure on their own just based on the chemical properties of amino acids,
+and others need the help of special proteins called "chaperone proteins" like the chaperonin protein from lesson
+4.
+ 
+Regardless of the protein's folding independence, the way proteins fold depend on the amino acids.  Hydrophilic
+amino acids "love water" (and each other), as do do charged amino acids.  But hydrophobic amino acids are
+"afraid" of water and will not want to be close to it. 
+ 
+ 
+ powered by NetLogo
+Mode: Interactive Commands and
+The embedded resource from above can be accessed via this link
+(https://ct-stem.s3.amazonaws.com/uploads/mandy_22/2022/02/15/protein%20folding%202.7.2022_2022-02-15-
+12-57-26-683580.html)
+QUESTION 10.9.1
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 83/86
+Explore the model above. Write 2-3 things that you notice.
+QUESTION 10.9.2
+Your challenge is to figure out which amino acids (blue circles vs. green squares) in this sequence are hydrophilic
+(water loving) and which are hydrophobic (water fearing).  Assuming that the protein is floating in a watery
+environment, how will you use the model to address your challenge?
+QUESTION 10.9.3
+Which amino acids (blue circles or green squares) are hydrophobic? Explain your answer and upload evidence in
+the next question.
+QUESTION 10.9.4
+Upload your evidence here
+Upload files to the space allocated by your teacher.
+10.10. OPTIONAL: BODY MODELING PROTEIN FOLDING
+QUESTION 10.10.1
+In your own worxds, describe what happened during the protein folding activity. What happened?  Why?
+10.11. OPTIONAL: WRITING ALGORITHMIC EXPLANATIONS OF PROTEIN FOLDING
+Protein folding activity
+You will model protein folding using the same amino acid sequence produced during the protein synthesis activity. 
+The students wearing Asp and Lys put on the Velcro bands around their arms (Asp left arm and Met right arm).  
+Stand in order and hold hands, then "fold" based on their amino acid properties (hydrophobic towards the center of the protein, hydrophilic on the outside of the protein, 
+and positive and negative attract each other). 
+ 
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 84/86
+QUESTION 10.11.1
+Write an algorithm (step by step procedure) for how proteins fold.  Include precise steps for the amino acids and
+their characteristics.  How do they "know" what to do?
+QUESTION 10.11.2
+Active site demonstration
+Use PTC and its taste receptor as an example. 
+When PTC (the ball) binds to a correctly folded receptor (attaches to the Velcro), the receptor sends a signal of bitter taste to the brain
+What do you taste if you put the PTC paper on your tongue?
+QUESTION 10.11.3
+Do you have a properly-folded PTC receptor?
+   Yes   No
+QUESTION 10.11.4
+Explain your answer to the previous question
+10.12. OPTIONAL: MODELING PROTEIN FOLDING
+ powered by NetLogo
+Commands and Code: Bo
+UndoRedoQuick Help and Hotkey
+The embedded resource from above can be accessed via this link
+(https://ct-
+stem.s3.amazonaws.com/uploads/mandy_22/2022/02/15/blockified%20protein%20folding%20empty_2022-02-
+15-12-56-29-623493.html)
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 85/86
+This material was developed by the
+CT-STEM Project
+at Northwestern University. To inquire about using our material in your school or as part of research, please
+contact
+ctstem@northwestern.edu
+.
+This work was made possible through generous support from the National Science Foundation (grants CNS-
+1138461, CNS-1441041, DRL-1020101, DRL-1640201 and DRL-1842374) and the Spencer Foundation (Award
+#201600069). Any opinions, findings, or recommendations expressed in this material are those of the author(s)
+and do not necessarily reflect the views of the funding organizations.
+© 2026 CT-STEM Project. Some rights reserved.
+2/26/26, 4:11 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/2530/ 86/86

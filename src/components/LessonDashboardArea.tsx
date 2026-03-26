@@ -3,11 +3,12 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { uploadLesson } from '@/app/dashboard/actions'
+import { uploadLesson, deleteLesson } from '@/app/dashboard/actions'
 import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Search, Upload, BookOpen, Plus } from 'lucide-react'
+import { Search, Upload, BookOpen, Plus, MoreVertical } from 'lucide-react'
 import { LessonEditor } from '@/components/LessonEditor'
 
 export function LessonDashboardArea({ initialLessons }: { initialLessons: any[] }) {
@@ -92,7 +93,32 @@ export function LessonDashboardArea({ initialLessons }: { initialLessons: any[] 
           {filteredLessons.map(lesson => (
             <Card key={lesson.id} className="flex flex-col hover:border-blue-200 transition-colors">
               <CardHeader className="flex-1">
-                <CardTitle className="text-lg line-clamp-2">{lesson.title}</CardTitle>
+                <div className="flex justify-between items-start gap-4">
+                  <CardTitle className="text-lg line-clamp-2">{lesson.title}</CardTitle>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors hover:bg-slate-100 h-8 w-8 -mt-2 -mr-2 text-slate-400 hover:text-slate-600 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring" onClick={(e: React.MouseEvent) => e.stopPropagation()}>
+                      <span className="sr-only">Open menu</span>
+                      <MoreVertical className="h-4 w-4" />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem 
+                        className="text-red-600 focus:text-red-700 focus:bg-red-50 cursor-pointer"
+                        onClick={async (e: React.MouseEvent) => {
+                          e.stopPropagation();
+                          if (window.confirm('Are you sure you want to delete this lesson?')) {
+                            try {
+                              await deleteLesson(lesson.id);
+                            } catch (err: any) {
+                              alert(`Failed to delete lesson: ${err.message}`);
+                            }
+                          }
+                        }}
+                      >
+                        Delete
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
                 <CardDescription className="line-clamp-3 mt-2">
                   {lesson.description || 'No description provided.'}
                 </CardDescription>

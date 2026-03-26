@@ -1,0 +1,156 @@
+EXCRETORY SYSTEM: REABSORPTION
+Author(s): V idya Pillai, SHRADDHA BHURKUNDE, Sugat Dabholkar
+Subject: Biology, Self-directed
+Time: 4 class periods (35 minutes each)
+Level: High School / Freshmen Biology
+Version: v2
+OVERVIEW
+This lesson is about reabsorption in nephron. Students will use computational model to study absorption, selective
+reabsorption and impact of changing lumen size on absorption in kidney.
+ 
+STANDARDS
+NEXT GENERATION SCIENCE STANDARDS
+Life Science[HS-LS1] From Molecules to Organisms: Structures and Processes[HS-LS1-3] Plan and conduct an investigation to provide evidence that feedback mechanisms maintainhomeostasis.
+COMPUTATIONAL THINKING IN STEM
+Data PracticesCollecting DataCreating DataAnalyzing DataModeling and Simulation PracticesAssessing Computational ModelsUsing Computational Models to Find and Test SolutionsUsing Computational Models to Understand a Concept
+CREDITS
+Lesson development - V idya Pillai , Shraddha Bhurkunde, Sugat Dabholkar
+ 
+Topic selection - V idya Pillai
+Illustrations - Shraddha Bhurkunde
+Model coding - Sugat Dabholkar
+2/26/26, 4:05 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1012/ 1/9
+ACKNOWLEDGEMENT
+We acknowledge the workshop conducted by CoESME , IISER Pune and CCL, Northwestern. We are also thankful for
+the support provided by Akshara International School. The content used in this lesson is adapted from NCERT textbook,
+All in one Biology (Arihant Publication), Biology textbook class XI (Pradeep).
+video credits - What I've learned (youtube channel) and Shraddha Bhurkunde (Computational Thinking video)
+ACTIVITIES
+1. Introduction to excretory system function2. Introduction to computational Thinking3. Model of Absorption4. Model of selective reabsorption5. Analysis of lumen size6. Evaluating and extending the model
+2/26/26, 4:05 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1012/ 2/9
+STUDENT DIRECTIONS AND RESOURCES
+Learning objectives:
+Introduce computational thinking and its application in scientific research.Understand the mechanism of reabsorption and learn about the parameters that govern it.Identify some of the structural components of the nephron.Describe some vital pathological conditions associated with the kidneyUse a computational model to understand the mechanism of a natural phenomenonCollect and analyze data to learn about reabsorption in the kidney.
+1. INTRODUCTION TO EXCRETORY SYSTEM FUNCTION
+Salt: Are you getting EnouSalt: Are you getting Enou……
+The embedded resource from above can be accessed via this link
+(https://www.youtube.com/embed/amJ-ev8Ial8)
+After watching the video, answer the questions below
+QUESTION 1.1
+Write two questions that you would like to investigate regarding the baby's disease condition.
+QUESTION 1.2
+What are the possible reasons that lead to babies’ excess salt consumption?
+QUESTION 1.3
+What can you conclude from the above video?
+2. INTRODUCTION TO COMPUTATIONAL THINKING
+2/26/26, 4:05 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1012/ 3/9
+Computational Thinking inComputational Thinking in……
+The embedded resource from above can be accessed via this link
+(https://www.youtube.com/embed/2ACjQLXrdug)
+In this video, researchers at the Indian Institute of Science Education and Research (IISER) Pune talk about how they
+use computational tools and methods in their work.
+Scientists and Mathematicians are increasingly using computational tools and methods to understand natural
+phenomena and solve problems. The thinking required to do so is called computational thinking.
+In this lesson using a computational model, we will learn computational thinking and reabsorption in the kidney.
+QUESTION 2.1
+Based on what you saw in the video, explain why science students need to develop computational thinking. 
+3. MODEL OF ABSORPTION
+Explore the model and answer the questions below.
+ powered by NetLogo M
+Mode: InteractiveCommands and
+setup go
+The embedded resource from above can be accessed via this link
+(https://ct-
+stem.s3.amazonaws.com/uploads/sugat_teacher_account/2019/12/01/MODEL%20OF%20ABSORPTION.HTML)
+QUESTION 3.1
+Write any observation/s that you find interesting about the model.
+QUESTION 3.2
+Set the number of molecules to 1000. Vary the chance of absorption, run the model and note down 'molecules
+absorbed'. Make sure that you 'setup' every time you change a parameter value.
+2/26/26, 4:05 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1012/ 4/9
+Record your results below.
+Chance of absorption Reading
+QUESTION 3.3
+Now set the number of molecules to 500. Again vary the chance of absorption, run the model and note down
+'molecules absorbed'. 
+Record your results below.
+Chance of absorption Reading
+QUESTION 3.4
+What can you conclude from your systematic observations regarding absorption in this model?
+4. MODEL OF SELECTIVE REABSORPTION
+ powered by NetLogo M
+Mode: InteractiveCommands and
+setup go
+The embedded resource from above can be accessed via this link
+(https://ct-
+stem.s3.amazonaws.com/uploads/sugat_teacher_account/2019/12/01/MODEL%20OF%20SELECTIV E%20REABSORPTION.HTML)
+QUESTION 4.1
+In comparison with the previous model, what other factors related to absorption in the kidney can you investigate with
+this model?
+2/26/26, 4:05 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1012/ 5/9
+QUESTION 4.2
+Set the chance of absorption of water to 100% and the chance of salt absorption to 0%. Run your model and note down
+your observations.
+QUESTION 4.3
+Different parts of a nephron perform different functions. Where in nephron do we observe the above scenario? Explain
+your answer.
+[Hint: You can read about Loop of Henle here (https://en.wikipedia.org/wiki/Loop_of_Henle).]
+QUESTION 4.4
+If you want to investigate the functioning of the ascending loop of Henle, how will you set the model? Mention the
+parameter values.
+QUESTION 4.5
+Provide justification to the previous answer.
+5. ANALYSIS OF LUMEN SIZE
+ powered by NetLogo
+Mode: InteractiveCommands and
+setup go
+The embedded resource from above can be accessed via this link
+(https://ct-
+stem.s3.amazonaws.com/uploads/sugat_teacher_account/2019/12/01/MOSR%20WITH%20VARIABLE%20LUMEN.HTML)
+QUESTION 5.1
+Write a question about the impact of lumen size that can be tested with this model.
+2/26/26, 4:05 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1012/ 6/9
+(For example, If we vary 'x', how will it impact 'y'?)
+QUESTION 5.2
+Make a guess about the answer to your question and state it in the form of a hypothesis.
+QUESTION 5.3
+Design an experiment to test your hypothesis. Explain your experimental design.
+QUESTION 5.4
+Collect the experimental data in an excel file. Upload the file here.
+Upload files to the space allocated by your teacher.
+QUESTION 5.5
+Draw conclusion/s from the experimental data.
+6. EVALUATING AND EXTENDING THE MODEL
+QUESTION 6.1
+What could be the advantage/s of using such models for researchers?
+QUESTION 6.2
+What could be the limitation/s of such models?
+QUESTION 6.3
+How can you modify this model of reabsorption to overcome the limitation/s that you mentioned?
+2/26/26, 4:05 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1012/ 7/9
+QUESTION 6.4
+Review your hypothesis of the baby’s illness from Page 1. Then, add to or revise your hypothesis for a possible cause of
+the baby’s illness with reference to the model.
+QUESTION 6.5
+Mention your biggest takeaway from this lesson.
+2/26/26, 4:05 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1012/ 8/9
+This material was developed by the
+CT-STEM Project
+at Northwestern University. To inquire about using our material in your school or as part of research, please contact
+ctstem@northwestern.edu
+.
+This work was made possible through generous support from the National Science Foundation (grants CNS-1138461,
+CNS-1441041, DRL-1020101, DRL-1640201 and DRL-1842374) and the Spencer Foundation (Award #201600069). Any
+opinions, findings, or recommendations expressed in this material are those of the author(s) and do not necessarily
+reflect the views of the funding organizations.
+© 2026 CT-STEM Project. Some rights reserved.
+2/26/26, 4:05 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1012/ 9/9

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Bookmark, Share, Play, Check, Pencil } from 'lucide-react'
+import { Bookmark, Play, Pencil, Eye, Users } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { LessonEditor } from '@/components/LessonEditor'
@@ -16,6 +16,12 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Checkbox } from '@/components/ui/checkbox'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { toggleBookmark, createSession } from '@/app/dashboard/lesson/[id]/actions'
 
 interface LessonActionsProps {
@@ -30,6 +36,7 @@ export function LessonActions({ lessonId, jsonContent, initialIsBookmarked }: Le
   const [isBookmarkLoading, setIsBookmarkLoading] = useState(false)
   const [isLaunchLoading, setIsLaunchLoading] = useState(false)
   const [isEditorOpen, setIsEditorOpen] = useState(false)
+  const [isLaunchOpen, setIsLaunchOpen] = useState(false)
 
   // Initialize selected steps state with all steps checked by default
   const initialCheckedState: Record<string, boolean> = {}
@@ -41,16 +48,7 @@ export function LessonActions({ lessonId, jsonContent, initialIsBookmarked }: Le
   
   const [selectedSteps, setSelectedSteps] = useState(initialCheckedState)
 
-  const handleShare = async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href)
-      toast('Link copied to clipboard', {
-        description: 'You can now share this lesson link.',
-      })
-    } catch (err) {
-      toast.error('Failed to copy link')
-    }
-  }
+
 
   const handleBookmark = async () => {
     setIsBookmarkLoading(true)
@@ -103,8 +101,12 @@ export function LessonActions({ lessonId, jsonContent, initialIsBookmarked }: Le
   return (
     <>
     <div className="flex gap-3 w-full md:w-auto mt-4 md:mt-0">
-      <Button variant="outline" className="flex-1 md:flex-none" onClick={handleShare}>
-        <Share className="w-4 h-4 mr-2" /> Share
+      <Button 
+        variant="outline" 
+        className="flex-1 md:flex-none" 
+        onClick={() => setIsEditorOpen(true)}
+      >
+        <Pencil className="w-4 h-4 mr-2" /> Edit
       </Button>
 
       <Button 
@@ -117,22 +119,21 @@ export function LessonActions({ lessonId, jsonContent, initialIsBookmarked }: Le
         {isBookmarked ? 'Bookmarked' : 'Bookmark'}
       </Button>
 
-      <Button 
-        variant="outline" 
-        className="flex-1 md:flex-none" 
-        onClick={() => setIsEditorOpen(true)}
-      >
-        <Pencil className="w-4 h-4 mr-2" /> Edit
-      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-9 px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 flex-1 md:flex-none shadow-sm cursor-pointer border-0">
+          <Play className="w-4 h-4 mr-2" /> Launch
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem onClick={() => router.push(`/preview/${lessonId}`)} className="cursor-pointer">
+            <Eye className="w-4 h-4 mr-2 text-slate-500" /> Preview
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setIsLaunchOpen(true)} className="cursor-pointer">
+            <Users className="w-4 h-4 mr-2 text-slate-500" /> Assign to Class
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
 
-      <Dialog>
-        <DialogTrigger
-          render={
-            <Button className="bg-blue-600 hover:bg-blue-700 flex-1 md:flex-none">
-              <Play className="w-4 h-4 mr-2" /> Launch
-            </Button>
-          }
-        />
+      <Dialog open={isLaunchOpen} onOpenChange={setIsLaunchOpen}>
         <DialogContent className="sm:max-w-2xl max-h-[85vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Configure Session Launch</DialogTitle>

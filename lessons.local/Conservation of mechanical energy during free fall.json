@@ -1,0 +1,271 @@
+{
+  "lesson_title": "CONSERVATION OF MECHANICAL ENERGY DURING FREE FALL",
+  "lesson_description": "This lesson is about the conservation of mechanical energy during the free fall of an object. Students will explore a computational model of free fall of a ball and make observations regarding changes in its motion and energy.",
+  "activities": [
+    {
+      "activity_title": "1. INTRODUCTION TO COMPUTATIONAL THINKING",
+      "steps": [
+        {
+          "title": "Watch the video",
+          "instruction_text": "In this video, researchers at the Indian Institute of Science Education and Research (IISER) Pune talk about how they use computational tools and methods in their work. Contemporary scientists and mathematicians use such computational tools and methods to understand natural phenomena, solve problems and design solutions. The thinking required for this is called Computational Thinking. In this lesson using a computational model, we will learn about computational thinking, and motion and conservation of mechanical energy of an object during free fall.",
+          "interactive_or_media": {
+            "media_type": "video",
+            "media_url": "https://www.youtube.com/embed/2ACjQLXrdug"
+          }
+        },
+        {
+          "title": "QUESTION 1.1",
+          "instruction_text": "Based on what you saw in the video, explain why science students need to develop computational thinking.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "video",
+            "media_url": "https://www.youtube.com/embed/2ACjQLXrdug"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "2. EXPLORING THE MODEL",
+      "steps": [
+        {
+          "title": "Explore the model",
+          "instruction_text": "Explore the model before you answer the questions below. Press 'setup' and 'proceed for one second'.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML"
+          }
+        },
+        {
+          "title": "QUESTION 2.1",
+          "instruction_text": "What happens to the ball when you press 'proceed for one second' in the model?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML"
+          }
+        },
+        {
+          "title": "QUESTION 2.2",
+          "instruction_text": "Write three observations about the motion of the ball.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML"
+          }
+        },
+        {
+          "title": "QUESTION 2.3",
+          "instruction_text": "Write three observations about the energy of the ball.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "3. OBSERVATIONS REGARDING MOTION OF THE BALL",
+      "steps": [
+        {
+          "title": "Observe Model",
+          "instruction_text": "Observe the changes in the ball's motion in the model.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML"
+          }
+        },
+        {
+          "title": "QUESTION 3.1",
+          "instruction_text": "What changes do you observe in distance as time progresses?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML"
+          }
+        },
+        {
+          "title": "QUESTION 3.2",
+          "instruction_text": "What changes do you observe in velocity as time progresses?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML"
+          }
+        },
+        {
+          "title": "QUESTION 3.3",
+          "instruction_text": "What changes do you observe in acceleration as time progresses?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "4. CHANGES IN MECHANICAL ENERGY OF THE BALL",
+      "steps": [
+        {
+          "title": "Observe Energy model",
+          "instruction_text": "Observe energy changes using the model.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML"
+          }
+        },
+        {
+          "title": "QUESTION 4.1",
+          "instruction_text": "Observe what happens to kinetic energy (KE), potential energy (PE) and total energy (KE+PE) of the ball after each second it drops. Write your observations below.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML"
+          }
+        },
+        {
+          "title": "QUESTION 4.2",
+          "instruction_text": "Observe what happens when the mass of the ball is changed. Write your observations below. Mention which aspects regarding the motion and energy of the ball change and which remain unchanged.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "5. EVALUATING THE MODEL",
+      "steps": [
+        {
+          "title": "Model Evaluation",
+          "instruction_text": "Evaluate the model you just used.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML"
+          }
+        },
+        {
+          "title": "QUESTION 5.1",
+          "instruction_text": "Do you think you learned anything new with this model? If yes, elaborate.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML"
+          }
+        },
+        {
+          "title": "QUESTION 5.2",
+          "instruction_text": "What do you think such models can be useful for?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML"
+          }
+        },
+        {
+          "title": "QUESTION 5.3",
+          "instruction_text": "What are some limitations of this model?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML"
+          }
+        },
+        {
+          "title": "QUESTION 5.4",
+          "instruction_text": "In order to improve this model, what changes will you make?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/shirishsant02/2019/11/19/FREE_FALL.HTML"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "6. CONSTRUCTING THE MODEL",
+      "steps": [
+        {
+          "title": "Construction Task",
+          "instruction_text": "On this page, you will use coding blocks to construct a model of an object under free fall.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/sugat_teacher_account/2019/12/15/NETTANGO_FREE%20FALL_SCREENSHOT.HTML"
+          }
+        },
+        {
+          "title": "QUESTION 6.1",
+          "instruction_text": "How will you know if your model is accurate?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/sugat_teacher_account/2019/12/15/NETTANGO_FREE%20FALL_SCREENSHOT.HTML"
+          }
+        },
+        {
+          "title": "QUESTION 6.2",
+          "instruction_text": "Take screenshots of the coding blocks (setup and 'proceed for one second') in your final model and upload those here. (Describe your coding blocks setup)",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/sugat_teacher_account/2019/12/15/NETTANGO_FREE%20FALL_SCREENSHOT.HTML"
+          }
+        },
+        {
+          "title": "QUESTION 6.3",
+          "instruction_text": "What did you learn additionally about the motion of an object under free fall after constructing the model?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/sugat_teacher_account/2019/12/15/NETTANGO_FREE%20FALL_SCREENSHOT.HTML"
+          }
+        },
+        {
+          "title": "QUESTION 6.4",
+          "instruction_text": "What is the biggest takeaway for you from this lesson?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/sugat_teacher_account/2019/12/15/NETTANGO_FREE%20FALL_SCREENSHOT.HTML"
+          }
+        }
+      ]
+    }
+  ]
+}

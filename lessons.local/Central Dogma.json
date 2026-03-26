@@ -1,0 +1,297 @@
+{
+  "lesson_title": "CENTRAL DOGMA",
+  "lesson_description": "Learn about the central dogma of biology; the flow of information from DNA to RNA to protein. This unit explores how the structure of DNA determines the structure of proteins, which carry out the essential functions of life.",
+  "activities": [
+    {
+      "activity_title": "1. WHAT MAKES US LOOK DIFFERENT?",
+      "steps": [
+        {
+          "title": "Twin Teens",
+          "instruction_text": "Watch the video about the twin teens: one Black, one White.",
+          "interactive_or_media": {
+            "media_type": "video",
+            "media_url": "https://www.youtube.com/embed/JIUK2KSbvvI"
+          }
+        },
+        {
+          "title": "QUESTION 1.1",
+          "instruction_text": "Write down everything you notice about the twins after watching the video.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "video",
+            "media_url": "https://www.youtube.com/embed/JIUK2KSbvvI"
+          }
+        },
+        {
+          "title": "QUESTION 1.2",
+          "instruction_text": "How do you think the genetic information in the twins' genes causes their different physical characteristics?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "video",
+            "media_url": "https://www.youtube.com/embed/JIUK2KSbvvI"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "2. WHAT IS HAIR?",
+      "steps": [
+        {
+          "title": "Hair Composition",
+          "instruction_text": "Look at the structure of hair under a microscope and observe its characteristics."
+        },
+        {
+          "title": "QUESTION 2.1",
+          "instruction_text": "Based on your observations, what do you notice about the structure of your own hair or the hair that most closely resembles yours?",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        },
+        {
+          "title": "QUESTION 2.2",
+          "instruction_text": "Predict what types of molecules are in hair.",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        },
+        {
+          "title": "QUESTION 2.3",
+          "instruction_text": "What reasoning did you use to answer the previous question?",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "3. WHAT GIVES HAIR ITS COLOR?",
+      "steps": [
+        {
+          "title": "Melanin Model",
+          "instruction_text": "Natural human hair is colored by 2 forms of melanin: pheomelanin and eumelanin. Use the model to see which types of melanin are in which hair colors.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/sugat_teacher_account/2020/07/27/melanin%20levels_2020-07-27-13-31-04-517472.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.1",
+          "instruction_text": "What is something you found interesting by playing around with this model?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/sugat_teacher_account/2020/07/27/melanin%20levels_2020-07-27-13-31-04-517472.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.2",
+          "instruction_text": "Based on your data, what is the trend of eumelanin levels with respect to hair color?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/sugat_teacher_account/2020/07/27/melanin%20levels_2020-07-27-13-31-04-517472.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.3",
+          "instruction_text": "Based on your data, what is the trend of pheomelanin levels with regards to hair color?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/sugat_teacher_account/2020/07/27/melanin%20levels_2020-07-27-13-31-04-517472.html"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "4. WHAT DO PROTEINS DO?",
+      "steps": [
+        {
+          "title": "Introduction to Proteins",
+          "instruction_text": "Watch the video overview of proteins: what they're made of and what they do.",
+          "interactive_or_media": {
+            "media_type": "video",
+            "media_url": "https://www.youtube.com/embed/78QUeXVKiJ4"
+          }
+        },
+        {
+          "title": "QUESTION 4.1",
+          "instruction_text": "What information seemed the most important in this video?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "video",
+            "media_url": "https://www.youtube.com/embed/78QUeXVKiJ4"
+          }
+        },
+        {
+          "title": "QUESTION 4.2",
+          "instruction_text": "Write down 4 things you notice about the structure of a hand. How do the different structures help with their different functions?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "video",
+            "media_url": "https://www.youtube.com/embed/78QUeXVKiJ4"
+          }
+        },
+        {
+          "title": "QUESTION 4.3",
+          "instruction_text": "Amino acids can act differently from each other. How do you think the primary structure could affect the secondary, tertiary, and quaternary structures?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "video",
+            "media_url": "https://www.youtube.com/embed/78QUeXVKiJ4"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "5. HOW DO THE INSTRUCTIONS TO MAKE PROTEINS WORK?",
+      "steps": [
+        {
+          "title": "DNA and RNA",
+          "instruction_text": "Think about what you already know about DNA and RNA."
+        },
+        {
+          "title": "QUESTION 5.1",
+          "instruction_text": "Brainstorm all you know about DNA in the space below.",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        },
+        {
+          "title": "QUESTION 5.2",
+          "instruction_text": "DNA can’t leave the nucleus and protein is made in the cytoplasm of cells at ribosomes. How do the instructions from the DNA get to the ribosomes?",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        },
+        {
+          "title": "DNA Synthesis Model",
+          "instruction_text": "Here is a test tube model of how DNA and RNA get made within a cell. Use it to observe replication.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jordanbrickteacher/2020/07/28/replication%20and%20transcription%20%281%29_2020-07-28-14-22-49-447356.html"
+          }
+        },
+        {
+          "title": "QUESTION 5.3",
+          "instruction_text": "Compare and contrast the process of making RNA (transcription) to the replication of DNA. Write down at least one similarity and one difference.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/jordanbrickteacher/2020/07/28/replication%20and%20transcription%20%281%29_2020-07-28-14-22-49-447356.html"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "6. HOW DO OUR CELLS KNOW HOW TO MAKE PROTEINS?",
+      "steps": [
+        {
+          "title": "Protein Synthesis",
+          "instruction_text": "Explore the translation animation model to see how proteins are synthesized.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://lab.concord.org/embeddable.html#interactives/sam/DNA-to-proteins/1-dna-to-protein.json"
+          }
+        },
+        {
+          "title": "QUESTION 6.1",
+          "instruction_text": "Click the 'transcribe' button in the model to start the process of transcription. Describe the process using the terms DNA, mRNA, and Nucleus.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://lab.concord.org/embeddable.html#interactives/sam/DNA-to-proteins/1-dna-to-protein.json"
+          }
+        },
+        {
+          "title": "QUESTION 6.2",
+          "instruction_text": "How many ribonucleotides (RNA) match with each amino acid? Can you tell if the same ribonucleotides and amino acids always go together?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://lab.concord.org/embeddable.html#interactives/sam/DNA-to-proteins/1-dna-to-protein.json"
+          }
+        },
+        {
+          "title": "QUESTION 6.3",
+          "instruction_text": "In your own words, how did the 'ribosome' know which amino acid to add?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://lab.concord.org/embeddable.html#interactives/sam/DNA-to-proteins/1-dna-to-protein.json"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "7. HOW DO THE INSTRUCTIONS END UP ALL OVER OUR BODY?",
+      "steps": [
+        {
+          "title": "DNA Replication Fork",
+          "instruction_text": "The DNA Replication Fork model helps simulate the process of DNA replication that occurs in every living thing as part of mitosis and meiosis.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/johnsonk/2022/04/29/dna%20replication%20forknosub_2022-04-29-15-10-09-946716.html"
+          }
+        },
+        {
+          "title": "QUESTION 7.1",
+          "instruction_text": "Which enzyme unzips the double stranded DNA? (Use the model to answer.)",
+          "learner_response": {
+            "response_type": "text_short"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/johnsonk/2022/04/29/dna%20replication%20forknosub_2022-04-29-15-10-09-946716.html"
+          }
+        },
+        {
+          "title": "QUESTION 7.2",
+          "instruction_text": "Which nucleotides will pair together?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/johnsonk/2022/04/29/dna%20replication%20forknosub_2022-04-29-15-10-09-946716.html"
+          }
+        },
+        {
+          "title": "QUESTION 7.3",
+          "instruction_text": "Why do you think it is important for DNA to replicate before a cell divides?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/johnsonk/2022/04/29/dna%20replication%20forknosub_2022-04-29-15-10-09-946716.html"
+          }
+        }
+      ]
+    }
+  ]
+}

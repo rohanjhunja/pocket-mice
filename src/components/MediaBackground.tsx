@@ -76,7 +76,7 @@ export function MediaBackground({ media, stepId, onThemeChange, onMediaInteracti
         setEmbedState('embeddable');
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stepId, media?.media_url]);
+  }, [media?.media_url]);
 
   useEffect(() => {
     if (media?.media_type === 'video' && media.media_url?.includes('youtube.com')) {

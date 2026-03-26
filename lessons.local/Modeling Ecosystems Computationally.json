@@ -1,0 +1,782 @@
+{
+  "lesson_title": "MODELING ECOSYSTEMS COMPUTATIONALLY",
+  "lesson_description": "Students will develop an understanding of how to develop a computational model starting from basic intuitions about individual behavior, then gradually and iteratively making improvements and adding complexity. They will begin by using block-based programming tools, but will eventually transition to simple text-based programming.",
+  "activities": [
+    {
+      "activity_title": "1.1. MODELING ECOSYSTEMS",
+      "steps": [
+        {
+          "title": "Isle Royale",
+          "instruction_text": "Ecosystems are often difficult to understand because they usually include interactions between a large number of species. Isle Royale is different. It is a relatively simple island ecosystem, located 24 km from the shore of Canada in Lake Superior. While there are many types of small animals on the island, and almost 20 types of mammals, only two species of the mammals that live on the island are relatively large. These are the wolves and the moose. On this island, wolves are the only predator of moose, and moose are essentially the only food for wolves."
+        },
+        {
+          "title": "Ecosystem observation",
+          "instruction_text": "To understand nature, it helps to observe an ecosystem where human impact is limited. On Isle Royale, there are no towns and people do not hunt wolves or moose or cut the forest. It is a very rare place on the planet where wolves, their prey, and the plants that support the prey are all left unharvested by humans. Your challenge will be to build a scientific model that can more realistically simulate the interactions of wolves and moose on Isle Royale, in order to help make predictions about how these two populations may change over time."
+        },
+        {
+          "title": "QUESTION 1.1.1",
+          "instruction_text": "Thinking about this community of wolves and moose in Isle Royale, do you believe that the size of the wolf population will change from one day to the next?",
+          "learner_response": {
+            "response_type": "multiple_choice",
+            "options": [
+              "Yes",
+              "No"
+            ]
+          }
+        },
+        {
+          "title": "QUESTION 1.1.2",
+          "instruction_text": "Do you believe that the size of the wolf population will change from one month to the next?",
+          "learner_response": {
+            "response_type": "multiple_choice",
+            "options": [
+              "Yes",
+              "No"
+            ]
+          }
+        },
+        {
+          "title": "QUESTION 1.1.3",
+          "instruction_text": "Do you believe that the size of the wolf population will change over the course of 30 years?",
+          "learner_response": {
+            "response_type": "multiple_choice",
+            "options": [
+              "Yes",
+              "No"
+            ]
+          }
+        },
+        {
+          "title": "QUESTION 1.1.4",
+          "instruction_text": "Since moose can’t typically migrate on or off the island, what other factors might cause the size of the moose population to change from year to year?",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        },
+        {
+          "title": "QUESTION 1.1.5",
+          "instruction_text": "Describe what may cause changes in the population of wolves and moose over time.",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "1.2. GETTING THE WOLF TO MOVE",
+      "steps": [
+        {
+          "title": "Wolf Movement Setup",
+          "instruction_text": "Scroll down the page and interact with the setup and go (play) button. Drag blocks over to tell the wolf and moose how to behave. Anytime you make changes click on the 'recompile' button followed by setup and go (play). Blocks can be used multiple times. Challenges: Get the wolf to move around the field. Get the wolf to move around the field more realistically. Get the wolf to draw a dashed line or another pattern.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/bainco/2025/07/15/getting_the_wolf_to_move_page_2_2025-07-15-13-28-15-217493.html"
+          }
+        },
+        {
+          "title": "QUESTION 1.2.1",
+          "instruction_text": "Which blocks did you use to make the wolf move around the field? Choose all that apply.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/bainco/2025/07/15/getting_the_wolf_to_move_page_2_2025-07-15-13-28-15-217493.html"
+          }
+        },
+        {
+          "title": "QUESTION 1.2.2",
+          "instruction_text": "Does the wolf look like it’s walking around the whole field or is it just going in a straight line or circles? If the moose aren't moving does the wolf get to all of them over time?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/bainco/2025/07/15/getting_the_wolf_to_move_page_2_2025-07-15-13-28-15-217493.html"
+          }
+        },
+        {
+          "title": "QUESTION 1.2.3",
+          "instruction_text": "After you have gotten your wolf moving, spend time trying to figure out the best block combination needed to get more realistic wolf movement. Try changing the numbers found in some of the blocks. What is your ideal block combination for movement.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/bainco/2025/07/15/getting_the_wolf_to_move_page_2_2025-07-15-13-28-15-217493.html"
+          }
+        },
+        {
+          "title": "QUESTION 1.2.4",
+          "instruction_text": "What blocks did you use to get the wolf to draw a dashed line?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/bainco/2025/07/15/getting_the_wolf_to_move_page_2_2025-07-15-13-28-15-217493.html"
+          }
+        },
+        {
+          "title": "QUESTION 1.2.5",
+          "instruction_text": "What other types of behavior blocks would you add to make this a more realistic wolf and moose predator/prey model?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/bainco/2025/07/15/getting_the_wolf_to_move_page_2_2025-07-15-13-28-15-217493.html"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "1.3. MAKING THE MODEL MORE REALISTIC",
+      "steps": [
+        {
+          "title": "Make model realistic",
+          "instruction_text": "The poor defenseless moose should be allowed to move as well. Let's see how we can make this a more realistic model. Challenges: Wolves and moose move around the field in a realistic way. Make the wolf appear to eat a moose when it runs into one. Make the moose slowly multiply.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/bainco/2025/07/15/making_the_model_more_realistic_page_3_2025-07-15-15-34-16-142277.html"
+          }
+        },
+        {
+          "title": "QUESTION 1.3.1",
+          "instruction_text": "Which blocks did you use to make the wolf eat the moose?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/bainco/2025/07/15/making_the_model_more_realistic_page_3_2025-07-15-15-34-16-142277.html"
+          }
+        },
+        {
+          "title": "QUESTION 1.3.2",
+          "instruction_text": "Which blocks did you use to make the moose multiply?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/bainco/2025/07/15/making_the_model_more_realistic_page_3_2025-07-15-15-34-16-142277.html"
+          }
+        },
+        {
+          "title": "QUESTION 1.3.3",
+          "instruction_text": "What block(s) did you use to slow down the moose reproduction?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/bainco/2025/07/15/making_the_model_more_realistic_page_3_2025-07-15-15-34-16-142277.html"
+          }
+        },
+        {
+          "title": "QUESTION 1.3.4",
+          "instruction_text": "What other blocks would you add to this model to help make it more realistic?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/bainco/2025/07/15/making_the_model_more_realistic_page_3_2025-07-15-15-34-16-142277.html"
+          }
+        },
+        {
+          "title": "QUESTION 1.3.5",
+          "instruction_text": "Describe the challenge that you created.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/bainco/2025/07/15/making_the_model_more_realistic_page_3_2025-07-15-15-34-16-142277.html"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "2.1. ANALYZING THE CODE BEHIND THE BLOCKS",
+      "steps": [
+        {
+          "title": "NetLogo Code",
+          "instruction_text": "Now we will look at the computer code produced from your blocks. Set up the blocks that you used before to have the wolf move around. Look at the code that is generated when you recompile.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://bainco.github.io/assets/temp/example/screen2.html"
+          }
+        },
+        {
+          "title": "QUESTION 2.1.1",
+          "instruction_text": "Look through the text-based code in the NetLogo code part. What is the copyright year?",
+          "learner_response": {
+            "response_type": "text_short"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://bainco.github.io/assets/temp/example/screen2.html"
+          }
+        },
+        {
+          "title": "QUESTION 2.1.2",
+          "instruction_text": "Examine the text-based code carefully. What is the size of a wolf?",
+          "learner_response": {
+            "response_type": "text_short"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://bainco.github.io/assets/temp/example/screen2.html"
+          }
+        },
+        {
+          "title": "QUESTION 2.1.3",
+          "instruction_text": "Can you find in the code the maximum number of moose that will be allowed in the model?",
+          "learner_response": {
+            "response_type": "text_short"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://bainco.github.io/assets/temp/example/screen2.html"
+          }
+        },
+        {
+          "title": "QUESTION 2.1.4",
+          "instruction_text": "Challenge: According to the code, what will happen 'if' there are more than the maximum number of moose?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://bainco.github.io/assets/temp/example/screen2.html"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "2.2. TRANSFORMING THE ECOSYSTEM",
+      "steps": [
+        {
+          "title": "Transform Model",
+          "instruction_text": "Now that you have a more realistic model of wolves and moose, what can you transform to make it more interesting? Use any combinations of blocks below to make your own world of wolves and moose.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://bainco.github.io/assets/temp/example/screen2.html"
+          }
+        },
+        {
+          "title": "QUESTION 2.2.1",
+          "instruction_text": "Describe your transformed world and what changes you made.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://bainco.github.io/assets/temp/example/screen2.html"
+          }
+        },
+        {
+          "title": "QUESTION 2.2.2",
+          "instruction_text": "Copy and paste the text-based NetLogo code produced in your model below.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://bainco.github.io/assets/temp/example/screen2.html"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "2.3. WRAP UP",
+      "steps": [
+        {
+          "title": "QUESTION 2.3.1",
+          "instruction_text": "Do you think that scientists could use a model like this to study a simple ecosystem?",
+          "learner_response": {
+            "response_type": "multiple_choice",
+            "options": [
+              "Yes",
+              "No"
+            ]
+          }
+        },
+        {
+          "title": "QUESTION 2.3.2",
+          "instruction_text": "Explain your answer to the previous question.",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        },
+        {
+          "title": "QUESTION 2.3.3",
+          "instruction_text": "What is one big idea that you have discovered in this lesson?",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        },
+        {
+          "title": "QUESTION 2.3.4",
+          "instruction_text": "What is the benefit of using block-based coding like this NetTango model compared to what you normally think about with coding?",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        },
+        {
+          "title": "QUESTION 2.3.5",
+          "instruction_text": "What other blocks would you want to add to this model?",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "3.1. MOVING FROM NETTANGO TO NETLOGO",
+      "steps": [
+        {
+          "title": "Move to NetLogo",
+          "instruction_text": "We will transfer the code that you generated in NetTango to the new NetLogo model. This will give us the basic functions that you worked on before but allow us to make more direct changes.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/mrhallonline/2018/02/27/WolfMooseNT.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.1.1",
+          "instruction_text": "After you transferred the code to NetLogo and clicked setup and start, does the model look the same as the NetTango version?",
+          "learner_response": {
+            "response_type": "multiple_choice",
+            "options": [
+              "Identical",
+              "A little different",
+              "Very different"
+            ]
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/mrhallonline/2018/02/27/WolfMooseNT.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.1.2",
+          "instruction_text": "The wolves and moose can be transformed into other shapes or organisms. Go to the 'set shape' line for wolves and change the shape for a wolf to a star. Find 5 other shapes that you can change the wolves or moose into and list them below.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/mrhallonline/2018/02/27/WolfMooseNT.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.1.3",
+          "instruction_text": "What else can you change in the model by changing the code?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/mrhallonline/2018/02/27/WolfMooseNT.html"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "3.2. ZOOMING OUT",
+      "steps": [
+        {
+          "title": "Zoom out",
+          "instruction_text": "Right now, our ecosystem is very small, with only a handful of moose and wolves. In order for it to be more useful for studying places like Isle Royale, we need to make the ecosystem bigger. Open the NetLogo code tab and make the changes need to transform your basic NetTango model into a model that shows interactions on much wider scale.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/mrhallonline/2018/02/27/WolfMooseNT2.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.2.1",
+          "instruction_text": "To make this ecosystem more realistic, we need there to be more animals in it. Try to make the model start with 20 wolves and 100 moose. How did you change the number of wolves or moose that start off the model?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/mrhallonline/2018/02/27/WolfMooseNT2.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.2.2",
+          "instruction_text": "When there are a lot of animals, it is hard to see them all when they are so big. Try to make the wolves and moose smaller. How did you change the size of the wolves and the moose?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/mrhallonline/2018/02/27/WolfMooseNT2.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.2.3",
+          "instruction_text": "Why do you think having a bigger ecosystem is important for studying wolf and moose populations?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/mrhallonline/2018/02/27/WolfMooseNT2.html"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "3.3. TRANSFORMING THE WORLD PART 2",
+      "steps": [
+        {
+          "title": "More Transformation",
+          "instruction_text": "Before we work with a more realistic model of wolves and moose, go ahead and mess around again and create your own world? Although this time you will make your changes directly in the code. Don't forget to click the 'recompile code' button after you make your changes.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/mrhallonline/2018/02/27/WolfMooseNT2.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.3.1",
+          "instruction_text": "Describe the changes you made to transform your world.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/mrhallonline/2018/02/27/WolfMooseNT2.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.3.2",
+          "instruction_text": "Copy and paste the NetLogo code produced in your model below.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/mrhallonline/2018/02/27/WolfMooseNT2.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.3.3",
+          "instruction_text": "What do you like working with more, the blocks or directly with the code?",
+          "learner_response": {
+            "response_type": "multiple_choice",
+            "options": [
+              "Blocks",
+              "Code"
+            ]
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/mrhallonline/2018/02/27/WolfMooseNT2.html"
+          }
+        },
+        {
+          "title": "QUESTION 3.3.4",
+          "instruction_text": "Explain why you chose the previous answer.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/mrhallonline/2018/02/27/WolfMooseNT2.html"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "4.1. UPDATING OUR ISLE ROYALE PREDICTIONS",
+      "steps": [
+        {
+          "title": "Data context",
+          "instruction_text": "In this lesson we will look at the wolf and moose ecosystem on Isle Royale again. Look at this table showing the wolf and moose population sizes in 2011 and answer the questions below. Wolves 16, Moose 515."
+        },
+        {
+          "title": "QUESTION 4.1.1",
+          "instruction_text": "Do you think the number of wolves will increase, decrease, or stay the same in the future?",
+          "learner_response": {
+            "response_type": "multiple_choice",
+            "options": [
+              "Increase",
+              "Decrease",
+              "Stay the same"
+            ]
+          }
+        },
+        {
+          "title": "QUESTION 4.1.2",
+          "instruction_text": "Do you think the number of moose will increase, decrease, or stay the same in the future?",
+          "learner_response": {
+            "response_type": "multiple_choice",
+            "options": [
+              "Increase",
+              "Decrease",
+              "Stay the same"
+            ]
+          }
+        },
+        {
+          "title": "QUESTION 4.1.3",
+          "instruction_text": "Are you confident in your predictions? Why or why not?",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        },
+        {
+          "title": "QUESTION 4.1.4",
+          "instruction_text": "How do you think we could test predictions like these?",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "4.2. ISLE ROYALE MODEL",
+      "steps": [
+        {
+          "title": "Model Isle Royale",
+          "instruction_text": "The model below is very similar to the model you have been working with in earlier lessons. The wolves and moose follow all of the same rules as before, except that now there are plants for the moose to eat. If the wolves or moose don't eat enough food, they will die. Look at how the size of the populations changes over time.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/pwoods/2018/02/05/Wolf%20Moose%20Predation%20intro.html"
+          }
+        },
+        {
+          "title": "QUESTION 4.2.1",
+          "instruction_text": "Run the model and look at the graph. What do the different parts of the graph represent? (X axis, Y axis, Orange line, Black line)",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/pwoods/2018/02/05/Wolf%20Moose%20Predation%20intro.html"
+          }
+        },
+        {
+          "title": "QUESTION 4.2.2",
+          "instruction_text": "What do you notice about how the number of wolves and the number of moose compare? For example, when one group is large, how big is the other one?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/pwoods/2018/02/05/Wolf%20Moose%20Predation%20intro.html"
+          }
+        },
+        {
+          "title": "QUESTION 4.2.3",
+          "instruction_text": "How do these patterns in the graph change when you change the inputs on different sliders?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/pwoods/2018/02/05/Wolf%20Moose%20Predation%20intro.html"
+          }
+        },
+        {
+          "title": "QUESTION 4.2.4",
+          "instruction_text": "Do you think the size of the wolf and moose populations on Isle Royale would actually increase and decrease like they do in this model? Why or why not?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/pwoods/2018/02/05/Wolf%20Moose%20Predation%20intro.html"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "4.3. COMPARING WITH REAL DATA",
+      "steps": [
+        {
+          "title": "QUESTION 4.3.1",
+          "instruction_text": "Scientists have studied the wolf and moose populations on Isle Royale for decades. How is the graph from the model similar to the graph of real population sizes?",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        },
+        {
+          "title": "QUESTION 4.3.2",
+          "instruction_text": "How is the graph from the model different from the graph of real population sizes?",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        },
+        {
+          "title": "QUESTION 4.3.3",
+          "instruction_text": "Based on this comparison, how good do you think our model is?",
+          "learner_response": {
+            "response_type": "multiple_choice",
+            "options": [
+              "Very good",
+              "OK",
+              "Not good"
+            ]
+          }
+        },
+        {
+          "title": "QUESTION 4.3.4",
+          "instruction_text": "Explain your answer.",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "5.1. THE FUTURE OF ISLE ROYALE",
+      "steps": [
+        {
+          "title": "Future model setup",
+          "instruction_text": "Recently the Isle Royale ecosystem has been suffering. First we need to set the model up so that it starts close to the current state of the island. There are very few wolves left and a lot of moose, so set the initial wolf population to 2 and set the initial moose population to about 200. Because the wolves are unhealthy, decrease the WOLF-GAIN-FROM-FOOD slider from 20 to 13 and decrease the WOLF-REPRODUCE slider from 5% to 3%.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/pwoods/2018/02/05/Wolf%20Moose%20Predation%20500%20ticks.html"
+          }
+        },
+        {
+          "title": "QUESTION 5.1.1",
+          "instruction_text": "Based on what you saw yesterday, why do you think there are so many moose in the ecosystem right now?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/pwoods/2018/02/05/Wolf%20Moose%20Predation%20500%20ticks.html"
+          }
+        },
+        {
+          "title": "QUESTION 5.1.2",
+          "instruction_text": "Before running the model, make a prediction. Do you think the wolf population will survive, or will it die out?",
+          "learner_response": {
+            "response_type": "multiple_choice",
+            "options": [
+              "It will usually survive",
+              "It will usually die out"
+            ]
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/pwoods/2018/02/05/Wolf%20Moose%20Predation%20500%20ticks.html"
+          }
+        },
+        {
+          "title": "QUESTION 5.1.3",
+          "instruction_text": "Run the model with the speed slider all the way to the right. The model will stop after 500 ticks have passed. Repeat this process at least 5 times and note if wolves survived each time.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/pwoods/2018/02/05/Wolf%20Moose%20Predation%20500%20ticks.html"
+          }
+        },
+        {
+          "title": "QUESTION 5.1.4",
+          "instruction_text": "Look at the results of your experiment. Do you think the wolves on the real Isle Royale have a good chance of surviving into the future? Explain your answer.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/pwoods/2018/02/05/Wolf%20Moose%20Predation%20500%20ticks.html"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "5.2. TESTING CONSERVATION STRATEGIES",
+      "steps": [
+        {
+          "title": "Intervention strategies",
+          "instruction_text": "Many scientists think that the wolf population on Isle Royale will probably die out in the near future. However, it may be possible to save them through some human intervention. We can use our model to test how good different interventions might be.",
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/pwoods/2018/02/05/Wolf%20Moose%20Predation%20500%20ticks.html"
+          }
+        },
+        {
+          "title": "QUESTION 5.2.1",
+          "instruction_text": "What do you think could we do on Isle Royale to increase the chances that the wolves will survive?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/pwoods/2018/02/05/Wolf%20Moose%20Predation%20500%20ticks.html"
+          }
+        },
+        {
+          "title": "QUESTION 5.2.2",
+          "instruction_text": "How could you make the change you suggested happen in the model? For example, what parameters would you change? How would you change them?",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/pwoods/2018/02/05/Wolf%20Moose%20Predation%20500%20ticks.html"
+          }
+        },
+        {
+          "title": "QUESTION 5.2.3",
+          "instruction_text": "Make the change or changes you suggested in the model and test how often the wolves survive over 5 trials. Note the results.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/pwoods/2018/02/05/Wolf%20Moose%20Predation%20500%20ticks.html"
+          }
+        },
+        {
+          "title": "QUESTION 5.2.4",
+          "instruction_text": "Do you think your intervention worked? Explain your answer.",
+          "learner_response": {
+            "response_type": "text_long"
+          },
+          "interactive_or_media": {
+            "media_type": "simulation",
+            "media_url": "https://ct-stem.s3.amazonaws.com/uploads/pwoods/2018/02/05/Wolf%20Moose%20Predation%20500%20ticks.html"
+          }
+        }
+      ]
+    },
+    {
+      "activity_title": "5.3. WRAPPING UP",
+      "steps": [
+        {
+          "title": "QUESTION 5.3.1",
+          "instruction_text": "Give an example of how a scientist might use a NetLogo model to study ecosystems. Think of something specific a scientist might want to learn by using a model like this.",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        },
+        {
+          "title": "QUESTION 5.3.2",
+          "instruction_text": "Models are useful tools for scientists, but no model can do everything. Why might it be hard to use a model like this to study ecosystems?",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        },
+        {
+          "title": "QUESTION 5.3.3",
+          "instruction_text": "What is one big idea you have discovered from these lessons?",
+          "learner_response": {
+            "response_type": "text_long"
+          }
+        }
+      ]
+    }
+  ]
+}

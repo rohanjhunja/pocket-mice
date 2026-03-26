@@ -1,0 +1,157 @@
+SIMPLE HARMONIC MOTION - SIMPLE PENDULUM
+Author(s): Tanali Bhattacharyay, Radhika Oka, Vaibhav Wagh, Sugat Dabholkar
+Subject: Physics, Self-directed
+Time: 80-90 minutes
+Level: Class IX
+Version: v2
+OVERVIEW
+This lesson is about understanding and investigating simple harmonic motion (SHM) of a simple pendulum.
+Students use a computational model of a simple pendulum to learn about its position, velocity and
+acceleration. Students can also observe changes in the mechanical energy (kinetic energy and potential
+energy) of the pendulum.    
+STANDARDS
+NEXT GENERATION SCIENCE STANDARDS
+Physical Science[HS-PS4-1] Use mathematical representations to support a claim regarding relationships amongthe frequency, wavelength, and speed of waves traveling in various media.
+COMPUTATIONAL THINKING IN STEM
+Data PracticesAnalyzing DataCollecting DataModeling and Simulation PracticesAssessing Computational ModelsUsing Computational Models to Find and Test SolutionsUsing Computational Models to Understand a Concept
+CREDITS
+Lesson development: Tanali Bhattacharya, Radhika Oka, Vaibhav Wagh, Sugat Dabholkar
+Topic selection: Tanali Bhattacharya, Radhika Oka
+Model coding: Vaibhav Wagh, Sugat Dabholkar
+2/26/26, 4:16 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1014/ 1/9
+ACKNOWLEDGEMENT
+This lesson has been co-designed as a part of a co-design project by CoESME at IISER Pune and CCL
+at Northwestern. 
+ACTIVITIES
+1. Introduction to computational thinking2. Exploring a model of simple pendulum3. Investigating motion of a pendulum4. Designing an experiment to find 'g'5. Understanding KE and PE of a pendulum6. Evaluating and extending the model
+2/26/26, 4:16 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1014/ 2/9
+STUDENT DIRECTIONS AND RESOURCES
+In this lesson, you will be able to -
+1) learn how to measure the amplitude and time period of a simple pendulum
+2) understand the changes in displacement, velocity, and acceleration during simple harmonic motion (SHM)
+of a pendulum
+3) understand the energy relationship between kinetic and potential energy during SHM of a pendulum
+4) learn how to verify the value of acceleration due to gravity 
+5) investigate how the mass of the bob (m) and the length of the pendulum (l) affects the time period
+6) use a computational model to perform scientific investigations
+1. INTRODUCTION TO COMPUTATIONAL THINKING
+Computational Thinking inComputational Thinking in……
+The embedded resource from above can be accessed via this link
+(https://www.youtube.com/embed/2ACjQLXrdug)
+In this video, researchers at the Indian Institute of Science Education and Research (IISER) Pune talk about
+how they use computational tools and methods in their work.
+Scientists and Mathematicians are increasingly using computational tools and methods to understand
+natural phenomena and solve problems. The thinking required to do so is called computational thinking.
+In this lesson using a computational model, we will learn computational thinking and simple harmonic
+motion of a pendulum.
+QUESTION 1.1
+Based on what you saw in the video, explain why science students need to develop computational thinking.
+2. EXPLORING A MODEL OF SIMPLE PENDULUM
+Explore the model first for at least 100 ticks. Then answer the questions below.
+2/26/26, 4:16 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1014/ 3/9
+ powered by NetLogo
+Mode: Interactive Commands and
+release-angle -18
+The embedded resource from above can be accessed via this link
+(https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%201_2021-02-10-
+19-57-22-835037.html)
+QUESTION 2.1
+Write at least two observation/s that you find interesting in the model above.
+QUESTION 2.2
+What parameters can you vary in the model?
+QUESTION 2.3
+Describe your observations regarding how the motion of pendulum changes as you vary the parameters.
+3. INVESTIGATING MOTION OF A PENDULUM
+ powered by NetLogo
+Mode: Interactive Commands and
+release-angle 15
+The embedded resource from above can be accessed via this link
+(https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%202_2021-02-
+10-20-00-07-289962.html)
+2/26/26, 4:16 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1014/ 4/9
+QUESTION 3.1
+Describe your observations about how the displacement from the mean position of the pendulum changes
+as time progresses.
+QUESTION 3.2
+Describe your observations about how the velocity of the pendulum changes as time progresses.
+QUESTION 3.3
+Describe your observations about how the acceleration of the pendulum changes as time progresses.
+QUESTION 3.4
+Which parameter represents time in this model?
+QUESTION 3.5
+Find the time period of the pendulum.
+QUESTION 3.6
+How can you establish the relationship between ticks and one second?
+(Hint: You will have to use the data you collected when you performed an experiment with a real pendulum.
+Skip this question if you have not performed the physical experiment.)
+4. DESIGNING AN EXPERIMENT TO FIND 'G'
+2/26/26, 4:16 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1014/ 5/9
+ powered by NetLogo
+Mode: Interactive Commands and
+release-angle 15
+The embedded resource from above can be accessed via this link
+(https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%202_2021-02-
+10-20-01-46-410289.html)
+QUESTION 4.1
+How could you conduct a computational experiment with this model to find out 'g'?
+(You will need to use information from the physical experiment you already performed with a real pendulum.
+If you have not done the physical experiment, use your imagination to design a computational experiment
+that can be also performed in real life.)
+QUESTION 4.2
+Conduct the experiment and find the value of 'g'. 
+(Use the correct unit of time. You will need to convert 'ticks' to seconds.)
+QUESTION 4.3
+Design another computational experiment to verify that the period of the pendulum does not change if you
+change the release angle. Describe your experimental design.
+QUESTION 4.4
+Perform the experiment and write your observations.
+QUESTION 4.5
+2/26/26, 4:16 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1014/ 6/9
+Write the conclusion of your experiment.
+5. UNDERSTANDING KE AND PE OF A PENDULUM
+ powered by NetLogo
+Mode: Interactive Commands and
+release-angle 15
+The embedded resource from above can be accessed via this link
+(https://ct-stem.s3.amazonaws.com/uploads/jamieadmin/2021/02/10/simple%20pendulum%203_2021-02-
+10-20-02-49-654923.html)
+QUESTION 5.1
+Explore the energy (KE and PE) graph and note down your observations.
+QUESTION 5.2
+In the energy (KE and PE) graph, which colour represents KE and which colour represents PE?
+QUESTION 5.3
+Find the relationship between the position of the bob and its kinetic and potential energy.
+QUESTION 5.4
+Note down the position/s of the bob where its KE and PE are maximum and minimum.
+2/26/26, 4:16 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1014/ 7/9
+6. EVALUATING AND EXTENDING THE MODEL
+QUESTION 6.1
+What are the advantages of using computational models for research?
+QUESTION 6.2
+List some limitations of the last model you used in this lesson.
+QUESTION 6.3
+To overcome one of those limitations, how will you modify the model?
+QUESTION 6.4
+What is your biggest takeaway from this lesson?
+2/26/26, 4:16 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1014/ 8/9
+This material was developed by the
+CT-STEM Project
+at Northwestern University. To inquire about using our material in your school or as part of research, please
+contact
+ctstem@northwestern.edu
+.
+This work was made possible through generous support from the National Science Foundation (grants
+CNS-1138461, CNS-1441041, DRL-1020101, DRL-1640201 and DRL-1842374) and the Spencer Foundation
+(Award #201600069). Any opinions, findings, or recommendations expressed in this material are those of
+the author(s) and do not necessarily reflect the views of the funding organizations.
+© 2026 CT-STEM Project. Some rights reserved.
+2/26/26, 4:16 PM CT-STEM
+https://ct-stem.northwestern.edu/curriculum/print/1014/ 9/9
