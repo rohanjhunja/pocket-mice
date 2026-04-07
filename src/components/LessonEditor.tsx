@@ -26,9 +26,12 @@ import {
   GripVertical,
   ChevronsUpDown,
   ChevronsDownUp,
+  Upload,
+  ArrowLeft,
+  FileCode,
 } from 'lucide-react'
 import { updateLesson, duplicateLesson } from '@/app/dashboard/lesson/[id]/actions'
-import { uploadLesson } from '@/app/dashboard/actions'
+import { uploadLesson, getSimulations, uploadSimulation } from '@/app/dashboard/actions'
 
 // ===== TYPES =====
 interface LessonEditorProps {
@@ -39,6 +42,11 @@ interface LessonEditorProps {
 }
 
 type EditMode = 'default' | 'advanced'
+
+type EditorScreen = 
+  | { type: 'edit' }
+  | { type: 'choose_simulation', actIdx: number, stepIdx: number }
+  | { type: 'preview_simulation', actIdx: number, stepIdx: number, file: File, previewUrl: string, title: string }
 
 // ===== PRESETS =====
 const GRADE_LEVELS = ['Elementary (K-5)', 'Middle School (6-8)', 'High School (9-12)', 'College', 'Professional']
@@ -147,6 +155,20 @@ export function LessonEditor({ lessonId, jsonContent, onClose, createMode = fals
   const router = useRouter()
   const [data, setData] = useState(() => deepClone(jsonContent))
   const [mode, setMode] = useState<EditMode>('default')
+  const [screen, setScreen] = useState<EditorScreen>({ type: 'edit' })
+  const [simulations, setSimulations] = useState<any[]>([])
+  const [isLoadingSimulations, setIsLoadingSimulations] = useState(false)
+  
+  useEffect(() => {
+    if (screen.type === 'choose_simulation' && simulations.length === 0) {
+      setIsLoadingSimulations(true)
+      getSimulations().then(data => {
+        setSimulations(data)
+        setIsLoadingSimulations(false)
+      })
+    }
+  }, [screen.type])
+
   const [expanded, setExpanded] = useState<Set<string>>(new Set())
   const [hasChanges, setHasChanges] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
@@ -382,7 +404,24 @@ export function LessonEditor({ lessonId, jsonContent, onClose, createMode = fals
             </div>
             {renderSelect('Media Type', media.media_type || '', MEDIA_TYPES, v => setMediaField('media_type', v))}
             {renderField('Media Title', media.media_title, v => setMediaField('media_title', v))}
-            {renderField('Media URL', media.media_url, v => setMediaField('media_url', v))}
+            
+            <div className="space-y-1.5">
+              <Label className="text-xs font-medium text-slate-600">Media URL</Label>
+              <div className="flex gap-2">
+                <Input 
+                  value={media.media_url || ''} 
+                  onChange={e => setMediaField('media_url', e.target.value)} 
+                  className="text-sm flex-1" 
+                />
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => setScreen({ type: 'choose_simulation', actIdx, stepIdx })}
+                >
+                  Choose
+                </Button>
+              </div>
+            </div>
             {isAdv && (
               <>
                 <div className="flex items-center gap-2">
@@ -443,7 +482,166 @@ export function LessonEditor({ lessonId, jsonContent, onClose, createMode = fals
     )
   }
 
+  // ===== RENDER CHOOSE SIMULATION =====
+  const renderChooseSimulation = () => {
+    if (screen.type !== 'choose_simulation') return null;
+    const fileInputRef = document.createElement('input');
+    fileInputRef.type = 'file';
+    fileInputRef.accept = '.html';
+    fileInputRef.onchange = (e: any) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        setScreen({
+          type: 'preview_simulation',
+          actIdx: screen.actIdx,
+          stepIdx: screen.stepIdx,
+          file,
+          previewUrl: URL.createObjectURL(file),
+          title: file.name
+        });
+      }
+    };
+
+    return (
+      <div className="fixed inset-0 z-50 bg-black/40 flex items-start justify-center overflow-y-auto">
+        <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl my-6 mx-4 flex flex-col max-h-[calc(100vh-48px)] h-[80vh]">
+          <div className="sticky top-0 z-10 bg-white border-b border-slate-200 rounded-t-2xl px-5 py-3 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <Button variant="ghost" size="sm" onClick={() => setScreen({ type: 'edit' })} className="p-1 h-8 w-8 text-slate-500">
+                <ArrowLeft className="w-5 h-5" />
+              </Button>
+              <h2 className="text-lg font-semibold text-slate-900">Choose Simulation</h2>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button size="sm" onClick={() => fileInputRef.click()} className="text-xs gap-1 bg-green-600 hover:bg-green-700">
+                <Upload className="w-3 h-3" /> Upload Simulation
+              </Button>
+            </div>
+          </div>
+          <div className="flex-1 overflow-y-auto p-5">
+            {isLoadingSimulations ? (
+              <div className="flex items-center justify-center h-full text-slate-500">Loading simulations...</div>
+            ) : simulations.length === 0 ? (
+              <div className="flex flex-col items-center justify-center h-auto py-12 text-slate-500">
+                <FileCode className="w-12 h-12 mb-3 text-slate-300" />
+                <p>No simulations found.</p>
+                <p className="text-sm mt-1">Upload an HTML simulation to get started.</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {simulations.map(sim => (
+                  <div key={sim.id} className="border border-slate-200 rounded-lg p-4 flex flex-col gap-3 hover:border-blue-300 transition-colors bg-slate-50/50">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-slate-900 truncate" title={sim.title}>{sim.title}</h3>
+                      <p className="text-xs text-slate-500 mt-0.5">{new Date(sim.created_at).toLocaleDateString()}</p>
+                    </div>
+                    <Button 
+                      size="sm" 
+                      variant="outline"
+                      className="w-full text-blue-600 border-blue-200 hover:bg-blue-50"
+                      onClick={() => {
+                        update(d => {
+                          const step = d.activities[screen.actIdx].steps[screen.stepIdx];
+                          if (!step.interactive_or_media) {
+                            step.interactive_or_media = { media_type: 'simulation', media_title: '', media_url: '', embed: true };
+                          }
+                          step.interactive_or_media.media_type = 'simulation';
+                          step.interactive_or_media.media_url = sim.url;
+                          step.interactive_or_media.media_title = sim.title;
+                        });
+                        setScreen({ type: 'edit' });
+                      }}
+                    >
+                      Add
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // ===== RENDER PREVIEW SIMULATION =====
+  const renderPreviewSimulation = () => {
+    if (screen.type !== 'preview_simulation') return null;
+
+    const handleAddSimulation = async () => {
+      setIsSaving(true);
+      try {
+        const formData = new FormData();
+        formData.append('file', screen.file);
+        formData.append('title', screen.title);
+        
+        const sim = await uploadSimulation(formData);
+        
+        // Add to local state list
+        setSimulations(prev => [sim, ...prev]);
+
+        // Select it
+        update(d => {
+          const step = d.activities[screen.actIdx].steps[screen.stepIdx];
+          if (!step.interactive_or_media) {
+            step.interactive_or_media = { media_type: 'simulation', media_title: '', media_url: '', embed: true };
+          }
+          step.interactive_or_media.media_type = 'simulation';
+          step.interactive_or_media.media_url = sim.url;
+          step.interactive_or_media.media_title = sim.title;
+        });
+        
+        toast.success('Simulation uploaded correctly');
+        setScreen({ type: 'edit' });
+      } catch (e: any) {
+        toast.error('Failed to upload simulation', { description: e.message });
+      } finally {
+        setIsSaving(false);
+      }
+    };
+
+    return (
+      <div className="fixed inset-0 z-50 bg-black/40 flex items-start justify-center overflow-y-auto">
+        <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl my-6 mx-4 flex flex-col max-h-[calc(100vh-48px)] h-[80vh]">
+          <div className="sticky top-0 z-10 bg-white border-b border-slate-200 rounded-t-2xl px-5 py-3 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+               <Button variant="ghost" size="sm" onClick={() => setScreen({ type: 'choose_simulation', actIdx: screen.actIdx, stepIdx: screen.stepIdx })} className="p-1 h-8 w-8 text-slate-500">
+                <ArrowLeft className="w-5 h-5" />
+              </Button>
+              <h2 className="text-lg font-semibold text-slate-900">Preview Simulation</h2>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button size="sm" onClick={handleAddSimulation} disabled={isSaving} className="text-xs gap-1 bg-blue-600 hover:bg-blue-700">
+                <Save className="w-3 h-3" /> {isSaving ? 'Uploading…' : 'Add Simulation'}
+              </Button>
+            </div>
+          </div>
+          <div className="p-4 border-b border-slate-100 flex gap-4">
+             <div className="space-y-1.5 flex-1">
+                <Label className="text-xs font-medium text-slate-600">Simulation Title</Label>
+                <Input 
+                  value={screen.title} 
+                  onChange={e => setScreen({ ...screen, title: e.target.value })} 
+                  className="text-sm" 
+                />
+              </div>
+          </div>
+          <div className="flex-1 overflow-hidden p-0 bg-slate-100">
+            <iframe 
+              src={screen.previewUrl} 
+              className="w-full h-full border-0" 
+              title="Simulation Preview"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   // ===== MAIN RENDER =====
+  if (screen.type === 'choose_simulation') return renderChooseSimulation();
+  if (screen.type === 'preview_simulation') return renderPreviewSimulation();
+
   return (
     <div className="fixed inset-0 z-50 bg-black/40 flex items-start justify-center overflow-y-auto">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl my-6 mx-4 flex flex-col max-h-[calc(100vh-48px)]">

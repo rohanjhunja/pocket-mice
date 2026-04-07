@@ -41,4 +41,4 @@ yarn-error.log*
 next-env.d.ts
 
 # Local lesson files
-@lessons.local/
+/lessons.local/

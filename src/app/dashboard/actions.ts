@@ -151,3 +151,66 @@ export async function deleteSession(sessionId: string) {
 
   revalidatePath('/dashboard')
 }
+
+export async function uploadSimulation(formData: FormData) {
+  const supabase = await createClient()
+
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) throw new Error('Not authenticated')
+
+  const file = formData.get('file') as File
+  const title = formData.get('title') as string
+  if (!file) throw new Error('No file provided')
+
+  const fileExt = file.name.split('.').pop()
+  const fileName = `${user.id}/${Math.random().toString(36).substring(2)}_${file.name.replace(/[^a-zA-Z0-9.\-_]/g, '')}`
+
+  const { error: uploadError } = await supabase.storage
+    .from('simulations')
+    .upload(fileName, file, { cacheControl: '3600', upsert: false })
+
+  if (uploadError) {
+    throw new Error(uploadError.message)
+  }
+
+  const { data: publicUrlData } = supabase.storage
+    .from('simulations')
+    .getPublicUrl(fileName)
+
+  const insertData = {
+    teacher_id: user.id,
+    title: title || file.name,
+    url: publicUrlData.publicUrl,
+  }
+
+  const { data: dbData, error: dbError } = await supabase
+    .from('simulations')
+    .insert(insertData)
+    .select()
+
+  if (dbError) {
+    throw new Error(dbError.message)
+  }
+
+  return dbData[0]
+}
+
+export async function getSimulations() {
+  const supabase = await createClient()
+
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) throw new Error('Not authenticated')
+
+  const { data, error } = await supabase
+    .from('simulations')
+    .select('*')
+    .eq('teacher_id', user.id)
+    .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error('Error fetching simulations:', error)
+    return []
+  }
+
+  return data
+}
