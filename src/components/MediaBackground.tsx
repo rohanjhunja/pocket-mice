@@ -132,6 +132,10 @@ export function MediaBackground({ media, stepId, onThemeChange, onMediaInteracti
     if (media.media_type === 'video' && iframeSrc.includes('youtube.com')) {
       iframeSrc += (iframeSrc.includes('?') ? '&' : '?') + 'autoplay=1';
     }
+    
+    if (media.media_type === 'simulation' && iframeSrc.includes('.supabase.co') && !iframeSrc.includes('/api/sim')) {
+      iframeSrc = `/api/sim?url=${encodeURIComponent(iframeSrc)}`;
+    }
 
     const isInteractive = media.media_type === 'simulation' || media.media_type === 'content';
 

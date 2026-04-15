@@ -12,7 +12,6 @@ export async function getLessons(searchQuery?: string) {
   let query = supabase
     .from('lessons')
     .select('*')
-    .eq('teacher_id', user.id)
     .order('created_at', { ascending: false })
 
   if (searchQuery) {
@@ -90,7 +89,6 @@ export async function getRecentSessions() {
   const { data: sessions, error } = await supabase
     .from('sessions')
     .select('*, lessons(title)')
-    .eq('teacher_id', user.id)
     .order('created_at', { ascending: false })
 
   if (error) {
@@ -124,7 +122,6 @@ export async function deleteLesson(lessonId: string) {
     .from('lessons')
     .delete()
     .eq('id', lessonId)
-    .eq('teacher_id', user.id)
 
   if (error) {
     throw new Error(error.message)
@@ -143,7 +140,6 @@ export async function deleteSession(sessionId: string) {
     .from('sessions')
     .delete()
     .eq('id', sessionId)
-    .eq('teacher_id', user.id)
 
   if (error) {
     throw new Error(error.message)
@@ -180,7 +176,7 @@ export async function uploadSimulation(formData: FormData) {
   const insertData = {
     teacher_id: user.id,
     title: title || file.name,
-    url: publicUrlData.publicUrl,
+    url: `/api/sim?url=${encodeURIComponent(publicUrlData.publicUrl)}`,
   }
 
   const { data: dbData, error: dbError } = await supabase
@@ -204,7 +200,6 @@ export async function getSimulations() {
   const { data, error } = await supabase
     .from('simulations')
     .select('*')
-    .eq('teacher_id', user.id)
     .order('created_at', { ascending: false })
 
   if (error) {

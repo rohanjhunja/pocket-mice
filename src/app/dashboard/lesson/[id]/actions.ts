@@ -97,9 +97,9 @@ export async function updateLesson(lessonId: string, updatedJsonContent: any) {
       json_content: updatedJsonContent,
     })
     .eq('id', lessonId)
-    .eq('teacher_id', user.id)
 
   if (error) throw new Error(error.message)
+
 
   revalidatePath(`/dashboard/lesson/${lessonId}`)
   revalidatePath('/dashboard')

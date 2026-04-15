@@ -167,7 +167,7 @@ export function LessonEditor({ lessonId, jsonContent, onClose, createMode = fals
         setIsLoadingSimulations(false)
       })
     }
-  }, [screen.type])
+  }, [screen.type, simulations.length])
 
   const [expanded, setExpanded] = useState<Set<string>>(new Set())
   const [hasChanges, setHasChanges] = useState(false)
@@ -302,8 +302,8 @@ export function LessonEditor({ lessonId, jsonContent, onClose, createMode = fals
         setHasChanges(false)
         originalRef.current = JSON.stringify(data)
         toast.success('Lesson saved')
-        router.refresh()
         onClose()
+        window.location.reload()
       }
     } catch (e: any) {
       toast.error(createMode ? 'Failed to create' : 'Failed to save', { description: e.message })
@@ -438,9 +438,36 @@ export function LessonEditor({ lessonId, jsonContent, onClose, createMode = fals
             )}
           </div>
         ) : (
-          <Button variant="ghost" size="sm" className="text-blue-600 text-xs gap-1" onClick={addMedia}>
-            <Film className="w-3 h-3" /> Add Media
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="sm" className="text-blue-600 text-xs gap-1" onClick={addMedia}>
+              <Film className="w-3 h-3" /> Add Media
+            </Button>
+            {(() => {
+              // Find the nearest preceding step (within or across activities) that has media
+              let prevMedia: any = null
+              outer: for (let ai = actIdx; ai >= 0; ai--) {
+                const steps = data.activities[ai]?.steps || []
+                const startStep = ai === actIdx ? stepIdx - 1 : steps.length - 1
+                for (let si = startStep; si >= 0; si--) {
+                  const m = steps[si]?.interactive_or_media
+                  if (m) { prevMedia = m; break outer }
+                }
+              }
+              if (!prevMedia) return null
+              return (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-slate-500 text-xs gap-1"
+                  onClick={() => update(d => {
+                    d.activities[actIdx].steps[stepIdx].interactive_or_media = deepClone(prevMedia)
+                  })}
+                >
+                  <Copy className="w-3 h-3" /> Keep Previous
+                </Button>
+              )
+            })()}
+          </div>
         )}
 
         {/* Response */}
@@ -485,22 +512,6 @@ export function LessonEditor({ lessonId, jsonContent, onClose, createMode = fals
   // ===== RENDER CHOOSE SIMULATION =====
   const renderChooseSimulation = () => {
     if (screen.type !== 'choose_simulation') return null;
-    const fileInputRef = document.createElement('input');
-    fileInputRef.type = 'file';
-    fileInputRef.accept = '.html';
-    fileInputRef.onchange = (e: any) => {
-      const file = e.target.files?.[0];
-      if (file) {
-        setScreen({
-          type: 'preview_simulation',
-          actIdx: screen.actIdx,
-          stepIdx: screen.stepIdx,
-          file,
-          previewUrl: URL.createObjectURL(file),
-          title: file.name
-        });
-      }
-    };
 
     return (
       <div className="fixed inset-0 z-50 bg-black/40 flex items-start justify-center overflow-y-auto">
@@ -513,7 +524,26 @@ export function LessonEditor({ lessonId, jsonContent, onClose, createMode = fals
               <h2 className="text-lg font-semibold text-slate-900">Choose Simulation</h2>
             </div>
             <div className="flex items-center gap-2">
-              <Button size="sm" onClick={() => fileInputRef.click()} className="text-xs gap-1 bg-green-600 hover:bg-green-700">
+              <input
+                type="file"
+                id="hidden-file-input"
+                accept=".html"
+                className="hidden"
+                onChange={(e: any) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    setScreen({
+                      type: 'preview_simulation',
+                      actIdx: screen.actIdx,
+                      stepIdx: screen.stepIdx,
+                      file,
+                      previewUrl: URL.createObjectURL(file),
+                      title: file.name
+                    });
+                  }
+                }}
+              />
+              <Button size="sm" onClick={() => document.getElementById('hidden-file-input')?.click()} className="text-xs gap-1 bg-green-600 hover:bg-green-700">
                 <Upload className="w-3 h-3" /> Upload Simulation
               </Button>
             </div>
