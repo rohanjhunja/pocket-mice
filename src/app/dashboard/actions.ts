@@ -1,8 +1,10 @@
 'use server'
 
 import { createClient } from '@/utils/supabase/server'
+import { getRole } from '@/utils/getRole'
 import { revalidatePath } from 'next/cache'
 
+/** Own lessons only (scoped to current teacher). Used on the main dashboard. */
 export async function getLessons(searchQuery?: string) {
   const supabase = await createClient()
 
@@ -12,10 +14,10 @@ export async function getLessons(searchQuery?: string) {
   let query = supabase
     .from('lessons')
     .select('*')
+    .eq('teacher_id', user.id)
     .order('created_at', { ascending: false })
 
   if (searchQuery) {
-    // Basic insensitive search on title or description
     query = query.or(`title.ilike.%${searchQuery}%,description.ilike.%${searchQuery}%`)
   }
 
@@ -27,6 +29,39 @@ export async function getLessons(searchQuery?: string) {
   }
 
   return data
+}
+
+/**
+ * All lessons across all teachers — used for the Global Library toggle
+ * and the admin dashboard. Joins profiles to surface teacher email.
+ */
+export async function getAllLessons(searchQuery?: string) {
+  const supabase = await createClient()
+
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) throw new Error('Not authenticated')
+
+  let query = supabase
+    .from('lessons')
+    .select('*, profiles!lessons_teacher_id_fkey(email)')
+    .order('created_at', { ascending: false })
+
+  if (searchQuery) {
+    query = query.or(`title.ilike.%${searchQuery}%,description.ilike.%${searchQuery}%`)
+  }
+
+  const { data, error } = await query
+
+  if (error) {
+    console.error('Error fetching all lessons:', error)
+    return []
+  }
+
+  return (data || []).map((lesson: any) => ({
+    ...lesson,
+    teacher_email: lesson.profiles?.email ?? null,
+    profiles: undefined,
+  }))
 }
 
 export async function uploadLesson(jsonData: any) {
@@ -86,11 +121,24 @@ export async function getRecentSessions() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) throw new Error('Not authenticated')
 
-  // Single query: join student count inline — eliminates N+1 pattern
-  const { data, error } = await supabase
+  const role = await getRole(supabase, user.id)
+  const isAdmin = role === 'admin'
+
+  // Admin: all sessions across all teachers, with teacher email joined.
+  // Teacher: own sessions only — eliminates N+1 with embedded student count.
+  let query = supabase
     .from('sessions')
-    .select('*, lessons(title), students(count)')
+    .select(isAdmin
+      ? '*, lessons(title), students(count), profiles!sessions_teacher_id_fkey(email)'
+      : '*, lessons(title), students(count)'
+    )
     .order('created_at', { ascending: false })
+
+  if (!isAdmin) {
+    query = query.eq('teacher_id', user.id)
+  }
+
+  const { data, error } = await query
 
   if (error) {
     console.error('Error fetching recent sessions:', error)
@@ -100,6 +148,8 @@ export async function getRecentSessions() {
   return (data || []).map((session: any) => ({
     ...session,
     studentCount: session.students?.[0]?.count ?? 0,
+    teacher_email: session.profiles?.email ?? null,
+    profiles: undefined,
   }))
 }
 

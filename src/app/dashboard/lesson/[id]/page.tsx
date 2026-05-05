@@ -4,17 +4,15 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { ArrowLeft, Clock, LayoutList } from 'lucide-react'
+import { ArrowLeft, Clock, LayoutList, Copy } from 'lucide-react'
 import { LessonActions } from '@/components/LessonActions'
 
 export default async function LessonOverviewPage({ params }: { params: Promise<{ id: string }> }) {
   const supabase = await createClient()
 
-  // Ensure user owns this lesson
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return notFound()
 
-  // Await params in Next.js 15
   const { id: lessonId } = await params
 
   // Fetch bookmarks
@@ -23,20 +21,24 @@ export default async function LessonOverviewPage({ params }: { params: Promise<{
     .select('bookmarks')
     .eq('id', user.id)
     .single()
-    
+
   const bookmarks = profile?.bookmarks || []
   const initialIsBookmarked = bookmarks.includes(lessonId)
-  
+
+  // Any authenticated user can access any lesson — ownership check is removed.
+  // isOwner controls whether editing happens in-place or creates a copy.
   const { data: lesson, error } = await supabase
     .from('lessons')
     .select('*')
     .eq('id', lessonId)
-    .eq('teacher_id', user.id)
     .single()
 
   if (error || !lesson) {
     return notFound()
   }
+
+  const isOwner = lesson.teacher_id === user.id
+
 
   const jsonContent = lesson.json_content
   const totalActivities = jsonContent.activities?.length || 0
@@ -55,6 +57,17 @@ export default async function LessonOverviewPage({ params }: { params: Promise<{
         Back to Dashboard
       </Link>
 
+      {/* Non-owner notice */}
+      {!isOwner && (
+        <div className="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800">
+          <Copy className="w-4 h-4 mt-0.5 shrink-0 text-amber-600" />
+          <p>
+            <span className="font-semibold">This lesson belongs to another teacher.</span>{' '}
+            You can preview and launch it freely. Clicking <em>Edit</em> will automatically create a copy in your library first.
+          </p>
+        </div>
+      )}
+
       <div className="flex flex-col md:flex-row gap-6 items-start justify-between">
         <div>
           <h1 className="text-3xl font-bold text-slate-900 mb-2">{lesson.title}</h1>
@@ -69,6 +82,7 @@ export default async function LessonOverviewPage({ params }: { params: Promise<{
           lessonId={lessonId}
           jsonContent={jsonContent}
           initialIsBookmarked={initialIsBookmarked}
+          isOwner={isOwner}
         />
       </div>
 

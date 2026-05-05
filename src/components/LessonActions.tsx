@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Bookmark, Play, Pencil, Eye, Users } from 'lucide-react'
+import { Bookmark, Play, Pencil, Eye, Users, Copy, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { LessonEditor } from '@/components/LessonEditor'
@@ -22,19 +22,21 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { toggleBookmark, createSession } from '@/app/dashboard/lesson/[id]/actions'
+import { toggleBookmark, createSession, duplicateLesson } from '@/app/dashboard/lesson/[id]/actions'
 
 interface LessonActionsProps {
   lessonId: string
   jsonContent: any
   initialIsBookmarked: boolean
+  isOwner?: boolean
 }
 
-export function LessonActions({ lessonId, jsonContent, initialIsBookmarked }: LessonActionsProps) {
+export function LessonActions({ lessonId, jsonContent, initialIsBookmarked, isOwner = true }: LessonActionsProps) {
   const router = useRouter()
   const [isBookmarked, setIsBookmarked] = useState(initialIsBookmarked)
   const [isBookmarkLoading, setIsBookmarkLoading] = useState(false)
   const [isLaunchLoading, setIsLaunchLoading] = useState(false)
+  const [isCopyingToEdit, setIsCopyingToEdit] = useState(false)
   const [isEditorOpen, setIsEditorOpen] = useState(false)
   const [isLaunchOpen, setIsLaunchOpen] = useState(false)
 
@@ -60,6 +62,18 @@ export function LessonActions({ lessonId, jsonContent, initialIsBookmarked }: Le
       toast.error('Failed to update bookmark', { description: error.message })
     } finally {
       setIsBookmarkLoading(false)
+    }
+  }
+
+  const handleCopyAndEdit = async () => {
+    setIsCopyingToEdit(true)
+    try {
+      const newId = await duplicateLesson(lessonId, jsonContent)
+      toast.success('Copy created — opening editor…')
+      router.push(`/dashboard/lesson/${newId}`)
+    } catch (error: any) {
+      toast.error('Failed to create copy', { description: error.message })
+      setIsCopyingToEdit(false)
     }
   }
 
@@ -101,13 +115,28 @@ export function LessonActions({ lessonId, jsonContent, initialIsBookmarked }: Le
   return (
     <>
     <div className="flex gap-3 w-full md:w-auto mt-4 md:mt-0">
-      <Button 
-        variant="outline" 
-        className="flex-1 md:flex-none" 
-        onClick={() => setIsEditorOpen(true)}
-      >
-        <Pencil className="w-4 h-4 mr-2" /> Edit
-      </Button>
+      {/* Edit / Copy & Edit button */}
+      {isOwner ? (
+        <Button
+          variant="outline"
+          className="flex-1 md:flex-none"
+          onClick={() => setIsEditorOpen(true)}
+        >
+          <Pencil className="w-4 h-4 mr-2" /> Edit
+        </Button>
+      ) : (
+        <Button
+          variant="outline"
+          className="flex-1 md:flex-none"
+          onClick={handleCopyAndEdit}
+          disabled={isCopyingToEdit}
+        >
+          {isCopyingToEdit
+            ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Copying…</>
+            : <><Copy className="w-4 h-4 mr-2" />Copy & Edit</>
+          }
+        </Button>
+      )}
 
       <Button 
         variant="outline" 
