@@ -1,5 +1,5 @@
 import { login } from './actions'
-import { Button } from '@/components/ui/button'
+import { LoginButton } from './LoginButton'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -32,12 +32,11 @@ export default function LoginPage() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button className="w-full" type="submit">
-              Sign in
-            </Button>
+            <LoginButton />
           </CardFooter>
         </form>
       </Card>
     </div>
   )
 }
+

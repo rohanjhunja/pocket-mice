@@ -8,7 +8,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from '@/comp
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Search, Upload, BookOpen, Plus, MoreVertical } from 'lucide-react'
+import { Search, Upload, BookOpen, Plus, MoreVertical, Loader2, Trash2 } from 'lucide-react'
 import { LessonEditor } from '@/components/LessonEditor'
 
 export function LessonDashboardArea({ initialLessons }: { initialLessons: any[] }) {
@@ -16,6 +16,7 @@ export function LessonDashboardArea({ initialLessons }: { initialLessons: any[] 
   const [searchQuery, setSearchQuery] = useState('')
   const [isUploading, setIsUploading] = useState(false)
   const [isCreating, setIsCreating] = useState(false)
+  const [deletingId, setDeletingId] = useState<string | null>(null)
 
   const EMPTY_LESSON_TEMPLATE = {
     lesson_id: '', lesson_title: '', lesson_description: '',
@@ -48,6 +49,18 @@ export function LessonDashboardArea({ initialLessons }: { initialLessons: any[] 
     }
   }
 
+  const handleDeleteLesson = async (e: React.MouseEvent, lessonId: string) => {
+    e.stopPropagation()
+    if (!window.confirm('Are you sure you want to delete this lesson?')) return
+    setDeletingId(lessonId)
+    try {
+      await deleteLesson(lessonId)
+    } catch (err: any) {
+      alert(`Failed to delete lesson: ${err.message}`)
+      setDeletingId(null)
+    }
+  }
+
   return (
     <>
     <div className="space-y-8">
@@ -72,8 +85,11 @@ export function LessonDashboardArea({ initialLessons }: { initialLessons: any[] 
             disabled={isUploading}
           />
           <Button disabled={isUploading} className="w-full sm:w-auto" onClick={() => document.getElementById('json-upload')?.click()}>
-            <Upload className="mr-2 h-4 w-4" />
-            {isUploading ? 'Uploading...' : 'Upload .json Lesson'}
+            {isUploading ? (
+              <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Uploading…</>
+            ) : (
+              <><Upload className="mr-2 h-4 w-4" />Upload .json Lesson</>
+            )}
           </Button>
           <Button variant="outline" className="w-full sm:w-auto" onClick={() => setIsCreating(true)}>
             <Plus className="mr-2 h-4 w-4" /> Create Lesson
@@ -96,25 +112,27 @@ export function LessonDashboardArea({ initialLessons }: { initialLessons: any[] 
                 <div className="flex justify-between items-start gap-4">
                   <CardTitle className="text-lg line-clamp-2">{lesson.title}</CardTitle>
                   <DropdownMenu>
-                    <DropdownMenuTrigger className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors hover:bg-slate-100 h-8 w-8 -mt-2 -mr-2 text-slate-400 hover:text-slate-600 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring" onClick={(e: React.MouseEvent) => e.stopPropagation()}>
+                    <DropdownMenuTrigger
+                      className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors hover:bg-slate-100 h-8 w-8 -mt-2 -mr-2 text-slate-400 hover:text-slate-600 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                      onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                      disabled={deletingId === lesson.id}
+                    >
                       <span className="sr-only">Open menu</span>
-                      <MoreVertical className="h-4 w-4" />
+                      {deletingId === lesson.id
+                        ? <Loader2 className="h-4 w-4 animate-spin" />
+                        : <MoreVertical className="h-4 w-4" />
+                      }
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem 
                         className="text-red-600 focus:text-red-700 focus:bg-red-50 cursor-pointer"
-                        onClick={async (e: React.MouseEvent) => {
-                          e.stopPropagation();
-                          if (window.confirm('Are you sure you want to delete this lesson?')) {
-                            try {
-                              await deleteLesson(lesson.id);
-                            } catch (err: any) {
-                              alert(`Failed to delete lesson: ${err.message}`);
-                            }
-                          }
-                        }}
+                        onClick={(e: React.MouseEvent) => handleDeleteLesson(e, lesson.id)}
+                        disabled={deletingId === lesson.id}
                       >
-                        Delete
+                        {deletingId === lesson.id
+                          ? <><Loader2 className="h-3.5 w-3.5 mr-2 animate-spin" />Deleting…</>
+                          : <><Trash2 className="h-3.5 w-3.5 mr-2" />Delete</>
+                        }
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -146,3 +164,4 @@ export function LessonDashboardArea({ initialLessons }: { initialLessons: any[] 
     </>
   )
 }
+

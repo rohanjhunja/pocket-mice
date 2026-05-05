@@ -86,9 +86,10 @@ export async function getRecentSessions() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) throw new Error('Not authenticated')
 
-  const { data: sessions, error } = await supabase
+  // Single query: join student count inline — eliminates N+1 pattern
+  const { data, error } = await supabase
     .from('sessions')
-    .select('*, lessons(title)')
+    .select('*, lessons(title), students(count)')
     .order('created_at', { ascending: false })
 
   if (error) {
@@ -96,21 +97,12 @@ export async function getRecentSessions() {
     return []
   }
 
-  // Get student count for each session
-  const sessionsWithCounts = await Promise.all(sessions.map(async (session) => {
-    const { count } = await supabase
-      .from('students')
-      .select('*', { count: 'exact', head: true })
-      .eq('session_id', session.id)
-      
-    return {
-      ...session,
-      studentCount: count || 0
-    }
+  return (data || []).map((session: any) => ({
+    ...session,
+    studentCount: session.students?.[0]?.count ?? 0,
   }))
-
-  return sessionsWithCounts
 }
+
 
 export async function deleteLesson(lessonId: string) {
   const supabase = await createClient()

@@ -6,15 +6,28 @@ import { deleteSession } from '@/app/dashboard/actions'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
-import { Clock, Users, ChevronRight, LayoutGrid, MoreVertical } from 'lucide-react'
+import { Clock, Users, ChevronRight, LayoutGrid, MoreVertical, Loader2, Trash2 } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
 
 export function RecentSessionsArea({ sessions }: { sessions: any[] }) {
   const [viewAll, setViewAll] = useState(false)
+  const [deletingId, setDeletingId] = useState<string | null>(null)
 
   if (!sessions || sessions.length === 0) return null
 
   const displaySessions = viewAll ? sessions : sessions.slice(0, 5)
+
+  const handleDeleteSession = async (e: React.MouseEvent, sessionId: string) => {
+    e.preventDefault()
+    if (!window.confirm('Are you sure you want to delete this session?')) return
+    setDeletingId(sessionId)
+    try {
+      await deleteSession(sessionId)
+    } catch (err: any) {
+      alert(`Failed to delete session: ${err.message}`)
+      setDeletingId(null)
+    }
+  }
 
   return (
     <div className="mb-12">
@@ -45,25 +58,27 @@ export function RecentSessionsArea({ sessions }: { sessions: any[] }) {
                     <CardDescription className="text-xs font-mono text-blue-600 mt-1">Code: {session.session_code}</CardDescription>
                   </div>
                   <DropdownMenu>
-                    <DropdownMenuTrigger className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors hover:bg-slate-100 h-8 w-8 -mt-2 -mr-2 text-slate-400 hover:text-slate-600 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring" onClick={(e: React.MouseEvent) => e.preventDefault()}>
+                    <DropdownMenuTrigger
+                      className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors hover:bg-slate-100 h-8 w-8 -mt-2 -mr-2 text-slate-400 hover:text-slate-600 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                      onClick={(e: React.MouseEvent) => e.preventDefault()}
+                      disabled={deletingId === session.id}
+                    >
                       <span className="sr-only">Open menu</span>
-                      <MoreVertical className="h-4 w-4" />
+                      {deletingId === session.id
+                        ? <Loader2 className="h-4 w-4 animate-spin" />
+                        : <MoreVertical className="h-4 w-4" />
+                      }
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem 
                         className="text-red-600 focus:text-red-700 focus:bg-red-50 cursor-pointer"
-                        onClick={async (e: React.MouseEvent) => {
-                          e.preventDefault();
-                          if (window.confirm('Are you sure you want to delete this session?')) {
-                            try {
-                              await deleteSession(session.id);
-                            } catch (err: any) {
-                              alert(`Failed to delete session: ${err.message}`);
-                            }
-                          }
-                        }}
+                        onClick={(e: React.MouseEvent) => handleDeleteSession(e, session.id)}
+                        disabled={deletingId === session.id}
                       >
-                        Delete
+                        {deletingId === session.id
+                          ? <><Loader2 className="h-3.5 w-3.5 mr-2 animate-spin" />Deleting…</>
+                          : <><Trash2 className="h-3.5 w-3.5 mr-2" />Delete</>
+                        }
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -86,3 +101,4 @@ export function RecentSessionsArea({ sessions }: { sessions: any[] }) {
     </div>
   )
 }
+
