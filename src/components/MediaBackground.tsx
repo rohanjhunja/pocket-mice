@@ -96,8 +96,10 @@ export function MediaBackground({ media, stepId, onThemeChange, onMediaInteracti
 
     const handleBlur = () => {
       if (document.activeElement === iframeRef.current) {
+        // Track the interaction — but do NOT call window.focus() here.
+        // Calling window.focus() immediately after an iframe gains focus
+        // steals focus back from the simulation, breaking text field input.
         onMediaInteraction(eventType);
-        setTimeout(() => { window.focus(); }, 100);
       }
     };
 
@@ -145,7 +147,7 @@ export function MediaBackground({ media, stepId, onThemeChange, onMediaInteracti
           ref={iframeRef}
           src={iframeSrc}
           className="w-full h-full border-none"
-          allow="autoplay; fullscreen"
+          allow="autoplay; fullscreen; clipboard-read; clipboard-write"
           allowFullScreen
           title={media.media_title}
           onLoad={() => {
