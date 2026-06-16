@@ -3,10 +3,14 @@ import { LoginButton } from './LoginButton'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { PlatformHealthPill } from '@/components/PlatformHealthPill'
 
 export default function LoginPage() {
   return (
-    <div className="flex h-screen w-full items-center justify-center bg-slate-50 px-4">
+    <div className="flex h-screen w-full items-center justify-center bg-slate-50 px-4 relative">
+      <div className="absolute top-4 right-4 z-50">
+        <PlatformHealthPill />
+      </div>
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Teacher Login</CardTitle>

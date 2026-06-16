@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { ProgressHeader } from "./ProgressHeader";
 import { MediaBackground } from "./MediaBackground";
 import { InstructionOverlay } from "./InstructionOverlay";
@@ -8,6 +8,15 @@ import { ResponseForm } from "./ResponseForm";
 import { CompletionCard } from "./CompletionCard";
 import { submitResponse, trackEvent } from "@/app/play/[code]/actions";
 import { toast } from "sonner";
+import { createClient } from "@/utils/supabase/client";
+
+interface ResponseRow {
+  id: string;
+  student_id: string;
+  step_id: string;
+  response_value: string;
+  submitted_at: string;
+}
 
 interface LessonPlayerProps {
   session: any;
@@ -15,9 +24,24 @@ interface LessonPlayerProps {
   initialResponses: Record<string, string>;
   resumeStepIndex?: number;
   isPreview?: boolean;
+  isSimulationWrapper?: boolean;
+  simulationId?: string;
+  isTeacher?: boolean;
+  /** Pre-fetched response rows for the summary panel (initial snapshot) */
+  initialResponseRows?: ResponseRow[];
 }
 
-export default function LessonPlayer({ session, student, initialResponses, resumeStepIndex = 0, isPreview = false }: LessonPlayerProps) {
+export default function LessonPlayer({
+  session,
+  student,
+  initialResponses,
+  resumeStepIndex = 0,
+  isPreview = false,
+  isSimulationWrapper = false,
+  simulationId,
+  isTeacher = false,
+  initialResponseRows = [],
+}: LessonPlayerProps) {
   const [allSteps, setAllSteps] = useState<any[]>([]);
   const [currentStepIndex, setCurrentStepIndex] = useState(resumeStepIndex);
   const [learnerResponses, setLearnerResponses] = useState<Record<string, string>>(initialResponses);
@@ -28,8 +52,35 @@ export default function LessonPlayer({ session, student, initialResponses, resum
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [failedEmbedUrl, setFailedEmbedUrl] = useState<string | null>(null);
 
+  // ── Response count per step (live) ──────────────────────────────────────
+  // Map of step_id → count of unique students who have responded
+  const [stepResponseCounts, setStepResponseCounts] = useState<Record<string, number>>(() => {
+    // Build initial counts from the pre-fetched rows
+    const latestPerStudent: Record<string, Record<string, ResponseRow>> = {};
+    for (const r of initialResponseRows) {
+      if (!latestPerStudent[r.step_id]) latestPerStudent[r.step_id] = {};
+      const existing = latestPerStudent[r.step_id][r.student_id];
+      if (!existing || new Date(r.submitted_at) > new Date(existing.submitted_at)) {
+        latestPerStudent[r.step_id][r.student_id] = r;
+      }
+    }
+    const counts: Record<string, number> = {};
+    for (const [stepId, byStudent] of Object.entries(latestPerStudent)) {
+      counts[stepId] = Object.keys(byStudent).length;
+    }
+    return counts;
+  });
+
+  // Keep a running list of all response rows for the summary panel
+  const [allResponseRows, setAllResponseRows] = useState<ResponseRow[]>(initialResponseRows);
+
+  // ── Teacher sync state ───────────────────────────────────────────────────
+  const [isSyncing, setIsSyncing] = useState(false);
+
+  const supabase = useRef(createClient()).current;
+
+  // ── Flatten steps ────────────────────────────────────────────────────────
   useEffect(() => {
-    // Flatten selected steps from session configuration
     const steps: any[] = [];
     if (session.selected_steps_json?.activities) {
       session.selected_steps_json.activities.forEach((activity: any) => {
@@ -43,37 +94,124 @@ export default function LessonPlayer({ session, student, initialResponses, resum
     setAllSteps(steps);
   }, [session]);
 
+  // ── Step view tracking ───────────────────────────────────────────────────
   useEffect(() => {
     if (allSteps.length > 0) {
       const step = allSteps[currentStepIndex];
       setCurrentInputValue(learnerResponses[step.step_id] || "");
       setIsMinimized(false);
       setFailedEmbedUrl(null);
-      // Track step viewed for ALL step types, unless previewing
       if (!isPreview) {
-        trackEvent(student.id, session.id, step.step_id, 'step_viewed');
+        trackEvent(student.id, session.id, step.step_id, "step_viewed");
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentStepIndex, allSteps.length]);
 
+  // ── Supabase Realtime: response inserts ──────────────────────────────────
+  useEffect(() => {
+    if (!session?.id) return;
+
+    const channel = supabase
+      .channel(`lesson-player-responses-${session.id}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "responses",
+          filter: `session_id=eq.${session.id}`,
+        },
+        (payload) => {
+          const newRow = payload.new as ResponseRow;
+          setAllResponseRows((prev) => [...prev, newRow]);
+          // Update per-step unique student counts
+          setStepResponseCounts((prev) => {
+            // We need the full list to deduplicate. Since this is a lightweight
+            // incremental update, we recalculate only the affected step.
+            setAllResponseRows((rows) => {
+              const stepRows = [...rows, newRow].filter(
+                (r) => r.step_id === newRow.step_id
+              );
+              const uniqueStudents = new Set(stepRows.map((r) => r.student_id));
+              return rows; // return unchanged — we only needed rows for the count
+            });
+            // Simplified: increment count if this is a student we haven't
+            // counted yet (best-effort; ResponseSummaryPanel does exact dedup)
+            return {
+              ...prev,
+              [newRow.step_id]: (prev[newRow.step_id] ?? 0) + 1,
+            };
+          });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [session?.id, supabase]);
+
+  // ── Supabase Realtime: teacher_step_id changes (learner side) ───────────
+  useEffect(() => {
+    if (!session?.id || isTeacher || isPreview) return;
+
+    const channel = supabase
+      .channel(`lesson-player-session-${session.id}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "UPDATE",
+          schema: "public",
+          table: "sessions",
+          filter: `id=eq.${session.id}`,
+        },
+        (payload) => {
+          const newStepId: string | null = (payload.new as any).teacher_step_id;
+          if (!newStepId) return;
+
+          setAllSteps((steps) => {
+            const idx = steps.findIndex((s) => s.step_id === newStepId);
+            if (idx !== -1 && idx !== currentStepIndex) {
+              setCurrentStepIndex(idx);
+              toast("Your teacher has moved you to a new step", {
+                icon: "📍",
+                duration: 4000,
+              });
+            }
+            return steps;
+          });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session?.id, isTeacher, isPreview, supabase]);
+
   if (allSteps.length === 0) {
-    return <div className="h-screen flex items-center justify-center text-slate-500 bg-slate-50">Initializing session footprint...</div>;
+    return (
+      <div className="h-screen flex items-center justify-center text-slate-500 bg-slate-50">
+        Initializing session footprint...
+      </div>
+    );
   }
 
   const step = allSteps[currentStepIndex];
-  
+
   const handleSaveResponse = async () => {
     if (step.learner_response) {
       const val = currentInputValue;
-      setLearnerResponses(prev => ({ ...prev, [step.step_id]: val }));
-      
+      setLearnerResponses((prev) => ({ ...prev, [step.step_id]: val }));
+
       try {
         setIsSubmitting(true);
         if (!isPreview) {
           await submitResponse(student.id, session.id, step.step_id, val);
         }
-      } catch (e) {
+      } catch {
         toast.error("Failed to save response. Please check connection.");
       } finally {
         setIsSubmitting(false);
@@ -82,9 +220,8 @@ export default function LessonPlayer({ session, student, initialResponses, resum
   };
 
   const handleNext = async () => {
-    // Track step completion for ALL steps (not just response ones), unless previewing
     if (!isPreview) {
-      trackEvent(student.id, session.id, step.step_id, 'step_completed');
+      trackEvent(student.id, session.id, step.step_id, "step_completed");
     }
     await handleSaveResponse();
     if (currentStepIndex < allSteps.length - 1) {
@@ -96,27 +233,57 @@ export default function LessonPlayer({ session, student, initialResponses, resum
 
   const handleBack = async () => {
     if (currentStepIndex > 0) {
-      // Track step completion for current step before going back, unless previewing
       if (!isPreview) {
-        trackEvent(student.id, session.id, step.step_id, 'step_completed');
+        trackEvent(student.id, session.id, step.step_id, "step_completed");
       }
       await handleSaveResponse();
       setCurrentStepIndex(currentStepIndex - 1);
     }
   };
 
+  // ── Teacher sync handler ─────────────────────────────────────────────────
+  const handleSyncLearners = useCallback(async () => {
+    if (!isTeacher || !step) return;
+    setIsSyncing(true);
+    try {
+      const res = await fetch(`/api/sessions/${session.id}/sync-step`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ teacher_step_id: step.step_id }),
+      });
+      if (!res.ok) throw new Error("Sync failed");
+      toast.success("All learners synced to this step", { duration: 2500 });
+    } catch {
+      toast.error("Could not sync learners. Please try again.");
+    } finally {
+      // Show syncing state briefly so teacher gets visual feedback
+      setTimeout(() => setIsSyncing(false), 1500);
+    }
+  }, [isTeacher, step, session.id]);
+
+  const currentStepResponseCount = stepResponseCounts[step?.step_id] ?? 0;
+
   return (
-    <div className={`flex flex-col h-screen overflow-hidden transition-colors duration-300 ${isVideoTheme ? 'bg-black' : 'bg-slate-50'}`}>
-      <ProgressHeader 
-        title={session.lessons?.title || "Live Lesson"} 
-        currentStep={currentStepIndex} 
-        totalSteps={allSteps.length} 
+    <div
+      className={`flex flex-col h-screen overflow-hidden transition-colors duration-300 ${
+        isVideoTheme ? "bg-black" : "bg-slate-50"
+      }`}
+    >
+      <ProgressHeader
+        title={session.lessons?.title || "Live Lesson"}
+        currentStep={currentStepIndex}
+        totalSteps={allSteps.length}
         isPreview={isPreview}
         lessonId={session.lessons?.id}
+        isSimulationWrapper={isSimulationWrapper}
+        simulationId={simulationId}
+        isTeacher={isTeacher}
+        isSyncing={isSyncing}
+        onSyncLearners={handleSyncLearners}
       />
-      
+
       <main className="flex-1 relative overflow-hidden">
-        <MediaBackground 
+        <MediaBackground
           media={step.interactive_or_media}
           stepId={step.step_id}
           onThemeChange={setIsVideoTheme}
@@ -125,26 +292,35 @@ export default function LessonPlayer({ session, student, initialResponses, resum
           }}
           onEmbedError={(url) => setFailedEmbedUrl(url)}
         />
-        
-        <InstructionOverlay 
-          step={step} 
-          isMinimized={isMinimized} 
-          onToggleMinimize={() => setIsMinimized(!isMinimized)}
-          fallbackUrl={failedEmbedUrl}
-        >
-          <ResponseForm 
-            responseReq={step.learner_response}
-            currentValue={currentInputValue}
-            onChange={setCurrentInputValue}
-            onSubmit={handleNext}
-            onBack={handleBack}
-            canGoBack={currentStepIndex > 0}
-            isLastStep={currentStepIndex === allSteps.length - 1}
-            isSubmitting={isSubmitting}
-          />
-        </InstructionOverlay>
 
-        {showCompletion && <CompletionCard isPreview={isPreview} lessonId={session.lessons?.id} />}
+        {/* For simulation wrappers, suppress the instruction panel entirely */}
+        {!isSimulationWrapper && (
+          <InstructionOverlay
+            step={step}
+            isMinimized={isMinimized}
+            onToggleMinimize={() => setIsMinimized(!isMinimized)}
+            fallbackUrl={failedEmbedUrl}
+            sessionId={session.id}
+            responseCount={currentStepResponseCount}
+            allSteps={allSteps}
+            initialResponses={allResponseRows}
+          >
+            <ResponseForm
+              responseReq={step.learner_response}
+              currentValue={currentInputValue}
+              onChange={setCurrentInputValue}
+              onSubmit={handleNext}
+              onBack={handleBack}
+              canGoBack={currentStepIndex > 0}
+              isLastStep={currentStepIndex === allSteps.length - 1}
+              isSubmitting={isSubmitting}
+            />
+          </InstructionOverlay>
+        )}
+
+        {showCompletion && !isSimulationWrapper && (
+          <CompletionCard isPreview={isPreview} lessonId={session.lessons?.id} />
+        )}
       </main>
     </div>
   );

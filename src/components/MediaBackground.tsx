@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { ExternalLink } from 'lucide-react';
+import { HealthPill } from './HealthPill';
+import { runDiagnostics, DiagnosticTrace } from '@/utils/runDiagnostics';
 
 interface MediaBackgroundProps {
   media: any;
@@ -17,6 +19,14 @@ export function MediaBackground({ media, stepId, onThemeChange, onMediaInteracti
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [embedState, setEmbedState] = useState<EmbedState>('checking');
   const [resolvedUrl, setResolvedUrl] = useState<string>('');
+  
+  // Health Tracking State
+  const [loadStartTime, setLoadStartTime] = useState<number>(0);
+  const [actualLoadMs, setActualLoadMs] = useState<number | null>(null);
+  const [loadStatus, setLoadStatus] = useState<'checking' | 'loaded' | 'failed' | 'timeout'>('checking');
+  const [isHealthReported, setIsHealthReported] = useState(false);
+  const [diagnosticTrace, setDiagnosticTrace] = useState<DiagnosticTrace | null>(null);
+  const [aggregateData, setAggregateData] = useState<any | null>(null);
 
   // Resolve the display URL
   const getUrl = () => {
@@ -32,6 +42,10 @@ export function MediaBackground({ media, stepId, onThemeChange, onMediaInteracti
   // Check embeddability server-side whenever step/media changes
   useEffect(() => {
     setEmbedState('checking');
+    setLoadStatus('checking');
+    setActualLoadMs(null);
+    setIsHealthReported(false);
+    // Don't set loadStartTime yet - wait until embeddable check passes
 
     const url = getUrl();
     setResolvedUrl(url);
@@ -40,6 +54,7 @@ export function MediaBackground({ media, stepId, onThemeChange, onMediaInteracti
 
     // Only check iframe-based media types
     if (media.media_type !== 'video' && media.media_type !== 'simulation' && media.media_type !== 'content') {
+      setLoadStartTime(performance.now());
       setEmbedState('embeddable'); // images etc don't need iframe check
       return;
     }
@@ -56,6 +71,7 @@ export function MediaBackground({ media, stepId, onThemeChange, onMediaInteracti
 
     // Local URLs don't need a server check
     if (url.startsWith('/')) {
+      setLoadStartTime(performance.now());
       setEmbedState('embeddable');
       return;
     }
@@ -64,6 +80,7 @@ export function MediaBackground({ media, stepId, onThemeChange, onMediaInteracti
     fetch(`/api/check-embed?url=${encodeURIComponent(url)}`)
       .then(res => res.json())
       .then(data => {
+        setLoadStartTime(performance.now());
         if (data.embeddable) {
           setEmbedState('embeddable');
         } else {
@@ -73,6 +90,7 @@ export function MediaBackground({ media, stepId, onThemeChange, onMediaInteracti
       })
       .catch(() => {
         // If the check itself fails, try embedding anyway
+        setLoadStartTime(performance.now());
         setEmbedState('embeddable');
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -106,6 +124,78 @@ export function MediaBackground({ media, stepId, onThemeChange, onMediaInteracti
     window.addEventListener('blur', handleBlur);
     return () => window.removeEventListener('blur', handleBlur);
   }, [media, onMediaInteraction, embedState]);
+
+  // Handle timeout
+  useEffect(() => {
+    if (embedState === 'embeddable' && loadStatus === 'checking') {
+      const timer = setTimeout(() => {
+        setLoadStatus('timeout');
+      }, 15000); // 15s timeout
+      return () => clearTimeout(timer);
+    }
+  }, [embedState, loadStatus]);
+
+  // Report Health Metric once loaded or failed/timeout
+  useEffect(() => {
+    if (loadStatus !== 'checking' && !isHealthReported && resolvedUrl) {
+      setIsHealthReported(true);
+      
+      const performDiagnostics = async () => {
+        let baselineData = null;
+        try {
+          const res = await fetch(`/api/sim-health?url=${encodeURIComponent(resolvedUrl)}`);
+          baselineData = await res.json();
+          setAggregateData(baselineData);
+        } catch (e) {
+          console.error("Failed to fetch baseline for diagnostics", e);
+        }
+
+        let dynamicExpectedMs = null;
+        let bandwidthClass = 'unknown';
+        const nav = navigator as any;
+
+        if (nav.connection) {
+          bandwidthClass = nav.connection.effectiveType || 'unknown';
+          const downlink = nav.connection.downlink; // Mbps
+          if (downlink && baselineData?.content_length_bytes) {
+            const clBytes = baselineData.content_length_bytes;
+            const ttfb = baselineData.ttfb_ms || 50;
+            // 1 Mbps = 125,000 bytes/sec
+            const transferMs = (clBytes / (downlink * 125000)) * 1000;
+            const parseOverhead = 500; // rough heuristic
+            dynamicExpectedMs = Math.round(ttfb + transferMs + parseOverhead);
+          }
+        }
+
+        const fallbackExpected = dynamicExpectedMs || baselineData?.ideal_load_ms || 1000;
+
+        const trace = await runDiagnostics(
+          resolvedUrl,
+          actualLoadMs,
+          fallbackExpected,
+          baselineData?.ttfb_ms || 50,
+          loadStatus === 'failed' // pass error flag if onError fired
+        );
+
+        setDiagnosticTrace(trace);
+
+        fetch('/api/sim-health', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            url: resolvedUrl,
+            load_time_ms: actualLoadMs || 15000, // if timeout, log as 15s
+            dynamic_expected_ms: fallbackExpected,
+            status: loadStatus === 'failed' ? 'error' : loadStatus === 'timeout' ? 'timeout' : 'ok',
+            bandwidth_class: bandwidthClass,
+            diagnostics: trace
+          })
+        }).catch(e => console.error("Failed to report health", e));
+      };
+
+      performDiagnostics();
+    }
+  }, [loadStatus, actualLoadMs, isHealthReported, resolvedUrl]);
 
   if (!media) return null;
 
@@ -143,6 +233,9 @@ export function MediaBackground({ media, stepId, onThemeChange, onMediaInteracti
 
     return (
       <div className={`absolute top-0 left-0 w-full z-0 flex items-center justify-center transition-colors duration-300 md:h-full flex-start md:items-center ${isInteractive ? 'h-full bg-white' : 'h-[50vh] bg-black'} md:bg-transparent`}>
+        {isInteractive && (
+          <HealthPill url={url} loadStatus={loadStatus} trace={diagnosticTrace} aggregateData={aggregateData} />
+        )}
         <iframe
           ref={iframeRef}
           src={iframeSrc}
@@ -150,7 +243,12 @@ export function MediaBackground({ media, stepId, onThemeChange, onMediaInteracti
           allow="autoplay; fullscreen; clipboard-read; clipboard-write"
           allowFullScreen
           title={media.media_title}
+          onError={() => setLoadStatus('failed')}
           onLoad={() => {
+            const timeTaken = performance.now() - loadStartTime;
+            setActualLoadMs(timeTaken);
+            setLoadStatus('loaded');
+            
             if (onMediaInteraction) {
               onMediaInteraction(media.media_type === 'video' ? 'media_video_started' : 'media_simulation_started');
             }

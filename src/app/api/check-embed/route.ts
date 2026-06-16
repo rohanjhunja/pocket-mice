@@ -56,11 +56,14 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // Check if the response indicates an error
+    // Check if the response indicates an error (like 403 Forbidden from Cloudflare)
+    // We should NOT fail the embed check just because of an HTTP error, because
+    // the client browser might still be able to load it perfectly fine in an iframe.
+    // We ONLY fail if we explicitly saw X-Frame-Options or CSP blocking it.
     if (!response.ok) {
       return NextResponse.json({
-        embeddable: false,
-        reason: `HTTP ${response.status}`,
+        embeddable: true, // Optimistically allow embedding
+        reason: `HTTP ${response.status} (Optimistic allow)`,
         finalUrl: response.url,
       })
     }
@@ -71,8 +74,8 @@ export async function GET(request: NextRequest) {
     })
   } catch (error: any) {
     return NextResponse.json({
-      embeddable: false,
-      reason: error.name === 'AbortError' ? 'Timeout' : (error.message || 'Network error'),
+      embeddable: true, // Optimistically allow embedding on network errors
+      reason: error.name === 'AbortError' ? 'Timeout (Optimistic)' : `Network error: ${error.message} (Optimistic)`,
     })
   }
 }

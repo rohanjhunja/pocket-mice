@@ -2,6 +2,7 @@
 
 import { createClient } from '@/utils/supabase/server'
 import { getRole } from '@/utils/getRole'
+import { profileLessonsSimulations } from '@/utils/simProfiling'
 import { revalidatePath } from 'next/cache'
 
 /** Own lessons only (scoped to current teacher). Used on the main dashboard. */
@@ -28,8 +29,9 @@ export async function getLessons(searchQuery?: string) {
     return []
   }
 
-  return data
+  return (data || []).filter((l: any) => !l.json_content?.is_simulation_wrapper)
 }
+
 
 /**
  * All lessons across all teachers — used for the Global Library toggle
@@ -110,6 +112,9 @@ export async function uploadLesson(jsonData: any) {
   if (error) {
     throw new Error(error.message)
   }
+
+  // Trigger profiling asynchronously
+  profileLessonsSimulations(doc).catch(console.error);
 
   revalidatePath('/dashboard')
   return data[0]
@@ -239,7 +244,8 @@ export async function getSimulations() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) throw new Error('Not authenticated')
 
-  const { data, error } = await supabase
+  // 1. Fetch existing simulations
+  const { data: existingSims, error } = await supabase
     .from('simulations')
     .select('*')
     .order('created_at', { ascending: false })
@@ -249,5 +255,263 @@ export async function getSimulations() {
     return []
   }
 
-  return data
+  // 2. Fetch all lessons to find implicit simulations (ones embedded in lessons but not tracked yet)
+  const { data: lessons } = await supabase.from('lessons').select('json_content, teacher_id')
+  
+  const existingUrls = new Set(existingSims.map(s => s.url))
+  const newSimulationsMap = new Map<string, any>()
+
+  if (lessons) {
+    lessons.forEach(lesson => {
+      // Skip auto-generated simulation wrapper lessons
+      if (lesson.json_content?.is_simulation_wrapper) return;
+      (lesson.json_content?.activities || []).forEach((act: any) => {
+        (act.steps || []).forEach((step: any) => {
+          let url = step.interactive_or_media?.media_url;
+          const type = step.interactive_or_media?.media_type;
+          const title = step.interactive_or_media?.media_title || step.title || 'Untitled Simulation';
+          
+          if (url && type === 'simulation') {
+            if (url.startsWith('http://')) url = url.replace('http://', 'https://');
+            if (url.toUpperCase().includes('POCKET%20MOUSE-NATURAL%20SELECTION_V2.HTML')) {
+              url = '/Pocket Mouse-Natural Selection_v2.html';
+            }
+            
+            if (!existingUrls.has(url) && !newSimulationsMap.has(url)) {
+              newSimulationsMap.set(url, {
+                teacher_id: lesson.teacher_id, // attribute to the lesson author
+                title: title,
+                url: url
+              });
+            }
+          }
+        });
+      });
+    });
+  }
+
+  // 3. Auto-upsert missing simulations — ignoreDuplicates prevents future double-inserts
+  let allSims = existingSims;
+  if (newSimulationsMap.size > 0) {
+    const toInsert = Array.from(newSimulationsMap.values());
+    const { data: inserted } = await supabase
+      .from('simulations')
+      .upsert(toInsert, { onConflict: 'url', ignoreDuplicates: true })
+      .select();
+    if (inserted && inserted.length > 0) {
+      allSims = [...existingSims, ...inserted];
+    }
+  }
+
+  // 4. Deduplicate by URL — handles any duplicates already in the DB
+  const seen = new Set<string>();
+  return allSims
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+    .filter(sim => {
+      if (seen.has(sim.url)) return false;
+      seen.add(sim.url);
+      return true;
+    });
+}
+
+export async function addSimulationByUrl(url: string, title?: string) {
+  const supabase = await createClient()
+
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) throw new Error('Not authenticated')
+
+  // Check if it already exists to avoid duplicates
+  const { data: existing } = await supabase
+    .from('simulations')
+    .select('id, title')
+    .eq('url', url)
+    .single()
+
+  if (existing) {
+    return { id: existing.id, exists: true, title: existing.title }
+  }
+
+  // Fetch title if not provided
+  let finalTitle = title
+  if (!finalTitle) {
+    try {
+      // In a server action, we can't easily call our own API route via full URL without knowing the host.
+      // So we just fetch directly from here.
+      const res = await fetch(url, {
+        headers: { 'User-Agent': 'LearnTube-Bot/1.0' },
+        signal: AbortSignal.timeout(5000)
+      })
+      if (res.ok) {
+        const html = await res.text()
+        const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i)
+        if (titleMatch && titleMatch[1]) {
+          finalTitle = titleMatch[1].replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim()
+        }
+      }
+    } catch (e) {
+      console.error('Failed to fetch title for', url, e)
+    }
+  }
+
+  const insertData = {
+    teacher_id: user.id,
+    title: finalTitle || url,
+    url: url,
+  }
+
+  const { data: dbData, error: dbError } = await supabase
+    .from('simulations')
+    .insert(insertData)
+    .select()
+
+  if (dbError) {
+    throw new Error(dbError.message)
+  }
+
+  revalidatePath('/dashboard')
+  return { id: dbData[0].id, exists: false, title: dbData[0].title }
+}
+
+export async function createSimulationLesson(simulationId: string) {
+  const supabase = await createClient()
+
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) throw new Error('Not authenticated')
+
+  const { data: sim, error: simError } = await supabase
+    .from('simulations')
+    .select('*')
+    .eq('id', simulationId)
+    .single()
+
+  if (simError || !sim) throw new Error('Simulation not found')
+
+  const lessonJson = {
+    lesson_title: `Preview: ${sim.title}`,
+    lesson_description: 'Auto-generated preview wrapper.',
+    estimated_duration_minutes: 15,
+    is_simulation_wrapper: true,
+    activities: [
+      {
+        activity_id: 'sim_act_1',
+        activity_title: 'Simulation',
+        activity_type: 'exploration',
+        sequence_order: 1,
+        steps: [
+          {
+            step_id: 'sim_step_1',
+            title: sim.title,
+            step_type: 'media',
+            sequence_order: 1,
+            instruction_format: 'text',
+            completion_condition: 'next_button',
+            interactive_or_media: {
+              media_type: 'simulation',
+              media_title: sim.title,
+              media_url: sim.url,
+              embed: true
+            }
+          }
+        ]
+      }
+    ]
+  }
+
+  const { data: lessonData, error: lessonError } = await supabase
+    .from('lessons')
+    .insert({
+      teacher_id: user.id,
+      title: lessonJson.lesson_title,
+      description: lessonJson.lesson_description,
+      tags: ['auto-generated', 'simulation-wrapper', 'preview'],
+      json_content: lessonJson,
+    })
+    .select()
+
+  if (lessonError) throw new Error(`Failed to create preview lesson: ${lessonError.message}`)
+
+  return lessonData[0].id
+}
+
+export async function createSimulationSession(simulationId: string) {
+  const supabase = await createClient()
+
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) throw new Error('Not authenticated')
+
+  // 1. Fetch simulation details
+  const { data: sim, error: simError } = await supabase
+    .from('simulations')
+    .select('*')
+    .eq('id', simulationId)
+    .single()
+
+  if (simError || !sim) throw new Error('Simulation not found')
+
+  // 2. Create a hidden, single-step lesson
+  const lessonJson = {
+    lesson_title: `Live Simulation: ${sim.title}`,
+    lesson_description: "Automatically generated lesson wrapper for a live simulation assignment.",
+    estimated_duration_minutes: 15,
+    is_simulation_wrapper: true,
+    activities: [
+      {
+        activity_id: "sim_act_1",
+        activity_title: "Simulation",
+        activity_type: "exploration",
+        sequence_order: 1,
+        steps: [
+          {
+            step_id: "sim_step_1",
+            title: sim.title,
+            step_type: "media",
+            sequence_order: 1,
+            instruction_format: "text",
+            completion_condition: "next_button",
+            interactive_or_media: {
+              media_type: "simulation",
+              media_title: sim.title,
+              media_url: sim.url,
+              embed: true
+            }
+          }
+        ]
+      }
+    ]
+  }
+
+  const insertLessonData = {
+    teacher_id: user.id,
+    title: lessonJson.lesson_title,
+    description: lessonJson.lesson_description,
+    tags: ["auto-generated", "simulation-wrapper"],
+    json_content: lessonJson,
+  }
+
+  const { data: lessonData, error: lessonError } = await supabase
+    .from('lessons')
+    .insert(insertLessonData)
+    .select()
+
+  if (lessonError) throw new Error(`Failed to wrap simulation: ${lessonError.message}`)
+
+  const newLessonId = lessonData[0].id
+
+  // 3. Create the Session
+  const sessionCode = Math.random().toString(36).substring(2, 8).toUpperCase()
+  const insertSessionData = {
+    lesson_id: newLessonId,
+    teacher_id: user.id,
+    session_code: sessionCode,
+  }
+
+  const { data: sessionData, error: sessionError } = await supabase
+    .from('sessions')
+    .insert(insertSessionData)
+    .select()
+
+  if (sessionError) throw new Error(`Failed to create session: ${sessionError.message}`)
+
+  revalidatePath('/dashboard')
+  return sessionData[0].id
 }

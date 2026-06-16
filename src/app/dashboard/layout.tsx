@@ -1,6 +1,8 @@
 import { createClient } from '@/utils/supabase/server'
 import { getRole } from '@/utils/getRole'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import { PlatformHealthPill } from '@/components/PlatformHealthPill'
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
@@ -21,9 +23,17 @@ export default async function DashboardLayout({ children }: { children: React.Re
             </span>
           )}
         </div>
-        <form action="/auth/signout" method="post">
-          <Button variant="outline" size="sm" type="submit">Sign out</Button>
-        </form>
+        <div className="flex items-center gap-4">
+          {isAdmin && (
+            <Link href="/dashboard/sim-health" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
+              Sim Health
+            </Link>
+          )}
+          <PlatformHealthPill />
+          <form action="/auth/signout" method="post">
+            <Button variant="outline" size="sm" type="submit">Sign out</Button>
+          </form>
+        </div>
       </header>
       <main className="flex-1 max-w-6xl w-full mx-auto p-6">
         {children}

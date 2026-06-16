@@ -6,6 +6,7 @@ import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { ArrowLeft, Clock, LayoutList, Copy } from 'lucide-react'
 import { LessonActions } from '@/components/LessonActions'
+import { HealthPill } from '@/components/HealthPill'
 
 export default async function LessonOverviewPage({ params }: { params: Promise<{ id: string }> }) {
   const supabase = await createClient()
@@ -25,8 +26,7 @@ export default async function LessonOverviewPage({ params }: { params: Promise<{
   const bookmarks = profile?.bookmarks || []
   const initialIsBookmarked = bookmarks.includes(lessonId)
 
-  // Any authenticated user can access any lesson — ownership check is removed.
-  // isOwner controls whether editing happens in-place or creates a copy.
+  // Fetch the lesson
   const { data: lesson, error } = await supabase
     .from('lessons')
     .select('*')
@@ -37,15 +37,67 @@ export default async function LessonOverviewPage({ params }: { params: Promise<{
     return notFound()
   }
 
-  const isOwner = lesson.teacher_id === user.id
-
-
-  const jsonContent = lesson.json_content
-  const totalActivities = jsonContent.activities?.length || 0
+  const jsonContent = lesson.json_content || {}
   let totalSteps = 0
-  jsonContent.activities?.forEach((act: any) => {
-    totalSteps += act.steps?.length || 0
+  let totalActivities = jsonContent.activities?.length || 0
+  
+  const simulationUrls: string[] = []
+
+  jsonContent.activities?.forEach((a: any) => { 
+    totalSteps += a.steps?.length || 0 
+    a.steps?.forEach((s: any) => {
+      const m = s.interactive_or_media;
+      if (m && m.media_url && (m.media_type === 'simulation' || m.media_type === 'content')) {
+        simulationUrls.push(m.media_url);
+      }
+    });
   })
+
+  // Fetch aggregate health status for simulations in this lesson
+  let urlHealth: Record<string, any> = {}
+  if (simulationUrls.length > 0) {
+    const { data: baselines } = await supabase
+      .from('sim_baselines')
+      .select('url, ideal_load_ms')
+      .in('url', simulationUrls);
+      
+    if (baselines) {
+      const { data: checks } = await supabase
+        .from('sim_health_checks')
+        .select('url, load_time_ms, status, diagnostics, dynamic_expected_ms')
+        .in('url', simulationUrls)
+        .order('created_at', { ascending: false });
+
+      baselines.forEach(baseline => {
+        const simChecks = (checks || []).filter(c => c.url === baseline.url).slice(0, 10);
+        if (simChecks.length === 0) {
+          urlHealth[baseline.url] = { status: 'No Data', checks: [] };
+          return;
+        }
+        let totalActual = 0;
+        let totalExpected = 0;
+        let failures = 0;
+        simChecks.forEach(c => {
+          const expected = c.dynamic_expected_ms || baseline.ideal_load_ms;
+          totalExpected += expected;
+          if (c.status === 'error' || c.status === 'timeout') {
+            failures++;
+            totalActual += expected * 3;
+          } else {
+            totalActual += c.load_time_ms;
+          }
+        });
+        const ratio = totalExpected > 0 ? (totalActual / totalExpected) : 1;
+        let status = 'Healthy';
+        if (ratio > 2.0 || failures >= 5) status = 'Unhealthy';
+        else if (ratio > 1.25 || failures >= 3) status = 'Degraded';
+        
+        urlHealth[baseline.url] = { status, checks: simChecks };
+      });
+    }
+  }
+
+  const isOwner = lesson.teacher_id === user.id
 
   // Basic time estimation heuristic: 3 mins per step
   const estimatedTime = totalSteps > 0 ? `${totalSteps * 3} mins` : 'Unknown'
@@ -101,14 +153,32 @@ export default async function LessonOverviewPage({ params }: { params: Promise<{
                   <div key={activity.activity_id || actIdx} className="border-l-2 border-slate-200 pl-4 py-1">
                     <h3 className="font-semibold text-slate-800 mb-2">{activity.activity_title}</h3>
                     <ul className="space-y-2">
-                      {activity.steps?.map((step: any, stepIdx: number) => (
-                        <li key={step.step_id || stepIdx} className="text-slate-600 text-sm flex items-start">
-                          <span className="bg-slate-200 text-slate-600 rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold mr-2 mt-0.5 flex-shrink-0">
-                            {stepIdx + 1}
-                          </span>
-                          <span className="leading-snug">{step.title}</span>
-                        </li>
-                      ))}
+                      {activity.steps?.map((step: any, stepIdx: number) => {
+                        const mUrl = step.interactive_or_media?.media_url;
+                        const isSim = mUrl && (step.interactive_or_media?.media_type === 'simulation' || step.interactive_or_media?.media_type === 'content');
+                        const health = isSim ? urlHealth[mUrl] : null;
+                        
+                        return (
+                          <li key={step.step_id || stepIdx} className="text-slate-600 text-sm flex items-start justify-between">
+                            <div className="flex items-start">
+                              <span className="bg-slate-200 text-slate-600 rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold mr-2 mt-0.5 flex-shrink-0">
+                                {stepIdx + 1}
+                              </span>
+                              <span className="leading-snug">{step.title}</span>
+                            </div>
+                            {health && (
+                              <div className="relative w-24 h-6 ml-2 shrink-0">
+                                <HealthPill 
+                                  url={mUrl} 
+                                  loadStatus="loaded" 
+                                  trace={null} 
+                                  aggregateData={health} 
+                                />
+                              </div>
+                            )}
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 ))}

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { deleteSession } from '@/app/dashboard/actions'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Clock, Users, ChevronRight, LayoutGrid, MoreVertical, Loader2, Trash2, ShieldAlert } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
@@ -17,24 +18,27 @@ interface RecentSessionsAreaProps {
 export function RecentSessionsArea({ sessions, isAdmin = false }: RecentSessionsAreaProps) {
   const [viewAll, setViewAll] = useState(isAdmin) // admin defaults to grid view
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [sessionToDelete, setSessionToDelete] = useState<any | null>(null)
 
   if (!sessions || sessions.length === 0) return null
 
   const displaySessions = viewAll ? sessions : sessions.slice(0, 5)
 
-  const handleDeleteSession = async (e: React.MouseEvent, sessionId: string) => {
-    e.preventDefault()
-    if (!window.confirm('Are you sure you want to delete this session?')) return
-    setDeletingId(sessionId)
+  const handleConfirmDelete = async () => {
+    if (!sessionToDelete) return
+    setDeletingId(sessionToDelete.id)
     try {
-      await deleteSession(sessionId)
+      await deleteSession(sessionToDelete.id)
+      setSessionToDelete(null)
     } catch (err: any) {
       alert(`Failed to delete session: ${err.message}`)
+    } finally {
       setDeletingId(null)
     }
   }
 
   return (
+    <>
     <div className="mb-12">
       <div className="flex justify-between items-end mb-4">
         <div className="flex items-center gap-2">
@@ -90,7 +94,10 @@ export function RecentSessionsArea({ sessions, isAdmin = false }: RecentSessions
                       <DropdownMenuContent align="end">
                         <DropdownMenuItem 
                           className="text-red-600 focus:text-red-700 focus:bg-red-50 cursor-pointer"
-                          onClick={(e: React.MouseEvent) => handleDeleteSession(e, session.id)}
+                          onClick={(e: React.MouseEvent) => {
+                            e.preventDefault()
+                            setSessionToDelete(session)
+                          }}
                           disabled={deletingId === session.id}
                         >
                           {deletingId === session.id
@@ -118,6 +125,27 @@ export function RecentSessionsArea({ sessions, isAdmin = false }: RecentSessions
         ))}
       </div>
     </div>
+
+    {/* Custom Delete Confirmation Modal */}
+    <Dialog open={!!sessionToDelete} onOpenChange={(isOpen) => !isOpen && !deletingId && setSessionToDelete(null)}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Delete Session</DialogTitle>
+          <DialogDescription>
+            Are you sure you want to delete the session for <strong>{sessionToDelete?.lessons?.title || 'Unknown Lesson'}</strong>? All student data will be permanently removed.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter className="mt-4">
+          <Button variant="outline" onClick={() => setSessionToDelete(null)} disabled={!!deletingId}>
+            Cancel
+          </Button>
+          <Button variant="destructive" onClick={handleConfirmDelete} disabled={!!deletingId}>
+            {deletingId ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Deleting...</> : 'Delete Session'}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+    </>
   )
 }
 

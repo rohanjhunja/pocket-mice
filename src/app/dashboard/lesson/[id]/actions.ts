@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@/utils/supabase/server'
+import { profileLessonsSimulations } from '@/utils/simProfiling'
 import { revalidatePath } from 'next/cache'
 
 export async function toggleBookmark(lessonId: string, currentStatus: boolean) {
@@ -100,6 +101,8 @@ export async function updateLesson(lessonId: string, updatedJsonContent: any) {
 
   if (error) throw new Error(error.message)
 
+  // Trigger profiling asynchronously
+  profileLessonsSimulations(updatedJsonContent).catch(console.error);
 
   revalidatePath(`/dashboard/lesson/${lessonId}`)
   revalidatePath('/dashboard')
@@ -125,6 +128,9 @@ export async function duplicateLesson(lessonId: string, jsonContent: any) {
     .select()
 
   if (error) throw new Error(error.message)
+
+  // Trigger profiling asynchronously
+  profileLessonsSimulations(duplicatedJson).catch(console.error);
 
   revalidatePath('/dashboard')
   return data[0].id

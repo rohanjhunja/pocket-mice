@@ -113,3 +113,8 @@ CREATE POLICY "Anyone can read responses" ON public.responses FOR SELECT USING (
 CREATE POLICY "Anyone can insert events" ON public.events FOR INSERT WITH CHECK (true);
 CREATE POLICY "Anyone can read events" ON public.events FOR SELECT USING (true);
 ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS bookmarks UUID[] DEFAULT '{}';
+
+-- Feature: Teacher Step Sync
+-- teacher_step_id stores the step the teacher has "synced" all learners to.
+-- Supabase Realtime broadcasts the UPDATE event to all subscribed learner clients.
+ALTER TABLE public.sessions ADD COLUMN IF NOT EXISTS teacher_step_id TEXT;

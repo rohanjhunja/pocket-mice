@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { uploadLesson, deleteLesson, getAllLessons } from '@/app/dashboard/actions'
 import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Search, Upload, BookOpen, Plus, MoreVertical, Loader2, Trash2, Globe, ShieldAlert } from 'lucide-react'
@@ -23,6 +24,7 @@ export function LessonDashboardArea({ initialLessons, isAdmin = false, currentUs
   const [isUploading, setIsUploading] = useState(false)
   const [isCreating, setIsCreating] = useState(false)
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [lessonToDelete, setLessonToDelete] = useState<any | null>(null)
 
   // Global library state
   const [showGlobal, setShowGlobal] = useState(false)
@@ -65,14 +67,15 @@ export function LessonDashboardArea({ initialLessons, isAdmin = false, currentUs
     }
   }
 
-  const handleDeleteLesson = async (e: React.MouseEvent, lessonId: string) => {
-    e.stopPropagation()
-    if (!window.confirm('Are you sure you want to delete this lesson?')) return
-    setDeletingId(lessonId)
+  const handleConfirmDelete = async () => {
+    if (!lessonToDelete) return
+    setDeletingId(lessonToDelete.id)
     try {
-      await deleteLesson(lessonId)
+      await deleteLesson(lessonToDelete.id)
+      setLessonToDelete(null)
     } catch (err: any) {
       alert(`Failed to delete lesson: ${err.message}`)
+    } finally {
       setDeletingId(null)
     }
   }
@@ -121,7 +124,10 @@ export function LessonDashboardArea({ initialLessons, isAdmin = false, currentUs
               <DropdownMenuContent align="end">
                 <DropdownMenuItem
                   className="text-red-600 focus:text-red-700 focus:bg-red-50 cursor-pointer"
-                  onClick={(e: React.MouseEvent) => handleDeleteLesson(e, lesson.id)}
+                  onClick={(e: React.MouseEvent) => {
+                    e.stopPropagation()
+                    setLessonToDelete(lesson)
+                  }}
                   disabled={deletingId === lesson.id}
                 >
                   {deletingId === lesson.id
@@ -248,6 +254,26 @@ export function LessonDashboardArea({ initialLessons, isAdmin = false, currentUs
         createMode
       />
     )}
+
+    {/* Custom Delete Confirmation Modal */}
+    <Dialog open={!!lessonToDelete} onOpenChange={(isOpen) => !isOpen && !deletingId && setLessonToDelete(null)}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Delete Lesson</DialogTitle>
+          <DialogDescription>
+            Are you sure you want to delete <strong>{lessonToDelete?.title}</strong>? This action cannot be undone.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter className="mt-4">
+          <Button variant="outline" onClick={() => setLessonToDelete(null)} disabled={!!deletingId}>
+            Cancel
+          </Button>
+          <Button variant="destructive" onClick={handleConfirmDelete} disabled={!!deletingId}>
+            {deletingId ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Deleting...</> : 'Delete Lesson'}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
     </>
   )
 }
