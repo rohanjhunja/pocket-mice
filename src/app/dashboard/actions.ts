@@ -45,7 +45,7 @@ export async function getAllLessons(searchQuery?: string) {
 
   let query = supabase
     .from('lessons')
-    .select('*, profiles!lessons_teacher_id_fkey(email)')
+    .select('*')
     .order('created_at', { ascending: false })
 
   if (searchQuery) {
@@ -61,8 +61,7 @@ export async function getAllLessons(searchQuery?: string) {
 
   return (data || []).map((lesson: any) => ({
     ...lesson,
-    teacher_email: lesson.profiles?.email ?? null,
-    profiles: undefined,
+    teacher_email: null, // profiles.email doesn't exist; email lives in auth.users
   }))
 }
 
@@ -131,12 +130,14 @@ export async function getRecentSessions() {
 
   // Admin: all sessions across all teachers, with teacher email joined.
   // Teacher: own sessions only — eliminates N+1 with embedded student count.
+  // Select explicit columns — avoids failures from schema drift or missing migrations.
+  // Note: profiles.email doesn't exist (email is in auth.users, not accessible via PostgREST).
+  // Admin gets the same columns as teacher for now; teacher_id is available for display.
+  const sessionColumns = 'id, lesson_id, teacher_id, session_code, status, created_at, lessons(title), students(count)'
+
   let query = supabase
     .from('sessions')
-    .select(isAdmin
-      ? '*, lessons(title), students(count), profiles!sessions_teacher_id_fkey(email)'
-      : '*, lessons(title), students(count)'
-    )
+    .select(sessionColumns)
     .order('created_at', { ascending: false })
 
   if (!isAdmin) {
@@ -153,7 +154,7 @@ export async function getRecentSessions() {
   return (data || []).map((session: any) => ({
     ...session,
     studentCount: session.students?.[0]?.count ?? 0,
-    teacher_email: session.profiles?.email ?? null,
+    teacher_email: null, // email not available via profiles table
     profiles: undefined,
   }))
 }
