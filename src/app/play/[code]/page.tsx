@@ -107,7 +107,7 @@ export default async function PlaySessionPage({ params }: { params: Promise<{ co
     // Always fetch live session responses for the summary panel
     const { data: sessionResponses } = await supabase
       .from('responses')
-      .select('id, student_id, step_id, response_value, submitted_at')
+      .select('id, student_id, step_id, response_value, submitted_at, students(name)')
       .eq('session_id', session.id)
       .order('submitted_at', { ascending: true })
 
@@ -125,7 +125,7 @@ export default async function PlaySessionPage({ params }: { params: Promise<{ co
         const otherSessionIds = otherSessions.map((s: any) => s.id)
         const { data: historicalResponses } = await supabase
           .from('responses')
-          .select('id, student_id, step_id, response_value, submitted_at')
+          .select('id, student_id, step_id, response_value, submitted_at, students(name)')
           .in('session_id', otherSessionIds)
           .order('submitted_at', { ascending: true })
 

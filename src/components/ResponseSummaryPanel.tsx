@@ -20,6 +20,9 @@ interface ResponseRow {
   step_id: string
   response_value: string
   submitted_at: string
+  students?: {
+    name: string
+  } | null
 }
 
 interface StepDef {
@@ -122,6 +125,20 @@ export function ResponseSummaryPanel({
   // Cross-step responses (all steps) — for cross-filter computation
   const [allSessionResponses, setAllSessionResponses] = useState<ResponseRow[]>(initialResponses)
 
+  // ── Student Names Cache ──────────────────────────────────────────────────
+  const [studentNames, setStudentNames] = useState<Record<string, string>>({})
+
+  // Initialize studentNames from initialResponses
+  useEffect(() => {
+    const namesMap: Record<string, string> = {}
+    initialResponses.forEach(r => {
+      if (r.students?.name) {
+        namesMap[r.student_id] = r.students.name
+      }
+    })
+    setStudentNames(prev => ({ ...prev, ...namesMap }))
+  }, [initialResponses])
+
   // ── Word cloud filter ────────────────────────────────────────────────────
   const [activeWord, setActiveWord] = useState<string | null>(null)
 
@@ -146,6 +163,24 @@ export function ResponseSummaryPanel({
         },
         (payload) => {
           const newRow = payload.new as ResponseRow
+
+          // Fetch student name dynamically if not cached yet
+          setStudentNames(prev => {
+            if (!prev[newRow.student_id]) {
+              supabase
+                .from('students')
+                .select('name')
+                .eq('id', newRow.student_id)
+                .single()
+                .then(({ data }) => {
+                  if (data?.name) {
+                    setStudentNames(curr => ({ ...curr, [newRow.student_id]: data.name }))
+                  }
+                })
+            }
+            return prev
+          })
+
           // Add to cross-step responses
           setAllSessionResponses(prev => [...prev, newRow])
           // Add to current-step responses if relevant
@@ -339,7 +374,12 @@ export function ResponseSummaryPanel({
                 </p>
               ) : (
                 wordFilteredResponses.map((r) => (
-                  <ResponseListItem key={r.id} value={r.response_value} highlight={activeWord} />
+                  <ResponseListItem
+                    key={r.id}
+                    value={r.response_value}
+                    highlight={activeWord}
+                    studentName={studentNames[r.student_id] || r.students?.name}
+                  />
                 ))
               )}
             </div>
@@ -432,27 +472,42 @@ export function ResponseSummaryPanel({
 // ---------------------------------------------------------------------------
 // Response list item with word highlight
 // ---------------------------------------------------------------------------
-function ResponseListItem({ value, highlight }: { value: string; highlight?: string | null }) {
-  if (!highlight) {
+function ResponseListItem({
+  value,
+  highlight,
+  studentName,
+}: {
+  value: string
+  highlight?: string | null
+  studentName?: string
+}) {
+  const content = (() => {
+    if (!highlight) {
+      return <span>{value}</span>
+    }
+    const parts = value.split(new RegExp(`(${highlight})`, 'gi'))
     return (
-      <div className="bg-slate-50 border border-slate-100 rounded-lg px-4 py-2.5 text-sm text-slate-700 leading-relaxed">
-        {value}
-      </div>
+      <>
+        {parts.map((part, i) =>
+          part.toLowerCase() === highlight.toLowerCase() ? (
+            <mark key={i} className="bg-yellow-200 text-yellow-900 rounded px-0.5">
+              {part}
+            </mark>
+          ) : (
+            <span key={i}>{part}</span>
+          )
+        )}
+      </>
     )
-  }
+  })()
 
-  // Split on highlight word (case-insensitive) and re-join with <mark>
-  const parts = value.split(new RegExp(`(${highlight})`, 'gi'))
   return (
-    <div className="bg-slate-50 border border-slate-100 rounded-lg px-4 py-2.5 text-sm text-slate-700 leading-relaxed">
-      {parts.map((part, i) =>
-        part.toLowerCase() === highlight.toLowerCase() ? (
-          <mark key={i} className="bg-yellow-200 text-yellow-900 rounded px-0.5">
-            {part}
-          </mark>
-        ) : (
-          <span key={i}>{part}</span>
-        )
+    <div className="bg-slate-50 border border-slate-100 rounded-lg px-4 py-2.5 text-sm text-slate-700 leading-relaxed flex flex-col gap-1">
+      <div>{content}</div>
+      {studentName && (
+        <span className="text-[11px] text-slate-400 self-end mt-0.5 font-normal tracking-wide">
+          — {studentName}
+        </span>
       )}
     </div>
   )

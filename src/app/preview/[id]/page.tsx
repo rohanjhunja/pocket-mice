@@ -56,7 +56,7 @@ export default async function PreviewLessonPage({ params }: { params: Promise<{ 
   if (lastSessionId) {
     const { data: sessionResponses } = await supabase
       .from('responses')
-      .select('id, student_id, step_id, response_value, submitted_at')
+      .select('id, student_id, step_id, response_value, submitted_at, students(name)')
       .eq('session_id', lastSessionId)
       .order('submitted_at', { ascending: true })
     initialResponseRows = sessionResponses ?? []
