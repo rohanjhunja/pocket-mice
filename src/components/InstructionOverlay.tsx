@@ -63,17 +63,21 @@ export function InstructionOverlay({
     "absolute transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden flex flex-col z-10 bg-white/95 backdrop-blur-md shadow-[0_0_40px_rgba(0,0,0,0.15)] border border-white/40 rounded-t-2xl md:rounded-2xl";
 
   if (!hasMedia) {
-    baseClasses +=
-      " md:right-1/2 md:bottom-1/2 md:translate-x-1/2 md:translate-y-1/2 md:w-[600px] md:max-w-[90vw] bottom-0 right-0 w-full h-[calc(100vh-60px)] md:h-auto md:max-h-[calc(100vh-120px)]";
-    if (isMinimized) {
-      baseClasses += " md:!bottom-6 md:!translate-y-[calc(100%-60px)]";
-    }
+    baseClasses += ` md:right-1/2 md:bottom-1/2 md:translate-x-1/2 md:translate-y-1/2 md:w-[600px] md:max-w-[90vw] bottom-0 right-0 w-full md:max-h-[calc(100vh-120px)] ${
+      isMinimized
+        ? "h-[60px] md:h-auto md:!bottom-6 md:!translate-y-[calc(100%-60px)]"
+        : showSummary && sessionId
+        ? "h-[calc(100vh-60px)] md:h-[600px]"
+        : "h-[calc(100vh-60px)] md:h-auto"
+    }`;
   } else {
-    baseClasses +=
-      " bottom-0 right-0 w-full md:w-[400px] md:bottom-6 md:right-6 max-h-[70vh] md:max-h-[calc(100vh-120px)] h-auto";
-    if (isMinimized) {
-      baseClasses += " translate-y-[calc(100%-60px)] md:translate-y-[calc(100%-72px)]";
-    }
+    baseClasses += ` bottom-0 right-0 w-full md:w-[400px] md:bottom-6 md:right-6 md:max-h-[calc(100vh-120px)] ${
+      isMinimized
+        ? "h-[60px] md:h-auto translate-y-[calc(100%-60px)] md:translate-y-[calc(100%-72px)]"
+        : showSummary && sessionId
+        ? "h-[70vh] md:h-[600px]"
+        : "max-h-[70vh] h-auto"
+    }`;
   }
 
   const showCollapse =
@@ -96,7 +100,7 @@ export function InstructionOverlay({
           onClick={(e) => e.stopPropagation()}
         >
           {/* Chart icon — only shown when this step has learner input */}
-          {hasLearnerInput && sessionId && (
+          {hasLearnerInput && (
             <button
               onClick={() => setShowSummary((v) => !v)}
               className={`relative flex items-center justify-center w-8 h-8 rounded-lg transition-colors ${
