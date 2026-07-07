@@ -40,9 +40,33 @@ export default async function PreviewLessonPage({ params }: { params: Promise<{ 
     }
   }
 
+  // Find the last session of this lesson that has learner responses
+  const { data: latestResponse } = await supabase
+    .from('responses')
+    .select('session_id, sessions!inner(lesson_id)')
+    .eq('sessions.lesson_id', id)
+    .order('submitted_at', { ascending: false })
+    .limit(1)
+
+  const lastSessionId = latestResponse && latestResponse.length > 0
+    ? latestResponse[0].session_id
+    : null
+
+  let initialResponseRows: any[] = []
+  if (lastSessionId) {
+    const { data: sessionResponses } = await supabase
+      .from('responses')
+      .select('id, student_id, step_id, response_value, submitted_at')
+      .eq('session_id', lastSessionId)
+      .order('submitted_at', { ascending: true })
+    initialResponseRows = sessionResponses ?? []
+  }
+
+  const sessionIdToUse = lastSessionId || 'preview-session'
+
   // Create a mock session object out of the lesson
   const mockSession = {
-    id: 'preview-session',
+    id: sessionIdToUse,
     session_code: 'PREVIEW',
     teacher_id: user.id,
     selected_steps_json: lesson.json_content,
@@ -53,7 +77,7 @@ export default async function PreviewLessonPage({ params }: { params: Promise<{ 
   const mockStudent = {
     id: 'preview-student',
     name: 'Preview Mode',
-    session_id: 'preview-session'
+    session_id: sessionIdToUse
   }
 
   return (
@@ -65,6 +89,7 @@ export default async function PreviewLessonPage({ params }: { params: Promise<{ 
       isPreview={true}
       isSimulationWrapper={isSimulationWrapper}
       simulationId={simulationId}
+      initialResponseRows={initialResponseRows}
     />
   )
 }
