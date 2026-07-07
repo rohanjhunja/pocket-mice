@@ -133,13 +133,13 @@ export function InstructionOverlay({
 
       {/* ── Panel Body ── */}
       <div
-        className={`flex-1 overflow-y-auto flex flex-col text-base leading-relaxed ${
+        className={`flex-1 flex flex-col text-base leading-relaxed min-h-0 overflow-hidden ${
           isMinimized ? "hidden" : "flex"
         }`}
       >
         {showSummary && sessionId ? (
           /* ── Response Summary Panel ── */
-          <div className="flex flex-col flex-1 overflow-hidden">
+          <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
             {/* Summary header */}
             <div className="flex items-center justify-between px-5 py-3 border-b border-slate-100 bg-slate-50/40">
               <span className="text-sm font-semibold text-slate-700">
@@ -154,7 +154,7 @@ export function InstructionOverlay({
                 Close
               </button>
             </div>
-            <div className="flex-1 overflow-hidden">
+            <div className="flex-1 min-h-0 overflow-hidden">
               <ResponseSummaryPanel
                 sessionId={sessionId}
                 stepId={step.step_id}
@@ -168,7 +168,7 @@ export function InstructionOverlay({
           </div>
         ) : (
           /* ── Normal instruction content ── */
-          <div className="p-5 overflow-y-auto flex-1 flex flex-col">
+          <div className="p-5 overflow-y-auto flex-1 flex flex-col min-h-0">
             <div
               className="mb-5 text-slate-900 whitespace-pre-wrap"
               style={{ whiteSpace: "pre-wrap" }}
