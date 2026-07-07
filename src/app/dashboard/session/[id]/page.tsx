@@ -1,10 +1,11 @@
 import { createClient } from '@/utils/supabase/server'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Play } from 'lucide-react'
 import { CopyableJoinLink } from '@/components/CopyableJoinLink'
 import { SessionMetricsLive } from '@/components/SessionMetricsLive'
 import { SessionAnalytics } from '@/components/SessionAnalytics'
+import { joinAsTeacherAction } from './actions'
 
 export default async function SessionDashboardPage({ params }: { params: Promise<{ id: string }> }) {
   const supabase = await createClient()
@@ -59,13 +60,29 @@ export default async function SessionDashboardPage({ params }: { params: Promise
         Back to Dashboard
       </Link>
 
-      <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-8">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-bold text-slate-900 mb-2">Live Session Dashboard</h1>
           <p className="text-lg text-slate-600">Lesson: {session.lessons?.title || (session.selected_steps_json as any)?.lesson_title || 'Unknown Lesson'}</p>
         </div>
         
-        <CopyableJoinLink sessionCode={session.session_code} />
+        <div className="flex flex-col sm:flex-row items-stretch gap-4 w-full lg:w-auto">
+          <CopyableJoinLink sessionCode={session.session_code} />
+          <form action={joinAsTeacherAction.bind(null, sessionId, session.session_code)} className="flex">
+            <button 
+              type="submit"
+              className="bg-white px-6 py-4 rounded-xl border-2 border-slate-200 shadow-sm flex items-center gap-4 hover:border-blue-400 hover:bg-slate-50 transition-colors text-left group h-full cursor-pointer w-full"
+            >
+              <div className="bg-slate-100 p-2 rounded-lg group-hover:bg-blue-100 transition-colors">
+                <Play className="text-slate-600 w-6 h-6 group-hover:text-blue-600 transition-colors fill-slate-600 group-hover:fill-blue-600" />
+              </div>
+              <div>
+                <div className="text-xs uppercase font-bold text-slate-500 tracking-wider">Teacher View</div>
+                <div className="font-bold text-slate-800 text-lg">View Lesson</div>
+              </div>
+            </button>
+          </form>
+        </div>
       </div>
 
       <SessionMetricsLive 

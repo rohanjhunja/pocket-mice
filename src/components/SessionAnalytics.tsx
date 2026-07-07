@@ -159,15 +159,23 @@ export function SessionAnalytics({ selectedStepsJson, students, responses, event
         new Date(b.submitted_at).getTime() - new Date(a.submitted_at).getTime()
       ))
 
+      const nonEmptyResponsesByStudent: Record<string, ResponseRow[]> = {}
+      Object.entries(byStudent).forEach(([studentId, versions]) => {
+        const latest = versions[0]
+        if (latest && latest.response_value && latest.response_value.trim() !== '') {
+          nonEmptyResponsesByStudent[studentId] = versions
+        }
+      })
+
       return {
         step,
         index: idx,
         uniqueCompleted: allCompleted.size,
         avgTimeMs,
         avgMediaClicks: allCompleted.size > 0 ? Math.round((mediaClicks.length / allCompleted.size) * 10) / 10 : 0,
-        hasResponses: step.learner_response?.response_required,
-        responsesByStudent: byStudent,
-        totalResponses: stepResponses.length,
+        hasResponses: !!step.learner_response || Object.keys(nonEmptyResponsesByStudent).length > 0,
+        responsesByStudent: nonEmptyResponsesByStudent,
+        totalResponses: Object.keys(nonEmptyResponsesByStudent).length,
       }
     })
   }, [allSteps, responses, events, students])
@@ -325,7 +333,7 @@ export function SessionAnalytics({ selectedStepsJson, students, responses, event
                                 <SheetTrigger
                                   render={
                                     <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700 gap-1" onClick={() => setSelectedStepId(row.step.step_id)}>
-                                      <Eye className="w-3.5 h-3.5" /> View ({row.uniqueCompleted})
+                                      <Eye className="w-3.5 h-3.5" /> View ({row.totalResponses})
                                     </Button>
                                   }
                                 />

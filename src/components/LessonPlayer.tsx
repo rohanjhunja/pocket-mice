@@ -29,6 +29,7 @@ interface LessonPlayerProps {
   isTeacher?: boolean;
   /** Pre-fetched response rows for the summary panel (initial snapshot) */
   initialResponseRows?: ResponseRow[];
+  teacherJoin?: boolean;
 }
 
 export default function LessonPlayer({
@@ -41,6 +42,7 @@ export default function LessonPlayer({
   simulationId,
   isTeacher = false,
   initialResponseRows = [],
+  teacherJoin = false,
 }: LessonPlayerProps) {
   const [allSteps, setAllSteps] = useState<any[]>([]);
   const [currentStepIndex, setCurrentStepIndex] = useState(resumeStepIndex);
@@ -99,7 +101,7 @@ export default function LessonPlayer({
       setCurrentInputValue(learnerResponses[step.step_id] || "");
       setIsMinimized(false);
       setFailedEmbedUrl(null);
-      if (!isPreview) {
+      if (!isPreview || teacherJoin) {
         trackEvent(student.id, session.id, step.step_id, "step_viewed");
       }
     }
@@ -209,7 +211,7 @@ export default function LessonPlayer({
 
       try {
         setIsSubmitting(true);
-        if (!isPreview) {
+        if (!isPreview || teacherJoin) {
           await submitResponse(student.id, session.id, step.step_id, val);
         }
       } catch {
@@ -221,7 +223,7 @@ export default function LessonPlayer({
   };
 
   const handleNext = async () => {
-    if (!isPreview) {
+    if (!isPreview || teacherJoin) {
       trackEvent(student.id, session.id, step.step_id, "step_completed");
     }
     await handleSaveResponse();
@@ -234,7 +236,7 @@ export default function LessonPlayer({
 
   const handleBack = async () => {
     if (currentStepIndex > 0) {
-      if (!isPreview) {
+      if (!isPreview || teacherJoin) {
         trackEvent(student.id, session.id, step.step_id, "step_completed");
       }
       await handleSaveResponse();
@@ -269,7 +271,7 @@ export default function LessonPlayer({
           stepId={step.step_id}
           onThemeChange={setIsVideoTheme}
           onMediaInteraction={(eventType) => {
-            if (!isPreview) trackEvent(student.id, session.id, step.step_id, eventType);
+            if (!isPreview || teacherJoin) trackEvent(student.id, session.id, step.step_id, eventType);
           }}
           onEmbedError={(url) => setFailedEmbedUrl(url)}
         />
@@ -287,7 +289,10 @@ export default function LessonPlayer({
             initialResponses={allResponseRows}
           >
             <ResponseForm
-              responseReq={step.learner_response}
+              responseReq={step.learner_response ? {
+                ...step.learner_response,
+                response_required: teacherJoin ? false : step.learner_response.response_required
+              } : null}
               currentValue={currentInputValue}
               onChange={setCurrentInputValue}
               onSubmit={handleNext}

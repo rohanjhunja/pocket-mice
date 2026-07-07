@@ -52,6 +52,14 @@ export function InstructionOverlay({
   const hasMedia = !!step.interactive_or_media && !fallbackUrl;
   const hasLearnerInput = !!step.learner_response;
 
+  console.log("InstructionOverlay render:", {
+    stepId: step.step_id,
+    hasLearnerInput,
+    sessionId,
+    showSummary,
+    isMinimized
+  });
+
   // Normalize response type for the summary panel
   const responseType: ResponseType = (() => {
     const t = step.learner_response?.response_type;

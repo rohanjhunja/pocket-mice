@@ -4,8 +4,17 @@ import { cookies } from 'next/headers'
 import { profileLessonsSimulations } from '@/utils/simProfiling'
 import LessonPlayer from '@/components/LessonPlayer'
 
-export default async function PlaySessionPage({ params }: { params: Promise<{ code: string }> }) {
+export default async function PlaySessionPage({ 
+  params,
+  searchParams
+}: { 
+  params: Promise<{ code: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
   const { code } = await params
+  const { teacher_join } = await searchParams
+  const isTeacherJoin = teacher_join === 'true'
+
   const supabase = await createClient()
 
   // 1. Fetch Session to ensure it exists
@@ -150,6 +159,7 @@ export default async function PlaySessionPage({ params }: { params: Promise<{ co
       isPreview={isTeacher}
       isTeacher={isTeacher}
       initialResponseRows={initialResponseRows}
+      teacherJoin={isTeacherJoin}
     />
   )
 }
