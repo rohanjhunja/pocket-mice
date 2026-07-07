@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Local lesson files
 /lessons.local/
+
+# Temporary scratch files
+/scratch/

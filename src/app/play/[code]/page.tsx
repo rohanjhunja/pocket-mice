@@ -20,8 +20,9 @@ export default async function PlaySessionPage({ params }: { params: Promise<{ co
   }
 
   // Trigger profiling asynchronously to ensure baselines exist
-  if (session.lessons?.json_content) {
-    profileLessonsSimulations(session.lessons.json_content).catch(console.error);
+  const lessonJson = session.lessons?.json_content || session.selected_steps_json;
+  if (lessonJson) {
+    profileLessonsSimulations(lessonJson).catch(console.error);
   }
 
   // 2. Detect if the caller is the teacher (authenticated Supabase user)

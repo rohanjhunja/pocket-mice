@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts'
 import { X, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -130,7 +130,7 @@ export function ResponseSummaryPanel({
   const [crossText, setCrossText] = useState<string>('')
 
   // ── Supabase realtime subscription ──────────────────────────────────────
-  const supabase = useRef(createClient()).current
+  const supabase = useMemo(() => createClient(), [])
 
   useEffect(() => {
     // Subscribe to all new response inserts for this session

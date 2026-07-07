@@ -62,7 +62,7 @@ export default async function SessionDashboardPage({ params }: { params: Promise
       <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-bold text-slate-900 mb-2">Live Session Dashboard</h1>
-          <p className="text-lg text-slate-600">Lesson: {session.lessons.title}</p>
+          <p className="text-lg text-slate-600">Lesson: {session.lessons?.title || (session.selected_steps_json as any)?.lesson_title || 'Unknown Lesson'}</p>
         </div>
         
         <CopyableJoinLink sessionCode={session.session_code} />

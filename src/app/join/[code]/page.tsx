@@ -21,7 +21,9 @@ export default async function JoinSessionPage({ params }: { params: Promise<{ co
       <div className="w-full max-w-md">
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
           <div className="bg-blue-600 p-8 text-center text-white">
-            <h1 className="text-2xl font-bold mb-2">{session.lessons.title}</h1>
+            <h1 className="text-2xl font-bold mb-2">
+              {session.lessons?.title || (session.selected_steps_json as any)?.lesson_title || 'Live Lesson'}
+            </h1>
             <p className="text-blue-100 text-sm">Join this live session</p>
           </div>
           <div className="p-8">

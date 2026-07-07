@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { ProgressHeader } from "./ProgressHeader";
 import { MediaBackground } from "./MediaBackground";
 import { InstructionOverlay } from "./InstructionOverlay";
@@ -52,32 +52,30 @@ export default function LessonPlayer({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [failedEmbedUrl, setFailedEmbedUrl] = useState<string | null>(null);
 
-  // ── Response count per step (live) ──────────────────────────────────────
-  // Map of step_id → count of unique students who have responded
-  const [stepResponseCounts, setStepResponseCounts] = useState<Record<string, number>>(() => {
-    // Build initial counts from the pre-fetched rows
-    const latestPerStudent: Record<string, Record<string, ResponseRow>> = {};
-    for (const r of initialResponseRows) {
-      if (!latestPerStudent[r.step_id]) latestPerStudent[r.step_id] = {};
-      const existing = latestPerStudent[r.step_id][r.student_id];
-      if (!existing || new Date(r.submitted_at) > new Date(existing.submitted_at)) {
-        latestPerStudent[r.step_id][r.student_id] = r;
-      }
-    }
-    const counts: Record<string, number> = {};
-    for (const [stepId, byStudent] of Object.entries(latestPerStudent)) {
-      counts[stepId] = Object.keys(byStudent).length;
-    }
-    return counts;
-  });
-
   // Keep a running list of all response rows for the summary panel
   const [allResponseRows, setAllResponseRows] = useState<ResponseRow[]>(initialResponseRows);
+
+  // ── Response count per step (live) ──────────────────────────────────────
+  // Map of step_id → count of unique students who have responded
+  const stepResponseCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    const latestPerStudent: Record<string, Set<string>> = {};
+    for (const r of allResponseRows) {
+      if (!latestPerStudent[r.step_id]) {
+        latestPerStudent[r.step_id] = new Set();
+      }
+      latestPerStudent[r.step_id].add(r.student_id);
+    }
+    for (const [stepId, students] of Object.entries(latestPerStudent)) {
+      counts[stepId] = students.size;
+    }
+    return counts;
+  }, [allResponseRows]);
 
   // ── Teacher sync state ───────────────────────────────────────────────────
   const [isSyncing, setIsSyncing] = useState(false);
 
-  const supabase = useRef(createClient()).current;
+  const supabase = useMemo(() => createClient(), []);
 
   // ── Flatten steps ────────────────────────────────────────────────────────
   useEffect(() => {
@@ -125,24 +123,6 @@ export default function LessonPlayer({
         (payload) => {
           const newRow = payload.new as ResponseRow;
           setAllResponseRows((prev) => [...prev, newRow]);
-          // Update per-step unique student counts
-          setStepResponseCounts((prev) => {
-            // We need the full list to deduplicate. Since this is a lightweight
-            // incremental update, we recalculate only the affected step.
-            setAllResponseRows((rows) => {
-              const stepRows = [...rows, newRow].filter(
-                (r) => r.step_id === newRow.step_id
-              );
-              const uniqueStudents = new Set(stepRows.map((r) => r.student_id));
-              return rows; // return unchanged — we only needed rows for the count
-            });
-            // Simplified: increment count if this is a student we haven't
-            // counted yet (best-effort; ResponseSummaryPanel does exact dedup)
-            return {
-              ...prev,
-              [newRow.step_id]: (prev[newRow.step_id] ?? 0) + 1,
-            };
-          });
         }
       )
       .subscribe();
@@ -190,6 +170,27 @@ export default function LessonPlayer({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session?.id, isTeacher, isPreview, supabase]);
+
+  // ── Teacher sync handler ─────────────────────────────────────────────────
+  const handleSyncLearners = useCallback(async () => {
+    const currentStep = allSteps[currentStepIndex];
+    if (!isTeacher || !currentStep) return;
+    setIsSyncing(true);
+    try {
+      const res = await fetch(`/api/sessions/${session.id}/sync-step`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ teacher_step_id: currentStep.step_id }),
+      });
+      if (!res.ok) throw new Error("Sync failed");
+      toast.success("All learners synced to this step", { duration: 2500 });
+    } catch {
+      toast.error("Could not sync learners. Please try again.");
+    } finally {
+      // Show syncing state briefly so teacher gets visual feedback
+      setTimeout(() => setIsSyncing(false), 1500);
+    }
+  }, [isTeacher, allSteps, currentStepIndex, session.id]);
 
   if (allSteps.length === 0) {
     return (
@@ -240,26 +241,6 @@ export default function LessonPlayer({
       setCurrentStepIndex(currentStepIndex - 1);
     }
   };
-
-  // ── Teacher sync handler ─────────────────────────────────────────────────
-  const handleSyncLearners = useCallback(async () => {
-    if (!isTeacher || !step) return;
-    setIsSyncing(true);
-    try {
-      const res = await fetch(`/api/sessions/${session.id}/sync-step`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ teacher_step_id: step.step_id }),
-      });
-      if (!res.ok) throw new Error("Sync failed");
-      toast.success("All learners synced to this step", { duration: 2500 });
-    } catch {
-      toast.error("Could not sync learners. Please try again.");
-    } finally {
-      // Show syncing state briefly so teacher gets visual feedback
-      setTimeout(() => setIsSyncing(false), 1500);
-    }
-  }, [isTeacher, step, session.id]);
 
   const currentStepResponseCount = stepResponseCounts[step?.step_id] ?? 0;
 

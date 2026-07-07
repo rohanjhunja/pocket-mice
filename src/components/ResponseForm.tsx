@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { highlightSingleQuotes } from "@/utils/textFormatter";
 
 interface ResponseFormProps {
   responseReq: any;
@@ -44,9 +45,12 @@ export function ResponseForm({
       {responseReq && (
         <div className="mt-4 pt-4 flex-1 overflow-y-auto">
           {responseReq.prompt && (
-            <Label className="font-medium mb-2 text-slate-700">
-              {responseReq.prompt}
-            </Label>
+            <Label
+              className="font-medium mb-2 text-slate-700"
+              dangerouslySetInnerHTML={{
+                __html: highlightSingleQuotes(responseReq.prompt)
+              }}
+            />
           )}
 
           {normalizedType === 'dropdown' && (

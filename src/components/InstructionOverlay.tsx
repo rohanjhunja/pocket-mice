@@ -3,6 +3,7 @@
 import { ReactNode, useState } from "react";
 import { ChevronDown, ChevronUp, ExternalLink, BarChart2, X } from "lucide-react";
 import { ResponseSummaryPanel, ResponseType } from "./ResponseSummaryPanel";
+import { highlightSingleQuotes } from "@/utils/textFormatter";
 
 interface StepDef {
   step_id: string;
@@ -169,11 +170,11 @@ export function InstructionOverlay({
           /* ── Normal instruction content ── */
           <div className="p-5 overflow-y-auto flex-1 flex flex-col">
             <div
-              className="mb-5 text-slate-900"
+              className="mb-5 text-slate-900 whitespace-pre-wrap"
+              style={{ whiteSpace: "pre-wrap" }}
               dangerouslySetInnerHTML={{
-                __html: (step.instruction_text || "").replace(
-                  /\\n/g,
-                  "<br>"
+                __html: highlightSingleQuotes(
+                  (step.instruction_text || "").replace(/\\n/g, "\n")
                 ),
               }}
             />

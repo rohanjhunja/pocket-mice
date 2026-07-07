@@ -95,6 +95,7 @@ CREATE POLICY "Users can update own profile" ON public.profiles FOR UPDATE USING
 -- Lessons: Teachers can read their own lessons, and create lessons
 CREATE POLICY "Teachers can read own lessons" ON public.lessons FOR SELECT USING (auth.uid() = teacher_id);
 CREATE POLICY "Teachers can insert own lessons" ON public.lessons FOR INSERT WITH CHECK (auth.uid() = teacher_id);
+CREATE POLICY "Anyone can view lessons" ON public.lessons FOR SELECT USING (true);
 
 -- Sessions: Teachers can read/update their own sessions
 -- Also allow public (student) access to read session details by session_id/session_code
