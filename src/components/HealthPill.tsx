@@ -5,15 +5,17 @@ import { Loader2, ServerCrash, Wifi, ShieldAlert, Laptop, Activity } from 'lucid
 import { DiagnosticTrace } from '@/utils/runDiagnostics';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 interface HealthPillProps {
   url: string;
   loadStatus: 'checking' | 'loaded' | 'failed' | 'timeout';
   trace: DiagnosticTrace | null;
   aggregateData?: any;
+  className?: string;
 }
 
-export function HealthPill({ url, loadStatus, trace, aggregateData }: HealthPillProps) {
+export function HealthPill({ url, loadStatus, trace, aggregateData, className }: HealthPillProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   // Determine current run health color based on trace or loadStatus
@@ -79,7 +81,11 @@ export function HealthPill({ url, loadStatus, trace, aggregateData }: HealthPill
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger 
-        className={`absolute top-4 right-4 z-50 flex items-center gap-1.5 px-2.5 py-1 rounded-full shadow-sm text-xs font-medium transition-all duration-300 opacity-90 hover:opacity-100 cursor-pointer ${color}`} 
+        className={cn(
+          "absolute top-4 right-4 z-50 flex items-center gap-1.5 px-2.5 py-1 rounded-full shadow-sm text-xs font-medium transition-all duration-300 opacity-90 hover:opacity-100 cursor-pointer",
+          color,
+          className
+        )} 
       >
         {loadStatus === 'checking' ? (
           <Loader2 className="w-3 h-3 animate-spin" />

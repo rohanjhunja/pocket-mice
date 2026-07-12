@@ -36,15 +36,19 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    const serializedPayload = JSON.stringify({
+      failure_reason: failure_reason || null,
+      diagnostics: diagnostics || null,
+      dynamic_expected_ms: dynamic_expected_ms || null
+    });
+
     const { error } = await supabase
       .from('sim_health_checks')
       .insert({
         url,
         load_time_ms,
-        dynamic_expected_ms,
         status,
-        failure_reason,
-        diagnostics,
+        failure_reason: serializedPayload,
         region,
         bandwidth_class
       });
@@ -89,14 +93,14 @@ export async function GET(request: NextRequest) {
   }
 
   // 2. Get last 10 checks
-  const { data: checks, error: cError } = await supabase
+  const { data: rawChecks, error: cError } = await supabase
     .from('sim_health_checks')
     .select('*')
     .eq('url', url)
     .order('created_at', { ascending: false })
     .limit(10);
 
-  if (cError || !checks || checks.length === 0) {
+  if (cError || !rawChecks || rawChecks.length === 0) {
     return NextResponse.json({
       status: 'Healthy',
       ideal_load_ms: baseline.ideal_load_ms,
@@ -107,6 +111,27 @@ export async function GET(request: NextRequest) {
       checks: []
     });
   }
+
+  // Deserialize failure_reason, diagnostics, dynamic_expected_ms
+  const checks = rawChecks.map(check => {
+    let failure_reason = check.failure_reason;
+    let diagnostics = null;
+    let dynamic_expected_ms = null;
+    if (check.failure_reason && check.failure_reason.startsWith('{')) {
+      try {
+        const payload = JSON.parse(check.failure_reason);
+        failure_reason = payload.failure_reason;
+        diagnostics = payload.diagnostics;
+        dynamic_expected_ms = payload.dynamic_expected_ms;
+      } catch (e) {}
+    }
+    return {
+      ...check,
+      failure_reason,
+      diagnostics,
+      dynamic_expected_ms
+    };
+  });
 
   // Calculate moving average ratio using dynamic expected ms if available, else ideal
   let totalActual = 0;

@@ -11,17 +11,30 @@ export default async function DashboardPage() {
   const role = user ? await getRole(supabase, user.id) : 'teacher'
   const isAdmin = role === 'admin'
 
-  const [lessons, recentSessions, simulationsRaw, { data: checks }] = await Promise.all([
+  const [lessons, recentSessions, simulationsRaw, { data: checksRaw }] = await Promise.all([
     getLessons(),
     getRecentSessions(),
     getSimulations(),
-    supabase.from('sim_health_checks').select('url, status, load_time_ms, dynamic_expected_ms').order('created_at', { ascending: false })
+    supabase.from('sim_health_checks').select('url, status, load_time_ms, failure_reason').order('created_at', { ascending: false })
   ])
 
   // Attach health status to simulations
-  const safeChecks = checks || [];
+  const safeChecks = (checksRaw || []).map(check => {
+    let dynamic_expected_ms = null;
+    if (check.failure_reason && check.failure_reason.startsWith('{')) {
+      try {
+        const payload = JSON.parse(check.failure_reason);
+        dynamic_expected_ms = payload.dynamic_expected_ms;
+      } catch (e) {}
+    }
+    return {
+      ...check,
+      dynamic_expected_ms
+    };
+  });
   const simulations = simulationsRaw.map(sim => {
-    const simChecks = safeChecks.filter(c => c.url === sim.url).slice(0, 10);
+    const allSimChecks = safeChecks.filter(c => c.url === sim.url);
+    const simChecks = allSimChecks.slice(0, 10);
     let totalActual = 0;
     let totalExpected = 0;
     let failures = 0;
@@ -57,7 +70,7 @@ export default async function DashboardPage() {
       ...sim,
       healthStatus,
       healthColor,
-      runsCount: simChecks.length
+      runsCount: Math.max(allSimChecks.length, 1)
     }
   });
 

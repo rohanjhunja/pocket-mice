@@ -34,7 +34,25 @@ export default async function SimulationOverviewPage({ params }: { params: Promi
     .eq('url', sim.url)
     .order('created_at', { ascending: false })
 
-  const checks = checksRaw || [];
+  const checks = (checksRaw || []).map(check => {
+    let failure_reason = check.failure_reason;
+    let diagnostics = null;
+    let dynamic_expected_ms = null;
+    if (check.failure_reason && check.failure_reason.startsWith('{')) {
+      try {
+        const payload = JSON.parse(check.failure_reason);
+        failure_reason = payload.failure_reason;
+        diagnostics = payload.diagnostics;
+        dynamic_expected_ms = payload.dynamic_expected_ms;
+      } catch (e) {}
+    }
+    return {
+      ...check,
+      failure_reason,
+      diagnostics,
+      dynamic_expected_ms
+    };
+  });
   const recent10 = checks.slice(0, 10);
 
   // Fetch lessons to find which ones use this simulation (exclude auto-generated wrappers)
@@ -244,12 +262,13 @@ export default async function SimulationOverviewPage({ params }: { params: Promi
                             {run.status === 'timeout' ? '> 5000ms' : `${run.load_time_ms}ms`}
                           </div>
                         </div>
-                        <div className="w-20">
+                        <div className="relative w-20 h-6">
                           <HealthPill 
                             url={run.url} 
                             loadStatus="loaded" 
                             trace={run.diagnostics} 
                             aggregateData={{ status: run.status === 'timeout' || run.status === 'error' ? 'Unhealthy' : (run.load_time_ms > (run.dynamic_expected_ms || 1000) * 1.5 ? 'Degraded' : 'Healthy'), checks: [run] }} 
+                            className="relative top-0 right-0 z-10"
                           />
                         </div>
                       </div>

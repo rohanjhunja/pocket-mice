@@ -7,7 +7,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { Upload, Plus, Globe, Activity, Loader2, Play } from 'lucide-react'
+import { Upload, Plus, Globe, Activity, Loader2, ChevronDown, ChevronUp } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { uploadSimulation, addSimulationByUrl } from '@/app/dashboard/actions'
 
@@ -18,6 +18,7 @@ interface SimulationsDashboardAreaProps {
 export function SimulationsDashboardArea({ simulations }: SimulationsDashboardAreaProps) {
   const router = useRouter()
   const [isUploading, setIsUploading] = useState(false)
+  const [viewAll, setViewAll] = useState(false)
   
   // URL Add Modal State
   const [isUrlModalOpen, setIsUrlModalOpen] = useState(false)
@@ -65,6 +66,14 @@ export function SimulationsDashboardArea({ simulations }: SimulationsDashboardAr
     }
   }
 
+  const showButton = simulations.length > 1
+  const buttonVisibilityClass = 
+    simulations.length > 4 ? 'block' :
+    (simulations.length === 4 || simulations.length === 3) ? 'lg:hidden block' :
+    simulations.length === 2 ? 'md:hidden block' :
+    'hidden'
+  const buttonContainerClass = viewAll ? 'block' : buttonVisibilityClass
+
   return (
     <div className="mb-12">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 gap-4">
@@ -105,32 +114,69 @@ export function SimulationsDashboardArea({ simulations }: SimulationsDashboardAr
           <p className="text-slate-500 mt-1 text-sm">Upload an HTML file or add a URL to start tracking health and assignments.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {simulations.map(sim => (
-            <Link key={sim.id} href={`/dashboard/simulation/${sim.id}`} className="block">
-              <Card className="h-full hover:border-blue-300 hover:shadow-md transition-all cursor-pointer flex flex-col group">
-                <CardHeader className="pb-3 flex-1">
-                  <CardTitle className="text-base line-clamp-2 leading-snug group-hover:text-blue-700 transition-colors">
-                    {sim.title}
-                  </CardTitle>
-                  <p className="text-xs text-slate-400 font-mono truncate mt-1">{sim.url}</p>
-                </CardHeader>
-                <CardContent className="pt-0 pb-4 mt-auto">
-                  <div className="flex items-center justify-between">
-                    <Badge variant="outline" className={`${sim.healthColor || 'bg-slate-100 text-slate-600 border-slate-200'}`}>
-                      {sim.healthStatus || 'No Data'}
-                    </Badge>
-                    {sim.runsCount !== undefined && (
-                      <span className="text-xs text-slate-500 font-medium bg-slate-50 px-2 py-1 rounded-md border border-slate-100">
-                        {sim.runsCount} runs
-                      </span>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {simulations.map((sim, index) => {
+              const itemClass = viewAll
+                ? "block"
+                : index === 0
+                ? "block"
+                : index === 1
+                ? "hidden md:block"
+                : (index === 2 || index === 3)
+                ? "hidden lg:block"
+                : "hidden"
+
+              return (
+                <Link key={sim.id} href={`/dashboard/simulation/${sim.id}`} className={itemClass}>
+                  <Card className="h-full hover:border-blue-300 hover:shadow-md transition-all cursor-pointer flex flex-col group">
+                    <CardHeader className="pb-3 flex-1">
+                      <CardTitle className="text-base line-clamp-2 leading-snug group-hover:text-blue-700 transition-colors">
+                        {sim.title}
+                      </CardTitle>
+                      <p className="text-xs text-slate-400 font-mono truncate mt-1">{sim.url}</p>
+                    </CardHeader>
+                    <CardContent className="pt-0 pb-4 mt-auto">
+                      <div className="flex items-center justify-between">
+                        <Badge variant="outline" className={`${sim.healthColor || 'bg-slate-100 text-slate-600 border-slate-200'}`}>
+                          {sim.healthStatus || 'No Data'}
+                        </Badge>
+                        {sim.runsCount !== undefined && (
+                          <span className="text-xs text-slate-500 font-medium bg-slate-50 px-2 py-1 rounded-md border border-slate-100">
+                            {sim.runsCount} runs
+                          </span>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              )
+            })}
+          </div>
+
+          {showButton && (
+            <div className={`flex justify-center mt-6 ${buttonContainerClass}`}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setViewAll(!viewAll)}
+                className="px-6 py-2 border-slate-200 text-slate-600 hover:text-slate-900 hover:border-slate-300 hover:bg-slate-50 transition-all rounded-full flex items-center gap-2 shadow-xs"
+              >
+                {viewAll ? (
+                  <>
+                    Show Less
+                    <ChevronUp className="w-4 h-4" />
+                  </>
+                ) : (
+                  <>
+                    See More
+                    <ChevronDown className="w-4 h-4" />
+                  </>
+                )}
+              </Button>
+            </div>
+          )}
+        </>
       )}
 
       {/* Add by URL Modal */}

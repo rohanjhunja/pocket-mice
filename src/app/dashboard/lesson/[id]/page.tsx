@@ -62,11 +62,31 @@ export default async function LessonOverviewPage({ params }: { params: Promise<{
       .in('url', simulationUrls);
       
     if (baselines) {
-      const { data: checks } = await supabase
+      const { data: checksRaw } = await supabase
         .from('sim_health_checks')
-        .select('url, load_time_ms, status, diagnostics, dynamic_expected_ms')
+        .select('url, load_time_ms, status, failure_reason')
         .in('url', simulationUrls)
         .order('created_at', { ascending: false });
+
+      const checks = (checksRaw || []).map(check => {
+        let failure_reason = check.failure_reason;
+        let diagnostics = null;
+        let dynamic_expected_ms = null;
+        if (check.failure_reason && check.failure_reason.startsWith('{')) {
+          try {
+            const payload = JSON.parse(check.failure_reason);
+            failure_reason = payload.failure_reason;
+            diagnostics = payload.diagnostics;
+            dynamic_expected_ms = payload.dynamic_expected_ms;
+          } catch (e) {}
+        }
+        return {
+          ...check,
+          failure_reason,
+          diagnostics,
+          dynamic_expected_ms
+        };
+      });
 
       baselines.forEach(baseline => {
         const simChecks = (checks || []).filter(c => c.url === baseline.url).slice(0, 10);
@@ -173,6 +193,7 @@ export default async function LessonOverviewPage({ params }: { params: Promise<{
                                   loadStatus="loaded" 
                                   trace={null} 
                                   aggregateData={health} 
+                                  className="relative top-0 right-0 z-10"
                                 />
                               </div>
                             )}

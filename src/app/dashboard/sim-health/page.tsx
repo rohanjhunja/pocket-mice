@@ -38,7 +38,25 @@ export default async function SimHealthDashboard() {
     .select('id, title, json_content');
 
   const safeBaselines = baselines || [];
-  const safeChecks = checks || [];
+  const safeChecks = (checks || []).map(check => {
+    let failure_reason = check.failure_reason;
+    let diagnostics = null;
+    let dynamic_expected_ms = null;
+    if (check.failure_reason && check.failure_reason.startsWith('{')) {
+      try {
+        const payload = JSON.parse(check.failure_reason);
+        failure_reason = payload.failure_reason;
+        diagnostics = payload.diagnostics;
+        dynamic_expected_ms = payload.dynamic_expected_ms;
+      } catch (e) {}
+    }
+    return {
+      ...check,
+      failure_reason,
+      diagnostics,
+      dynamic_expected_ms
+    };
+  });
   const safeLessons = lessons || [];
 
   // Map URLs to Lesson Titles and find all unique simulation URLs
