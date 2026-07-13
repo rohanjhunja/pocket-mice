@@ -424,7 +424,7 @@ export default function LessonPlayer({
                     return (
                       <div
                         key={s.step_id}
-                        className="flex flex-col bg-white border border-slate-200 rounded-xl pt-4 pb-3 shadow-sm hover:shadow-md transition-shadow h-[350px] max-h-[350px] overflow-hidden"
+                        className="flex flex-col bg-white border border-slate-200 rounded-xl pt-4 pb-3 shadow-sm hover:shadow-md transition-shadow h-[525px] max-h-[525px] overflow-hidden"
                       >
                         {/* Card Header */}
                         <div className="flex items-center justify-between pb-2 border-b border-slate-100 flex-shrink-0 px-4">

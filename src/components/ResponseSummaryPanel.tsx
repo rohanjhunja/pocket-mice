@@ -270,6 +270,7 @@ export function ResponseSummaryPanel({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ sessionId, stepId, checkCache, forceRefresh }),
+        cache: 'no-store',
       })
 
       if (!res.ok) {
@@ -502,7 +503,7 @@ export function ResponseSummaryPanel({
                           </div>
                           <div>
                             <h3 className="text-sm font-bold text-slate-800">
-                              AI Learning Goal Summary
+                              AI Summary
                             </h3>
                           </div>
                         </div>
@@ -521,7 +522,7 @@ export function ResponseSummaryPanel({
                             className="h-8 text-xs border-slate-200 text-slate-600 hover:text-indigo-600 hover:border-indigo-200 hover:bg-indigo-50/30 gap-1.5"
                           >
                             <RefreshCw className={`w-3.5 h-3.5 ${isSummaryLoading ? 'animate-spin' : ''}`} />
-                            Refresh
+                            Regenerate
                           </Button>
                         </div>
                       </div>
@@ -580,12 +581,12 @@ export function ResponseSummaryPanel({
                                     className={`text-xs p-4 rounded-xl border transition-all cursor-pointer select-none flex flex-col gap-2 ${
                                       isActive
                                         ? 'bg-blue-50/70 border-blue-200 shadow-sm'
-                                        : 'bg-white border-slate-100 hover:border-blue-100 hover:bg-blue-50/10'
+                                        : 'bg-white border-slate-100 hover:border-slate-200 hover:bg-white/70'
                                     }`}
                                   >
                                     <div className="flex items-start justify-between gap-4">
                                       <div className="flex flex-col gap-1.5 flex-1">
-                                        <h4 className="text-sm font-bold text-blue-600 pl-0.5 leading-snug">
+                                        <h4 className="text-sm font-bold text-slate-900 pl-0.5 leading-snug">
                                           {point.title}
                                         </h4>
                                         <p className="text-slate-650 leading-relaxed pl-0.5">
@@ -643,7 +644,7 @@ export function ResponseSummaryPanel({
                         className="w-full py-2 text-xs font-semibold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 rounded-lg shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
                       >
                         <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
-                        {isSummaryLoading ? "Generating..." : "Generate Summary"}
+                        {isSummaryLoading ? "Regenerating..." : "Regenerate"}
                       </Button>
                       {apiError && (
                         <div className="mt-2 text-xs text-red-500 border border-red-100 bg-red-50/30 p-2 rounded">

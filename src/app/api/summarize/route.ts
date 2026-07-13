@@ -276,37 +276,46 @@ You must return a valid JSON object matching the following JSON schema. Do not w
 
   // Helper: try each model in order, falling back on 429 quota errors
   const GEMINI_MODELS = [
+    'gemini-3.5-flash',
+    'gemini-2.5-flash',
     'gemini-2.0-flash',
-    'gemini-1.5-flash-8b',
-    'gemini-1.5-flash',
+    'gemini-flash-latest',
+    'gemini-flash-lite-latest',
   ]
 
   async function callGeminiWithFallback(): Promise<{ data: any; modelUsed: string }> {
     let lastError = ''
     for (const model of GEMINI_MODELS) {
       const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(geminiPayload),
-      })
-      if (res.ok) {
-        return { data: await res.json(), modelUsed: model }
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(geminiPayload),
+          cache: 'no-store',
+        })
+        const text = await res.text()
+        if (res.ok) {
+          try {
+            const data = JSON.parse(text)
+            return { data, modelUsed: model }
+          } catch (jsonErr) {
+            console.error(`[summarize] Failed to parse JSON from model ${model}:`, text)
+            lastError = `JSON parse error on model ${model}`
+            continue
+          }
+        }
+        let parsedErr: any = {}
+        try { parsedErr = JSON.parse(text) } catch {}
+        const message = parsedErr?.error?.message || text
+        console.warn(`[summarize] Model ${model} failed (${res.status}): ${message}`)
+        lastError = `Model ${model} failed (${res.status}): ${message}`
+      } catch (err: any) {
+        console.warn(`[summarize] Fetch error on model ${model}: ${err.message}`)
+        lastError = `Fetch error on model ${model}: ${err.message}`
       }
-      const errText = await res.text()
-      let parsedErr: any = {}
-      try { parsedErr = JSON.parse(errText) } catch {}
-      const message = parsedErr?.error?.message || errText
-      console.warn(`[summarize] Model ${model} failed (${res.status}): ${message}`)
-      if (res.status === 429) {
-        // Quota exhausted — try next model
-        lastError = `Quota exceeded on ${model}: ${message}`
-        continue
-      }
-      // Non-quota error — fail immediately
-      throw new Error(`Gemini API error (${res.status}) on model ${model}: ${message}`)
     }
-    throw new Error(`All Gemini models quota-exhausted. Last error: ${lastError}`)
+    throw new Error(`All Gemini models failed. Last error: ${lastError}`)
   }
 
   try {
