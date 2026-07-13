@@ -14,6 +14,7 @@ interface ResponseFormProps {
   canGoBack: boolean;
   isLastStep: boolean;
   isSubmitting?: boolean;
+  isPreview?: boolean;
 }
 
 export function ResponseForm({ 
@@ -24,7 +25,8 @@ export function ResponseForm({
   onBack, 
   canGoBack, 
   isLastStep,
-  isSubmitting = false
+  isSubmitting = false,
+  isPreview = false
 }: ResponseFormProps) {
   
   // Normalize legacy response types to current values
@@ -36,8 +38,13 @@ export function ResponseForm({
   })()
 
   // Decide next button state
-  const isNextDisabled = responseReq?.response_required && !currentValue.trim();
-  const nextText = responseReq?.response_required ? 'Submit' : (isLastStep ? 'Finish' : 'Continue');
+  const isNextDisabled = !isPreview && responseReq?.response_required && !currentValue.trim();
+  const nextText = (() => {
+    if (responseReq?.response_required) {
+      return isPreview ? 'Submit*' : 'Submit';
+    }
+    return isLastStep ? 'Finish' : 'Continue';
+  })();
 
   return (
     <div className="flex flex-col h-full">

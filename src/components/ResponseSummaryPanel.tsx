@@ -2,11 +2,11 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts'
-import { X, ChevronDown } from 'lucide-react'
+import { X, ChevronDown, Sparkles, RefreshCw, AlertCircle, Cloud } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { WordCloud } from './WordCloud'
 import { createClient } from '@/utils/supabase/client'
+import { WordCloud } from './WordCloud'
 
 // ---------------------------------------------------------------------------
 // Types
@@ -44,6 +44,8 @@ interface ResponseSummaryPanelProps {
   /** Initial snapshot of responses (SSR pre-fetched); real-time updates on top */
   initialResponses: ResponseRow[]
   onClose: () => void
+  autoGenerateSummary?: boolean
+  isCompact?: boolean
 }
 
 // ---------------------------------------------------------------------------
@@ -114,6 +116,8 @@ export function ResponseSummaryPanel({
   allSteps,
   initialResponses,
   onClose,
+  autoGenerateSummary = true,
+  isCompact = false,
 }: ResponseSummaryPanelProps) {
   const normType = normaliseType(responseType)
   const isTextBased = normType === 'text_short' || normType === 'text_long'
@@ -139,12 +143,187 @@ export function ResponseSummaryPanel({
     setStudentNames(prev => ({ ...prev, ...namesMap }))
   }, [initialResponses])
 
-  // ── Word cloud filter ────────────────────────────────────────────────────
-  const [activeWord, setActiveWord] = useState<string | null>(null)
-
   // ── Cross-filter state ───────────────────────────────────────────────────
   const [crossStepId, setCrossStepId] = useState<string>('')
   const [crossText, setCrossText] = useState<string>('')
+
+  // ── AI Summary states ────────────────────────────────────────────────────
+  interface AISummaryPoint {
+    title: string
+    synthesis: string
+    matchingResponseIds: string[]
+  }
+
+  interface AISummaryData {
+    summaryPoints: AISummaryPoint[]
+  }
+
+  const [aiSummary, setAiSummary] = useState<AISummaryData | null>(null)
+  const [activeBulletId, setActiveBulletId] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState<'ai' | 'cloud'>('ai')
+  const [activeWord, setActiveWord] = useState<string | null>(null)
+  const [isSummaryLoading, setIsSummaryLoading] = useState(false)
+  const [apiError, setApiError] = useState<string | null>(null)
+  const [summaryCount, setSummaryCount] = useState<number>(0)
+  const [summaryTimestamp, setSummaryTimestamp] = useState<string | null>(null)
+
+  // ── Latest-per-student deduplication (current step) ─────────────────────
+  const latestResponses = useMemo(() => latestPerStudent(allResponses), [allResponses])
+
+  // ── Cross-filter: compute allowed student IDs ────────────────────────────
+  const crossFilteredStudentIds = useMemo(() => {
+    if (!crossStepId || !crossText.trim()) return null
+    const priorForStep = allSessionResponses.filter(r => r.step_id === crossStepId)
+    const legacyDeduplicate = latestPerStudent(priorForStep)
+    const lowerQuery = crossText.toLowerCase().trim()
+    const matching = legacyDeduplicate.filter(r =>
+      r.response_value?.toLowerCase().includes(lowerQuery)
+    )
+    return new Set(matching.map(r => r.student_id))
+  }, [crossStepId, crossText, allSessionResponses])
+
+  // ── Apply cross-filter to current responses ──────────────────────────────
+  const visibleResponses = useMemo(() => {
+    let rows = latestResponses
+    if (crossFilteredStudentIds) {
+      rows = rows.filter(r => crossFilteredStudentIds.has(r.student_id))
+    }
+    return rows
+  }, [latestResponses, crossFilteredStudentIds])
+
+  // ── Texts for word cloud ─────────────────────────────────────────────────
+  const cloudTexts = useMemo(
+    () => visibleResponses.map(r => r.response_value).filter(Boolean),
+    [visibleResponses]
+  )
+
+  // ── Apply word filter to list (text steps only) ──────────────────────────
+  const wordFilteredResponses = useMemo(() => {
+    if (!activeWord) return visibleResponses
+    return visibleResponses.filter(r =>
+      r.response_value?.toLowerCase().includes(activeWord.toLowerCase())
+    )
+  }, [visibleResponses, activeWord])
+
+  const normalizedSummary = useMemo<AISummaryData | null>(() => {
+    if (!aiSummary) return null
+
+    // If it has summaryPoints (new format), return as is
+    if ('summaryPoints' in aiSummary && Array.isArray(aiSummary.summaryPoints)) {
+      return aiSummary as AISummaryData
+    }
+
+    // If it has goals (old format), map it dynamically
+    const legacy = aiSummary as any
+    if (legacy.goals && Array.isArray(legacy.goals)) {
+      const summaryPoints = legacy.goals.flatMap((goal: any) => {
+        return (goal.levels || []).map((level: any) => ({
+          title: `“${level.subSkill}”`,
+          synthesis: level.observedPattern || '',
+          matchingResponseIds: level.matchingResponseIds || [],
+        }))
+      })
+      return {
+        summaryPoints,
+      }
+    }
+
+    return null
+  }, [aiSummary])
+
+  // ── Donut data ───────────────────────────────────────────────────────────
+  const donutData = useMemo(() => {
+    if (isTextBased) return []
+    const effectiveOptions = options.length > 0 ? options : [
+      ...new Set(visibleResponses.map(r => r.response_value).filter(Boolean))
+    ]
+    return effectiveOptions.map(opt => ({
+      name: opt,
+      value: visibleResponses.filter(r => r.response_value === opt).length,
+    })).filter(d => d.value > 0 || options.length > 0)
+  }, [isTextBased, options, visibleResponses])
+
+  // ── AI Summary Caching & Fetching Memos / Hooks ──────────────────────────
+  const latestResponseTime = useMemo(() => {
+    if (visibleResponses.length === 0) return null
+    return new Date(Math.max(...visibleResponses.map(r => new Date(r.submitted_at).getTime()))).toISOString()
+  }, [visibleResponses])
+
+  const hasNewResponses = useMemo(() => {
+    if (!aiSummary) return false
+    const isTimestampMatch = (() => {
+      if (!summaryTimestamp && !latestResponseTime) return true
+      if (!summaryTimestamp || !latestResponseTime) return false
+      return new Date(summaryTimestamp).getTime() === new Date(latestResponseTime).getTime()
+    })()
+    return visibleResponses.length !== summaryCount || !isTimestampMatch
+  }, [aiSummary, visibleResponses.length, summaryCount, latestResponseTime, summaryTimestamp])
+
+  const fetchSummary = useCallback(async (checkCache: boolean = false, forceRefresh: boolean = false) => {
+    if (!sessionId || !stepId) return
+    setIsSummaryLoading(true)
+    setApiError(null)
+    try {
+      const res = await fetch('/api/summarize', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ sessionId, stepId, checkCache, forceRefresh }),
+      })
+
+      if (!res.ok) {
+        const errData = await res.json()
+        if (errData.error === 'GEMINI_KEY_MISSING') {
+          setApiError('GEMINI_KEY_MISSING')
+        } else {
+          setApiError(errData.error || 'Failed to generate summary')
+        }
+        return
+      }
+
+      const data = await res.json()
+      if (data.summary) {
+        setAiSummary(data.summary)
+        setSummaryCount(data.count || 0)
+        setSummaryTimestamp(data.lastResponseAt || null)
+      } else {
+        setAiSummary(null)
+      }
+    } catch (err: any) {
+      console.error('[ResponseSummaryPanel] fetchSummary error', err)
+      setApiError(err.message || 'An unexpected error occurred')
+    } finally {
+      setIsSummaryLoading(false)
+    }
+  }, [sessionId, stepId])
+
+  // Load cached summary from database on mount if any exists (across all views)
+  useEffect(() => {
+    if (isTextBased && visibleResponses.length > 0 && !aiSummary && !isSummaryLoading && !apiError) {
+      // Check cache first (only calls database, doesn't invoke Gemini)
+      fetchSummary(true)
+    }
+  }, [isTextBased, visibleResponses.length, fetchSummary, aiSummary, isSummaryLoading, apiError])
+
+  // If auto-generate is enabled and we still don't have a summary, run full Gemini fetch
+  useEffect(() => {
+    if (autoGenerateSummary && isTextBased && visibleResponses.length > 0 && !aiSummary && !isSummaryLoading && !apiError) {
+      // Run full summary generation (calls Gemini if cache is stale or missing)
+      fetchSummary(false)
+    }
+  }, [autoGenerateSummary, isTextBased, visibleResponses.length, fetchSummary, aiSummary, isSummaryLoading, apiError])
+
+  const resetCrossFilter = useCallback(() => {
+    setCrossStepId('')
+    setCrossText('')
+  }, [])
+
+  // Steps that have a learner_response (excluding the current step)
+  const filterableSteps = useMemo(
+    () => allSteps.filter(s => s.learner_response && s.step_id !== stepId),
+    [allSteps, stepId]
+  )
 
   // ── Supabase realtime subscription ──────────────────────────────────────
   const supabase = useMemo(() => createClient(), [])
@@ -196,214 +375,339 @@ export function ResponseSummaryPanel({
     }
   }, [sessionId, stepId, supabase])
 
-  // ── Latest-per-student deduplication (current step) ─────────────────────
-  const latestResponses = useMemo(() => latestPerStudent(allResponses), [allResponses])
-
-  // ── Cross-filter: compute allowed student IDs ────────────────────────────
-  const crossFilteredStudentIds = useMemo(() => {
-    if (!crossStepId || !crossText.trim()) return null
-    const priorForStep = allSessionResponses.filter(r => r.step_id === crossStepId)
-    const latestPrior = latestPerStudent(priorForStep)
-    const lowerQuery = crossText.toLowerCase().trim()
-    const matching = latestPrior.filter(r =>
-      r.response_value?.toLowerCase().includes(lowerQuery)
-    )
-    return new Set(matching.map(r => r.student_id))
-  }, [crossStepId, crossText, allSessionResponses])
-
-  // ── Apply cross-filter to current responses ──────────────────────────────
-  const visibleResponses = useMemo(() => {
-    let rows = latestResponses
-    if (crossFilteredStudentIds) {
-      rows = rows.filter(r => crossFilteredStudentIds.has(r.student_id))
-    }
-    return rows
-  }, [latestResponses, crossFilteredStudentIds])
-
-  // ── Apply word filter to list (text steps only) ──────────────────────────
-  const wordFilteredResponses = useMemo(() => {
-    if (!activeWord) return visibleResponses
-    return visibleResponses.filter(r =>
-      r.response_value?.toLowerCase().includes(activeWord.toLowerCase())
-    )
-  }, [visibleResponses, activeWord])
-
-  // ── Donut data ───────────────────────────────────────────────────────────
-  const donutData = useMemo(() => {
-    if (isTextBased) return []
-    const effectiveOptions = options.length > 0 ? options : [
-      ...new Set(visibleResponses.map(r => r.response_value).filter(Boolean))
-    ]
-    return effectiveOptions.map(opt => ({
-      name: opt,
-      value: visibleResponses.filter(r => r.response_value === opt).length,
-    })).filter(d => d.value > 0 || options.length > 0)
-  }, [isTextBased, options, visibleResponses])
-
-  // ── Texts for word cloud ─────────────────────────────────────────────────
-  const cloudTexts = useMemo(
-    () => visibleResponses.map(r => r.response_value).filter(Boolean),
-    [visibleResponses]
-  )
-
-  const resetCrossFilter = useCallback(() => {
-    setCrossStepId('')
-    setCrossText('')
-  }, [])
-
-  // Steps that have a learner_response (excluding the current step)
-  const filterableSteps = useMemo(
-    () => allSteps.filter(s => s.learner_response && s.step_id !== stepId),
-    [allSteps, stepId]
-  )
-
   const hasCrossFilter = !!(crossStepId && crossText.trim())
-  const hasWordFilter = !!activeWord
   const totalCount = latestResponses.length
   const visibleCount = visibleResponses.length
 
   return (
-    <div className="flex flex-col h-full">
-      {/* ── Top filter bar ── */}
-      <div className="px-5 pt-4 pb-3 border-b border-slate-100 bg-slate-50/60">
-        <div className="flex items-center gap-2 text-xs font-medium text-slate-500 mb-2 uppercase tracking-wide">
-          Filter by prior question
-        </div>
-        <div className="flex gap-2 items-center flex-wrap">
-          {/* Step selector */}
-          <div className="relative flex-1 min-w-[140px]">
-            <select
-              value={crossStepId}
-              onChange={e => { setCrossStepId(e.target.value); setCrossText('') }}
-              className="w-full appearance-none text-sm border border-slate-200 rounded-lg px-3 py-2 pr-8 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-              aria-label="Select a prior question to filter by"
-            >
-              <option value="">Select a question…</option>
-              {filterableSteps.map(s => (
-                <option key={s.step_id} value={s.step_id}>
-                  {s.title}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+    <div className="flex flex-col h-full animate-fadeIn">
+      {/* ── Top filter bar (Functional but hidden visually as requested) ── */}
+      {false && (
+        <div className="px-5 pt-4 pb-3 border-b border-slate-100 bg-slate-50/60">
+          <div className="flex gap-2 items-center flex-wrap">
+            {/* Step selector */}
+            <div className="relative flex-1 min-w-[140px]">
+              <select
+                value={crossStepId}
+                onChange={e => { setCrossStepId(e.target.value); setCrossText('') }}
+                className="w-full appearance-none text-sm border border-slate-200 rounded-lg px-3 py-2 pr-8 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                aria-label="Select a prior question to filter by"
+              >
+                <option value="">Select a question…</option>
+                {filterableSteps.map(s => (
+                  <option key={s.step_id} value={s.step_id}>
+                    {s.title}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+            </div>
+
+            {/* Text match input */}
+            {crossStepId && (
+              <Input
+                value={crossText}
+                onChange={e => setCrossText(e.target.value)}
+                placeholder="Filter text…"
+                className="flex-1 min-w-[100px] text-sm h-9"
+                aria-label="Filter text for selected question"
+              />
+            )}
+
+            {/* Reset */}
+            {hasCrossFilter && (
+              <button
+                onClick={resetCrossFilter}
+                className="flex items-center gap-1 px-2 py-1.5 rounded-lg bg-blue-100 text-blue-700 text-xs font-medium hover:bg-blue-200 transition-colors"
+                aria-label="Reset cross-filter"
+              >
+                <X className="w-3.5 h-3.5" />
+                Reset
+              </button>
+            )}
           </div>
-
-          {/* Text match input */}
-          {crossStepId && (
-            <Input
-              value={crossText}
-              onChange={e => setCrossText(e.target.value)}
-              placeholder="Filter text…"
-              className="flex-1 min-w-[100px] text-sm h-9"
-              aria-label="Filter text for selected question"
-            />
-          )}
-
-          {/* Reset */}
-          {hasCrossFilter && (
-            <button
-              onClick={resetCrossFilter}
-              className="flex items-center gap-1 px-2 py-1.5 rounded-lg bg-blue-100 text-blue-700 text-xs font-medium hover:bg-blue-200 transition-colors"
-              aria-label="Reset cross-filter"
-            >
-              <X className="w-3.5 h-3.5" />
-              Reset
-            </button>
-          )}
         </div>
-
-        {/* Active filter summary */}
-        {hasCrossFilter && (
-          <p className="mt-2 text-xs text-slate-500">
-            Showing <span className="font-semibold text-slate-700">{visibleCount}</span> of{' '}
-            <span className="font-semibold text-slate-700">{totalCount}</span> responses where
-            prior answer contains &ldquo;<span className="text-blue-600 font-medium">{crossText}</span>&rdquo;
-          </p>
-        )}
-      </div>
+      )}
 
       {/* ── Main content ── */}
-      <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5">
+      <div className={`flex-1 overflow-y-auto space-y-4 ${isCompact ? 'px-0.5 py-1' : 'px-5 py-4'}`}>
 
-        {/* Response count pill */}
-        <div className="flex items-center justify-between">
-          <span className="text-sm font-semibold text-slate-800">
-            {visibleCount} {visibleCount === 1 ? 'response' : 'responses'}
-            {hasCrossFilter && ` (filtered from ${totalCount})`}
-          </span>
-          {(hasWordFilter) && (
-            <button
-              onClick={() => setActiveWord(null)}
-              className="flex items-center gap-1 px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-medium hover:bg-blue-200 transition-colors"
-            >
-              <X className="w-3 h-3" />
-              &ldquo;{activeWord}&rdquo;
-            </button>
-          )}
-        </div>
-
-        {/* ────── TEXT-BASED: Word cloud + response list ────── */}
-        {isTextBased && (
+        {visibleCount === 0 ? (
+          <div className="flex flex-col items-center justify-center py-10 text-slate-400 text-sm">
+            No responses yet
+          </div>
+        ) : (
           <>
-            <div className="bg-white border border-slate-100 rounded-xl p-4 overflow-hidden shadow-sm">
-              {cloudTexts.length === 0 ? (
-                <div className="flex items-center justify-center h-40 text-slate-400 text-sm">
-                  No responses yet
-                </div>
-              ) : (
-                <WordCloud
-                  texts={cloudTexts}
-                  activeWord={activeWord}
-                  onWordClick={(word) =>
-                    setActiveWord(prev => (prev === word ? null : word))
-                  }
-                />
-              )}
-              {cloudTexts.length > 0 && (
-                <p className="text-center text-xs text-slate-400 mt-2">
-                  Click a word to filter responses
-                </p>
-              )}
-            </div>
+            {/* Response count pill & icon-only tabs */}
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-semibold text-slate-800">
+                {visibleCount} {visibleCount === 1 ? 'response' : 'responses'}
+                {hasCrossFilter && ` (filtered from ${totalCount})`}
+              </span>
+              <div className="flex items-center gap-2">
+                {activeTab === 'cloud' && activeWord && (
+                  <button
+                    onClick={() => setActiveWord(null)}
+                    className="flex items-center gap-1 px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-medium hover:bg-blue-200 transition-colors"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                    &ldquo;{activeWord}&rdquo;
+                  </button>
+                )}
 
-            {/* Response list */}
-            <div className="space-y-2">
-              {wordFilteredResponses.length === 0 ? (
-                <p className="text-sm text-slate-400 text-center py-4">
-                  No responses match the current filter.
-                </p>
-              ) : (
-                wordFilteredResponses.map((r) => (
-                  <ResponseListItem
-                    key={r.id}
-                    value={r.response_value}
-                    highlight={activeWord}
-                    studentName={studentNames[r.student_id] || r.students?.name}
-                  />
-                ))
-              )}
-            </div>
-          </>
-        )}
-
-        {/* ────── CHOICE-BASED: Donut chart ────── */}
-        {!isTextBased && (
-          <>
-            {donutData.filter(d => d.value > 0).length === 0 ? (
-              <div className="flex items-center justify-center h-48 text-slate-400 text-sm">
-                No responses yet
+                {/* Icon-only tabs - only shown if > 3 responses */}
+                {isTextBased && visibleCount > 3 && (
+                  <div className="flex bg-slate-100 p-0.5 rounded-md border border-slate-200/50">
+                    <button
+                      onClick={() => { setActiveTab('ai'); setActiveWord(null) }}
+                      title="AI Summary"
+                      className={`p-1 rounded transition-all ${
+                        activeTab === 'ai'
+                          ? 'bg-white text-indigo-600 shadow-sm'
+                          : 'text-slate-400 hover:text-slate-600'
+                      }`}
+                    >
+                      <Sparkles className="w-3.5 h-3.5" />
+                    </button>
+                    <button
+                      onClick={() => { setActiveTab('cloud'); setActiveBulletId(null) }}
+                      title="Word Cloud"
+                      className={`p-1 rounded transition-all ${
+                        activeTab === 'cloud'
+                          ? 'bg-white text-indigo-600 shadow-sm'
+                          : 'text-slate-400 hover:text-slate-600'
+                      }`}
+                    >
+                      <Cloud className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
               </div>
-            ) : (
+            </div>
+
+            {/* ────── TEXT-BASED: AI Summary + Word Cloud Tabs ────── */}
+            {isTextBased && (
               <>
-                <div className="bg-white border border-slate-100 rounded-xl shadow-sm overflow-hidden" style={{ height: 280 }}>
+
+                {/* AI Summary View / Generate Button - only if > 3 responses and activeTab is 'ai' */}
+                {visibleCount > 3 && activeTab === 'ai' && (
+                  normalizedSummary ? (
+                    /* AI goal summary details */
+                    <div className={`bg-gradient-to-br from-indigo-50/90 via-blue-50/40 to-white border border-blue-100/80 shadow-md shadow-blue-100/20 rounded-xl overflow-hidden relative ${isCompact ? 'p-3' : 'p-5'}`}>
+                      {/* Header */}
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-2">
+                          <div className="bg-indigo-600/10 p-1.5 rounded-lg text-indigo-600">
+                            <Sparkles className="w-5 h-5 animate-pulse" />
+                          </div>
+                          <div>
+                            <h3 className="text-sm font-bold text-slate-800">
+                              AI Learning Goal Summary
+                            </h3>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          {hasNewResponses && (
+                            <span className="text-[10px] text-amber-600 font-semibold bg-amber-50 px-2 py-1 rounded-md border border-amber-100 animate-pulse">
+                              New responses
+                            </span>
+                          )}
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => fetchSummary(false, true)}
+                            disabled={isSummaryLoading}
+                            className="h-8 text-xs border-slate-200 text-slate-600 hover:text-indigo-600 hover:border-indigo-200 hover:bg-indigo-50/30 gap-1.5"
+                          >
+                            <RefreshCw className={`w-3.5 h-3.5 ${isSummaryLoading ? 'animate-spin' : ''}`} />
+                            Refresh
+                          </Button>
+                        </div>
+                      </div>
+
+                      {/* State handling */}
+                      {apiError ? (
+                        <div className="border border-red-100 bg-red-50/40 rounded-lg p-4 text-sm text-slate-700 flex flex-col gap-2">
+                          <div className="flex items-start gap-2 text-red-600">
+                            <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+                            <div>
+                              <p className="font-semibold">Generation Failed</p>
+                              <p className="text-xs text-slate-500 mt-0.5">{apiError}</p>
+                              <Button
+                                size="sm"
+                                variant="link"
+                                onClick={() => fetchSummary(false, true)}
+                                className="p-0 h-auto text-xs text-red-600 font-semibold underline hover:text-red-700 mt-2"
+                              >
+                                Try again
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      ) : isSummaryLoading ? (
+                        <div className="flex flex-col items-center justify-center py-10 gap-3">
+                          <div className="relative">
+                            <div className="w-10 h-10 border-4 border-indigo-100 border-t-indigo-600 rounded-full animate-spin"></div>
+                            <Sparkles className="w-4 h-4 text-indigo-600 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                          </div>
+                          <p className="text-xs text-slate-500 font-medium">
+                            Analyzing student responses against learning goals...
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="space-y-4">
+                          {(!normalizedSummary || !normalizedSummary.summaryPoints || normalizedSummary.summaryPoints.length === 0) ? (
+                            <p className="text-xs text-slate-400 py-2">
+                              Could not map responses to summary points.
+                            </p>
+                          ) : (
+                            <div className="space-y-3.5">
+                              {/* Render Main Summary Points */}
+                              {normalizedSummary.summaryPoints.map((point: AISummaryPoint, index: number) => {
+                                const bulletId = `point-${index}`
+                                const isActive = activeBulletId === bulletId
+
+                                // Get responses matching point
+                                const pointResponses = visibleResponses.filter(r =>
+                                  point.matchingResponseIds?.includes(r.id)
+                                )
+
+                                return (
+                                  <div
+                                    key={index}
+                                    onClick={() => setActiveBulletId(isActive ? null : bulletId)}
+                                    className={`text-xs p-4 rounded-xl border transition-all cursor-pointer select-none flex flex-col gap-2 ${
+                                      isActive
+                                        ? 'bg-blue-50/70 border-blue-200 shadow-sm'
+                                        : 'bg-white border-slate-100 hover:border-blue-100 hover:bg-blue-50/10'
+                                    }`}
+                                  >
+                                    <div className="flex items-start justify-between gap-4">
+                                      <div className="flex flex-col gap-1.5 flex-1">
+                                        <h4 className="text-sm font-bold text-blue-600 pl-0.5 leading-snug">
+                                          {point.title}
+                                        </h4>
+                                        <p className="text-slate-650 leading-relaxed pl-0.5">
+                                          {point.synthesis}
+                                        </p>
+                                      </div>
+                                    </div>
+
+                                    {/* Inline matching responses */}
+                                    {isActive && (
+                                      <div className="mt-2 pt-3 border-t border-blue-100/40 space-y-2 animate-fadeIn">
+                                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider pl-0.5 mb-1">
+                                          Tagged Student Answers
+                                        </p>
+                                        <div className="space-y-1.5">
+                                          {pointResponses.length === 0 ? (
+                                            <p className="text-xs text-slate-400 italic pl-0.5">No responses tagged.</p>
+                                          ) : (
+                                            pointResponses.map((r) => (
+                                              <div
+                                                key={r.id}
+                                                className="p-2.5 rounded-lg text-xs leading-relaxed bg-slate-50 border border-slate-100/70 flex flex-col gap-1"
+                                              >
+                                                <span className="text-slate-700 font-normal">{r.response_value}</span>
+                                                {studentNames[r.student_id] && (
+                                                  <span className="text-[9px] text-slate-400 self-end">
+                                                    — {studentNames[r.student_id]}
+                                                  </span>
+                                                )}
+                                              </div>
+                                            ))
+                                          )}
+                                        </div>
+                                      </div>
+                                    )}
+                                  </div>
+                                )
+                              })}
+
+                            </div>
+                          )}
+                          <p className="text-center text-[10px] text-slate-400 mt-2">
+                            Click a card to view matching answers inline. Click again to close.
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    /* Generate Summary secondary styled button */
+                    <div className="mb-2">
+                      <Button
+                        variant="secondary"
+                        onClick={() => fetchSummary(false, true)}
+                        disabled={isSummaryLoading}
+                        className="w-full py-2 text-xs font-semibold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 rounded-lg shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
+                      >
+                        <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
+                        {isSummaryLoading ? "Generating..." : "Generate Summary"}
+                      </Button>
+                      {apiError && (
+                        <div className="mt-2 text-xs text-red-500 border border-red-100 bg-red-50/30 p-2 rounded">
+                          {apiError}
+                        </div>
+                      )}
+                    </div>
+                  )
+                )}
+
+                {/* Word Cloud view - only if > 3 responses and activeTab is 'cloud' */}
+                {visibleCount > 3 && activeTab === 'cloud' && (
+                  <div className={`bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm ${isCompact ? 'p-2' : 'p-4'}`}>
+                    <WordCloud
+                      texts={cloudTexts}
+                      activeWord={activeWord}
+                      onWordClick={(word) =>
+                        setActiveWord(prev => (prev === word ? null : word))
+                      }
+                    />
+                    {cloudTexts.length > 0 && (
+                      <p className="text-center text-xs text-slate-400 mt-2">
+                        Click a word to filter responses below
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                {/* Response list */}
+                <div className="space-y-2">
+                  {visibleCount <= 3 || activeTab !== 'cloud' ? (
+                    visibleResponses.map((r) => (
+                      <ResponseListItem
+                        key={r.id}
+                        value={r.response_value}
+                        studentName={studentNames[r.student_id] || r.students?.name}
+                      />
+                    ))
+                  ) : (
+                    wordFilteredResponses.map((r) => (
+                      <ResponseListItem
+                        key={r.id}
+                        value={r.response_value}
+                        highlight={activeWord}
+                        studentName={studentNames[r.student_id] || r.students?.name}
+                      />
+                    ))
+                  )}
+                </div>
+              </>
+            )}
+
+            {/* ────── CHOICE-BASED: Donut chart ────── */}
+            {!isTextBased && (
+              <>
+                <div className="bg-white border border-slate-100 rounded-xl shadow-sm overflow-hidden" style={{ height: isCompact ? 180 : 280 }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie
                         data={donutData.filter(d => d.value > 0)}
                         cx="50%"
                         cy="50%"
-                        innerRadius={72}
-                        outerRadius={104}
+                        innerRadius={isCompact ? 45 : 72}
+                        outerRadius={isCompact ? 65 : 104}
                         paddingAngle={2}
                         dataKey="value"
                         animationBegin={0}
@@ -474,12 +778,14 @@ export function ResponseSummaryPanel({
 // ---------------------------------------------------------------------------
 function ResponseListItem({
   value,
-  highlight,
   studentName,
+  isExemplar,
+  highlight,
 }: {
   value: string
-  highlight?: string | null
   studentName?: string
+  isExemplar?: boolean
+  highlight?: string | null
 }) {
   const content = (() => {
     if (!highlight) {
@@ -490,7 +796,7 @@ function ResponseListItem({
       <>
         {parts.map((part, i) =>
           part.toLowerCase() === highlight.toLowerCase() ? (
-            <mark key={i} className="bg-yellow-200 text-yellow-900 rounded px-0.5">
+            <mark key={i} className="bg-yellow-100 text-yellow-800 rounded px-0.5">
               {part}
             </mark>
           ) : (
@@ -502,8 +808,21 @@ function ResponseListItem({
   })()
 
   return (
-    <div className="bg-slate-50 border border-slate-100 rounded-lg px-4 py-2.5 text-sm text-slate-700 leading-relaxed flex flex-col gap-1">
-      <div>{content}</div>
+    <div
+      className={`rounded-lg px-4 py-2.5 text-sm leading-relaxed flex flex-col gap-1 transition-all ${
+        isExemplar
+          ? 'bg-amber-50/50 border-l-4 border-l-amber-400 border-y border-r border-amber-200/60 shadow-sm'
+          : 'bg-slate-50 border border-slate-100'
+      }`}
+    >
+      <div className="flex items-start justify-between gap-4">
+        <span className="text-slate-755 font-normal">{content}</span>
+        {isExemplar && (
+          <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-100 text-amber-800 uppercase tracking-wider shrink-0 select-none">
+            ★ AI Exemplar
+          </span>
+        )}
+      </div>
       {studentName && (
         <span className="text-[11px] text-slate-400 self-end mt-0.5 font-normal tracking-wide">
           — {studentName}

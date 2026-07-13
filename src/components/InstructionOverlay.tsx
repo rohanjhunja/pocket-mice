@@ -4,6 +4,7 @@ import { ReactNode, useState } from "react";
 import { ChevronDown, ChevronUp, ExternalLink, BarChart2, X } from "lucide-react";
 import { ResponseSummaryPanel, ResponseType } from "./ResponseSummaryPanel";
 import { highlightSingleQuotes } from "@/utils/textFormatter";
+import { getActivityColor } from "@/utils/activityColors";
 
 interface StepDef {
   step_id: string;
@@ -71,15 +72,15 @@ export function InstructionOverlay({
     "absolute transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden flex flex-col z-10 bg-white/95 backdrop-blur-md shadow-[0_0_40px_rgba(0,0,0,0.15)] border border-white/40 rounded-t-2xl md:rounded-2xl";
 
   if (!hasMedia) {
-    baseClasses += ` md:right-1/2 md:bottom-1/2 md:translate-x-1/2 md:translate-y-1/2 md:w-[600px] md:max-w-[90vw] bottom-0 right-0 w-full md:max-h-[calc(100vh-120px)] ${
+    baseClasses += ` md:right-1/2 md:bottom-1/2 md:translate-x-1/2 md:translate-y-1/2 md:w-[600px] md:max-w-[90vw] bottom-0 right-0 w-full md:max-h-[calc(100vh-160px)] ${
       isMinimized
         ? "h-[60px] md:h-auto md:!bottom-6 md:!translate-y-[calc(100%-60px)]"
         : showSummary && sessionId
-        ? "h-[calc(100vh-60px)] md:h-[600px]"
-        : "h-[calc(100vh-60px)] md:h-auto"
+        ? "h-[calc(100vh-110px)] md:h-[600px]"
+        : "h-[calc(100vh-110px)] md:h-auto"
     }`;
   } else {
-    baseClasses += ` bottom-0 right-0 w-full md:w-[400px] md:bottom-6 md:right-6 md:max-h-[calc(100vh-120px)] ${
+    baseClasses += ` bottom-0 right-0 w-full md:w-[400px] md:bottom-6 md:right-6 md:max-h-[calc(100vh-160px)] ${
       isMinimized
         ? "h-[60px] md:h-auto translate-y-[calc(100%-60px)] md:translate-y-[calc(100%-72px)]"
         : showSummary && sessionId
@@ -99,7 +100,7 @@ export function InstructionOverlay({
         className="flex justify-between items-center py-4 px-5 bg-white/80 border-b border-slate-200 cursor-pointer"
         onClick={onToggleMinimize}
       >
-        <h2 className="text-lg font-semibold text-slate-900 m-0 flex-1 truncate pr-2">
+        <h2 className={`text-lg font-semibold m-0 flex-1 truncate pr-2 ${getActivityColor(step.activityIndex ?? 0).text}`}>
           {step.title}
         </h2>
 
