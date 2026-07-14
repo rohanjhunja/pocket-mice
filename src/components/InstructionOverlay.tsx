@@ -34,6 +34,7 @@ interface InstructionOverlayProps {
   responseCount?: number;
   allSteps?: StepDef[];
   initialResponses?: ResponseRow[];
+  enableLearnerInsights?: boolean;
 }
 
 export function InstructionOverlay({
@@ -46,6 +47,7 @@ export function InstructionOverlay({
   responseCount = 0,
   allSteps = [],
   initialResponses = [],
+  enableLearnerInsights = false,
 }: InstructionOverlayProps) {
   const [showSummary, setShowSummary] = useState(false);
 
@@ -108,8 +110,8 @@ export function InstructionOverlay({
           className="flex items-center gap-2 shrink-0"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Chart icon — only shown when this step has learner input */}
-          {hasLearnerInput && (
+          {/* Chart icon — only shown when this step has learner input and insights are enabled */}
+          {hasLearnerInput && enableLearnerInsights && (
             <button
               onClick={() => setShowSummary((v) => !v)}
               className={`relative flex items-center justify-center w-8 h-8 rounded-lg transition-colors ${

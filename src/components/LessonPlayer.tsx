@@ -600,6 +600,13 @@ const mediaResourcePatterns = useMemo(() => {
                                   patternType={s.interactive_or_media?.media_url ? (mediaResourcePatterns[s.interactive_or_media.media_url] || "blank") : "blank"}
                                 />
                               )}
+                              
+                              {/* Response Count Badge */}
+                              {!s.isDiscussionStep && s.learner_response && (
+                                <div className={`absolute top-0 right-0 z-20 min-w-[18px] h-[18px] px-1 rounded-bl-md flex items-center justify-center text-[8px] font-bold text-white shadow-sm ${color.bgActive}`}>
+                                  {stepResponseCounts[s.step_id] ?? 0}
+                                </div>
+                              )}
                             </div>
                             <div className={`text-[8px] font-bold truncate px-0.5 transition-colors ${
                               isActive ? "text-indigo-600" : "text-slate-500 group-hover:text-slate-800"
@@ -642,6 +649,7 @@ const mediaResourcePatterns = useMemo(() => {
                   responseCount={currentStepResponseCount}
                   allSteps={allSteps}
                   initialResponses={allResponseRows}
+                  enableLearnerInsights={isTeacher || !!session.selected_steps_json?.enable_learner_insights}
                 >
                   <ResponseForm
                     responseReq={step.learner_response ? {

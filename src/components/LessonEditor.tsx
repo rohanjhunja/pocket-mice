@@ -853,6 +853,16 @@ export function LessonEditor({ lessonId, jsonContent, onClose, createMode = fals
               onChange={v => update(d => { d.learning_objectives = v })}
               label="Learning Objectives"
             />
+            <div className="flex items-center gap-2 pt-3 border-t border-slate-100">
+              <Checkbox
+                id="enable-learner-insights"
+                checked={data.enable_learner_insights === true}
+                onCheckedChange={(c) => update(d => { d.enable_learner_insights = !!c })}
+              />
+              <Label htmlFor="enable-learner-insights" className="text-xs text-slate-600 font-medium cursor-pointer">
+                Enable learners to see each other's responses and AI summaries
+              </Label>
+            </div>
           </Section>
 
           {/* === ACTIVITIES === */}
