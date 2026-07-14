@@ -31,7 +31,7 @@ import {
   FileCode,
 } from 'lucide-react'
 import { updateLesson, duplicateLesson } from '@/app/dashboard/lesson/[id]/actions'
-import { uploadLesson, getSimulations, uploadSimulation } from '@/app/dashboard/actions'
+import { uploadLesson, getSimulations, uploadSimulation, uploadThumbnail } from '@/app/dashboard/actions'
 
 // ===== TYPES =====
 interface LessonEditorProps {
@@ -377,6 +377,33 @@ export function LessonEditor({ lessonId, jsonContent, onClose, createMode = fals
       d.activities[actIdx].steps[stepIdx].learner_response[field] = val
     })
     const removeMedia = () => update(d => { delete d.activities[actIdx].steps[stepIdx].interactive_or_media })
+    const setThumbnailUrlAndSyncCommon = (url: string | null) => update(d => {
+      const currentStep = d.activities[actIdx].steps[stepIdx];
+      const targetMediaUrl = currentStep.interactive_or_media?.media_url;
+
+      if (!currentStep.interactive_or_media) {
+        currentStep.interactive_or_media = { media_type: 'video', media_title: '', media_url: '', embed: true };
+      }
+      if (url) {
+        currentStep.interactive_or_media.thumbnail_url = url;
+      } else {
+        delete currentStep.interactive_or_media.thumbnail_url;
+      }
+
+      if (targetMediaUrl) {
+        d.activities.forEach((activity: any) => {
+          activity.steps?.forEach((s: any) => {
+            if (s.interactive_or_media && s.interactive_or_media.media_url === targetMediaUrl) {
+              if (url) {
+                s.interactive_or_media.thumbnail_url = url;
+              } else {
+                delete s.interactive_or_media.thumbnail_url;
+              }
+            }
+          });
+        });
+      }
+    });
     const removeResponse = () => update(d => { delete d.activities[actIdx].steps[stepIdx].learner_response })
     const addMedia = () => update(d => {
       d.activities[actIdx].steps[stepIdx].interactive_or_media = { media_type: 'video', media_title: '', media_url: '', embed: true }
@@ -422,6 +449,64 @@ export function LessonEditor({ lessonId, jsonContent, onClose, createMode = fals
                 </Button>
               </div>
             </div>
+
+            {/* Custom Thumbnail Upload */}
+            <div className="space-y-1.5 border-t border-slate-200/60 pt-2.5">
+              <Label className="text-xs font-medium text-slate-600">Custom Thumbnail (Optional)</Label>
+              {media.thumbnail_url ? (
+                <div className="flex items-center gap-3 bg-white p-2 border border-slate-200 rounded-lg shadow-sm">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={media.thumbnail_url} alt="Thumbnail preview" className="w-16 h-9 object-cover rounded border border-slate-150" />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[10px] text-slate-400 truncate">{media.thumbnail_url}</p>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-xs text-red-500 hover:text-red-700 h-7"
+                    onClick={() => setThumbnailUrlAndSyncCommon(null)}
+                  >
+                    Remove
+                  </Button>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <input
+                    type="file"
+                    id={`thumb-upload-${actIdx}-${stepIdx}`}
+                    accept="image/*"
+                    className="hidden"
+                    onChange={async (e) => {
+                      const file = e.target.files?.[0];
+                      if (!file) return;
+                      const formData = new FormData();
+                      formData.append("file", file);
+                      toast.loading("Uploading thumbnail...");
+                      try {
+                        const publicUrl = await uploadThumbnail(formData);
+                        setThumbnailUrlAndSyncCommon(publicUrl);
+                        toast.dismiss();
+                        toast.success("Thumbnail uploaded successfully");
+                      } catch (err: any) {
+                        toast.dismiss();
+                        toast.error(`Failed to upload: ${err.message}`);
+                      }
+                    }}
+                  />
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-xs gap-1.5"
+                    type="button"
+                    onClick={() => document.getElementById(`thumb-upload-${actIdx}-${stepIdx}`)?.click()}
+                  >
+                    <Upload className="w-3.5 h-3.5" /> Upload Image
+                  </Button>
+                  <span className="text-[10px] text-slate-400">Fits 16:9 ratio</span>
+                </div>
+              )}
+            </div>
+
             {isAdv && (
               <>
                 <div className="flex items-center gap-2">

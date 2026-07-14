@@ -89,8 +89,6 @@ export default async function DashboardPage() {
         <RecentSessionsArea sessions={recentSessions} isAdmin={isAdmin} />
       )}
       
-      <SimulationsDashboardArea simulations={simulations} />
-
       <div>
         <h3 className="text-xl font-bold mb-6 text-slate-800">
           {isAdmin ? 'All Lessons' : 'Your App Lessons'}
@@ -101,6 +99,8 @@ export default async function DashboardPage() {
           currentUserId={user?.id ?? ''}
         />
       </div>
+
+      <SimulationsDashboardArea simulations={simulations} />
     </div>
   )
 }

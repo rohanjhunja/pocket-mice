@@ -516,3 +516,29 @@ export async function createSimulationSession(simulationId: string) {
   revalidatePath('/dashboard')
   return sessionData[0].id
 }
+
+export async function uploadThumbnail(formData: FormData) {
+  const supabase = await createClient()
+
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) throw new Error('Not authenticated')
+
+  const file = formData.get('file') as File
+  if (!file) throw new Error('No file provided')
+
+  const fileName = `thumbnails/${user.id}/${Math.random().toString(36).substring(2)}_${file.name.replace(/[^a-zA-Z0-9.\-_]/g, '')}`
+
+  const { error: uploadError } = await supabase.storage
+    .from('simulations')
+    .upload(fileName, file, { cacheControl: '3600', upsert: false })
+
+  if (uploadError) {
+    throw new Error(uploadError.message)
+  }
+
+  const { data: publicUrlData } = supabase.storage
+    .from('simulations')
+    .getPublicUrl(fileName)
+
+  return publicUrlData.publicUrl
+}

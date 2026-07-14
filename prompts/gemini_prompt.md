@@ -24,25 +24,25 @@ Group the responses into 3–5 distinct summary points that represent the most c
 
 ## Analysis Requirements
 
-1. **Group into 3-5 themes**: Group the responses into 3-5 distinct summary points that represent the most common ideas, interpretations, misconceptions, or approaches. Start each bullet item with a short title in the form of a student answer to the question, then describe what is observed among student responses.
-2. **Summary Point Fields**: For each summary point, output:
+1. **Group into 3-5 themes**: Group the responses into 3-5 distinct summary points that represent the most common ideas, interpretations, misconceptions, or approaches. Start each theme with a short title in the form of a student answer to the question, then describe the pattern observed among the student responses.
+2. **Conciseness & Length Constraint**: For each summary point:
+   - The title (learner-response style heading) must be a short phrase in quotes.
+   - The synthesis (description of the observed pattern) must describe the pattern, how it represents the overall student group (using quantifiers like most, some, few, etc.), and any exceptions or variations shown. It must be extremely concise, **at most 180 characters long**.
+3. **Summary Point Fields**: For each summary point, output:
    - A short title written in the form of a learner answer.
      Examples:
      - "It helps us visualise atomic structure."
      - "It is useful, but it is not the atom itself."
      - "Its meaning depends on context and prior knowledge."
-   - A brief synthesis describing what is observed across the responses for that theme.
+   - A brief synthesis describing the pattern, group representation, and exceptions for that theme (max 180 characters).
      Examples:
-     - "Many students see the model as a useful simplification for showing electron shells, electron configuration, valence electrons, chemical stability, ion formation, and links to the periodic table or bonding."
-     - "Several responses recognise the limitations of the representation: it does not show protons, neutrons, charge, scale, forces, probability clouds, or actual electron motion, and therefore cannot uniquely identify the particle."
-     - "Students note that an 18th-century observer might interpret it as a planetary system, transport map, seating plan, or abstract symbol. This highlights how scientific models rely on shared conventions, labels, and teaching to generate curiosity and support reasoning."
-   - The count text specifying the number and percentage of learners associated with that point, formatted exactly as X/TOTAL (P%), for example: "3/{{TOTAL_COUNT}} (43%)".
+     - "Most students view the model as a helpful visual for electron shells, though a few confuse it with the actual scale of an atom."
+     - "Some students recognize visual limitations (no charge or motion shown), while most agree it still aids basic understanding."
+     - "A few students note that meaning varies by context, whereas others assume the representation is absolute without shared rules."
    - The list of response IDs that are tagged under this summary point.
-3. **Multi-tagging**: A response may receive more than one tag. Tag every learner response against all relevant summary points it matches.
-4. **Insufficient Evidence**: Do not force a response into a category when there is insufficient evidence.
-5. **Other / Unclear**: Place response IDs of responses that do not fit the main themes in the separate "otherUnclearResponseIds" array.
-6. **No Meaningful Response**: Place response IDs of blank, irrelevant, or uninterpretable answers in the separate "noMeaningfulResponseIds" array.
-7. **Preserve Meaningful Differences**: Preserve meaningful differences between responses. Do not merge ideas merely because they use similar words.
+4. **Multi-tagging**: A response may receive more than one tag. Tag every learner response against all relevant summary points it matches.
+5. **Insufficient Evidence**: Do not force a response into a category when there is insufficient evidence. Do not include any fallback categories or other summary text. Only output the main 3-5 theme points.
+6. **Preserve Meaningful Differences**: Preserve meaningful differences between responses. Do not merge ideas merely because they use similar words.
 8. **Distinguish Perspectives**: Distinguish between:
    - Correct or productive interpretations
    - Partial understanding
